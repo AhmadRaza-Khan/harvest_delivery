@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/css/output.css" rel="stylesheet">
+  <title>Login</title>
+</head>
+<body class="flex justify-center items-center min-h-screen">
+
+  <div class="flex flex-col mt-0 relative bg-white p-6 rounded shadow-lg w-full max-w-sm py-10">
+
+    <!-- Title -->
+    <h3 class="text-center pb-4 lg:text-2xl md:text-xl text-lg md:mt-0.5 text-primary lg:mt-1">
+      Login
+    </h3>
+
+    <!-- Form -->
+    <form id="loginForm" class="dialog flex flex-col gap-3 md:gap-4 lg:gap-5">
+
+      <!-- Username -->
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend text-primary p-0">Username</legend>
+        <input
+          type="text"
+          id="username"
+          class="input-autofill input w-full border rounded py-2 px-2 bg-white text-black border-accent focus:border-2 focus:ring-primary"
+          placeholder="Type your username"
+          name="username"
+          required
+        />
+      </fieldset>
+
+      <!-- Password -->
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend text-primary p-0">Password</legend>
+        <input
+          type="password"
+          id="password"
+          class="input input-autofill w-full border rounded bg-white text-black py-2 px-2 border-accent focus:border-2 focus:ring-primary"
+          placeholder="Type your password"
+          name="password"
+          required
+        />
+      </fieldset>
+
+      <!-- Submit Button -->
+      <div class="mt-2">
+        <span class="block w-full rounded-md shadow-sm">
+          <button
+            type="submit"
+            class="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md opacity-90 hover:opacity-100 bg-primary text-primary-content cursor-pointer"
+            id="submitBtn"
+          >
+            Submit
+          </button>
+        </span>
+      </div>
+    </form>
+  </div>
+
+  <!-- Link external JS -->
+  <script src="/js/login.js"></script>
+  <script src="/js/toast.js"></script>
+
+</body>
+</html>

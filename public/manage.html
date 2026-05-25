@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage</title>
+  <style>
+    .fade-in { animation: fadeIn 0.3s ease both; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    .del-btn { transition: background 0.15s, transform 0.1s; }
+    .del-btn:active { transform: scale(0.95); }
+
+    .section-table { display: block; }
+    .section-table.force-hidden { display: none !important; }
+  </style>
+</head>
+<body class="min-h-screen bg-base-200">
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col gap-10">
+
+    <!-- Products -->
+    <section>
+      <div class="flex items-center justify-between mb-3">
+        <div>
+          <h2 class="text-lg font-bold">Products</h2>
+          <p class="text-xs opacity-50">All synced products in the database</p>
+        </div>
+        <span id="product-count" class="badge badge-outline text-xs hidden"></span>
+      </div>
+
+      <div id="products-loading" class="flex flex-col gap-2">
+        <div class="skeleton h-10 w-full rounded-xl"></div>
+        <div class="skeleton h-10 w-full rounded-xl opacity-70"></div>
+        <div class="skeleton h-10 w-full rounded-xl opacity-40"></div>
+      </div>
+
+      <div id="products-error" class="hidden text-center py-10 opacity-50">
+        <p class="text-sm">Failed to load products.</p>
+        <button class="btn btn-xs btn-outline mt-3" onclick="loadProducts()">Retry</button>
+      </div>
+
+      <div id="products-empty" class="hidden text-center py-10 opacity-40">
+        <p class="text-sm">No products found.</p>
+      </div>
+
+      <div id="products-table-wrapper" class="section-table force-hidden overflow-x-auto rounded-xl border border-base-300 bg-base-100 shadow-sm">
+        <table class="table table-sm w-full">
+          <thead>
+            <tr class="text-xs uppercase tracking-wider opacity-50 border-b border-base-300">
+              <th class="py-3 px-4 w-16">#ID</th>
+              <th class="py-3 px-4">Name (EN)</th>
+              <th class="py-3 px-4">Name (AR)</th>
+              <th class="py-3 px-4 w-28 text-right">Price (QAR)</th>
+              <th class="py-3 px-4 w-24 text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody id="products-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Categories -->
+    <section>
+      <div class="flex items-center justify-between mb-3">
+        <div>
+          <h2 class="text-lg font-bold">Categories</h2>
+          <p class="text-xs opacity-50">All synced categories in the database</p>
+        </div>
+        <span id="category-count" class="badge badge-outline text-xs hidden"></span>
+      </div>
+
+      <div id="categories-loading" class="flex flex-col gap-2">
+        <div class="skeleton h-10 w-full rounded-xl"></div>
+        <div class="skeleton h-10 w-full rounded-xl opacity-70"></div>
+        <div class="skeleton h-10 w-full rounded-xl opacity-40"></div>
+      </div>
+
+      <div id="categories-error" class="hidden text-center py-10 opacity-50">
+        <p class="text-sm">Failed to load categories.</p>
+        <button class="btn btn-xs btn-outline mt-3" onclick="loadCategories()">Retry</button>
+      </div>
+
+      <div id="categories-empty" class="hidden text-center py-10 opacity-40">
+        <p class="text-sm">No categories found.</p>
+      </div>
+
+      <div id="categories-table-wrapper" class="section-table force-hidden overflow-x-auto rounded-xl border border-base-300 bg-base-100 shadow-sm">
+        <table class="table table-sm w-full">
+          <thead>
+            <tr class="text-xs uppercase tracking-wider opacity-50 border-b border-base-300">
+              <th class="py-3 px-4 w-16">#ID</th>
+              <th class="py-3 px-4">Category Name</th>
+              <th class="py-3 px-4 w-24 text-center">Products</th>
+              <th class="py-3 px-4 w-24 text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody id="categories-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Confirm Modal -->
+  <dialog id="confirm-modal" class="modal">
+    <div class="modal-box max-w-sm">
+      <h3 class="font-bold text-base mb-1">Confirm Delete</h3>
+      <p id="confirm-text" class="text-sm opacity-70 mb-4"></p>
+      <div class="flex justify-end gap-2">
+        <button class="btn btn-sm btn-ghost" onclick="document.getElementById('confirm-modal').close()">Cancel</button>
+        <button id="confirm-ok" class="btn btn-sm btn-error">Delete</button>
+      </div>
+    </div>
+    <form method="dialog" class="modal-backdrop"><button>close</button></form>
+  </dialog>
+
+  <script src="/js/cdn.js"></script>
+  <script>
+    function getPrice(variants) {
+      if (!Array.isArray(variants) || !variants.length) return '—';
+      const p = variants[0]?.price;
+      return (p != null && p !== '') ? Number(p).toFixed(2) : '—';
+    }
+
+    function escHtml(str) {
+      return String(str ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function confirm(text, onOk) {
+      document.getElementById('confirm-text').textContent = text;
+      const modal = document.getElementById('confirm-modal');
+      const btn = document.getElementById('confirm-ok');
+      const handler = async () => {
+        btn.removeEventListener('click', handler);
+        modal.close();
+        await onOk();
+      };
+      btn.addEventListener('click', handler);
+      modal.showModal();
+    }
+
+    // ── Products ─────────────────────────────────────────────
+
+    async function loadProducts() {
+      const loading = document.getElementById('products-loading');
+      const error   = document.getElementById('products-error');
+      const empty   = document.getElementById('products-empty');
+      const wrapper = document.getElementById('products-table-wrapper');
+      const count   = document.getElementById('product-count');
+
+      loading.classList.remove('hidden');
+      error.classList.add('hidden');
+      empty.classList.add('hidden');
+      wrapper.classList.add('force-hidden');
+      count.classList.add('hidden');
+
+      try {
+        const res = await fetch('/menu/list/products', { credentials: 'include' });
+        const products = await res.json();
+
+        loading.classList.add('hidden');
+
+        if (!products.length) { empty.classList.remove('hidden'); return; }
+
+        count.textContent = `${products.length} total`;
+        count.classList.remove('hidden');
+
+        const tbody = document.getElementById('products-tbody');
+        tbody.innerHTML = '';
+        products.forEach((p, i) => {
+          const tr = document.createElement('tr');
+          tr.className = 'border-b border-base-200 fade-in';
+          tr.style.animationDelay = `${Math.min(i * 25, 250)}ms`;
+          tr.id = `product-row-${p.productId}`;
+          tr.innerHTML = `
+            <td class="py-3 px-4 font-mono text-xs opacity-60">${p.productId}</td>
+            <td class="py-3 px-4 font-medium text-sm">${escHtml(p.productNameEn)}</td>
+            <td class="py-3 px-4 text-sm opacity-70" dir="rtl">${escHtml(p.productNameAr || '—')}</td>
+            <td class="py-3 px-4 text-right text-sm tabular-nums">${getPrice(p.variants)}</td>
+            <td class="py-3 px-4 text-center">
+              <button class="del-btn btn btn-xs btn-error btn-outline" onclick="deleteProduct(${p.productId}, '${escHtml(p.productNameEn)}')">Delete</button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+        wrapper.classList.remove('force-hidden');
+      } catch (e) {
+        loading.classList.add('hidden');
+        error.classList.remove('hidden');
+      }
+    }
+
+    async function deleteProduct(productId, name) {
+      confirm(`Delete product "${name}" (#${productId})? This cannot be undone.`, async () => {
+        try {
+          const res = await fetch(`/menu/products/${productId}`, { method: 'DELETE', credentials: 'include' });
+          const data = await res.json();
+          if (!data.success) throw new Error();
+          const row = document.getElementById(`product-row-${productId}`);
+          if (row) row.remove();
+          showToast(`Product "${name}" deleted.`, 'success');
+          updateCount('product-count', 'products-tbody', 'products-empty', 'products-table-wrapper');
+        } catch {
+          showToast('Failed to delete product.', 'error');
+        }
+      });
+    }
+
+    // ── Categories ───────────────────────────────────────────
+
+    async function loadCategories() {
+      const loading = document.getElementById('categories-loading');
+      const error   = document.getElementById('categories-error');
+      const empty   = document.getElementById('categories-empty');
+      const wrapper = document.getElementById('categories-table-wrapper');
+      const count   = document.getElementById('category-count');
+
+      loading.classList.remove('hidden');
+      error.classList.add('hidden');
+      empty.classList.add('hidden');
+      wrapper.classList.add('force-hidden');
+      count.classList.add('hidden');
+
+      try {
+        const res = await fetch('/menu/list/categories', { credentials: 'include' });
+        const categories = await res.json();
+
+        loading.classList.add('hidden');
+
+        if (!categories.length) { empty.classList.remove('hidden'); return; }
+
+        count.textContent = `${categories.length} total`;
+        count.classList.remove('hidden');
+
+        const tbody = document.getElementById('categories-tbody');
+        tbody.innerHTML = '';
+        categories.forEach((c, i) => {
+          const tr = document.createElement('tr');
+          tr.className = 'border-b border-base-200 fade-in';
+          tr.style.animationDelay = `${Math.min(i * 25, 250)}ms`;
+          tr.id = `category-row-${c.categoryId}`;
+          const productCount = Array.isArray(c.products) ? c.products.length : 0;
+          tr.innerHTML = `
+            <td class="py-3 px-4 font-mono text-xs opacity-60">${c.categoryId}</td>
+            <td class="py-3 px-4 font-medium text-sm">${escHtml(c.categoryName)}</td>
+            <td class="py-3 px-4 text-center text-sm opacity-60">${productCount}</td>
+            <td class="py-3 px-4 text-center">
+              <button class="del-btn btn btn-xs btn-error btn-outline" onclick="deleteCategory(${c.categoryId}, '${escHtml(c.categoryName)}')">Delete</button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+        wrapper.classList.remove('force-hidden');
+      } catch (e) {
+        loading.classList.add('hidden');
+        error.classList.remove('hidden');
+      }
+    }
+
+    async function deleteCategory(categoryId, name) {
+      confirm(`Delete category "${name}" (#${categoryId})? This cannot be undone.`, async () => {
+        try {
+          const res = await fetch(`/menu/categories/${categoryId}`, { method: 'DELETE', credentials: 'include' });
+          const data = await res.json();
+          if (!data.success) throw new Error();
+          const row = document.getElementById(`category-row-${categoryId}`);
+          if (row) row.remove();
+          showToast(`Category "${name}" deleted.`, 'success');
+          updateCount('category-count', 'categories-tbody', 'categories-empty', 'categories-table-wrapper');
+        } catch {
+          showToast('Failed to delete category.', 'error');
+        }
+      });
+    }
+
+    // ── Helpers ───────────────────────────────────────────────
+
+    function updateCount(countId, tbodyId, emptyId, wrapperId) {
+      const tbody = document.getElementById(tbodyId);
+      const remaining = tbody.querySelectorAll('tr').length;
+      const countEl = document.getElementById(countId);
+      countEl.textContent = `${remaining} total`;
+      if (!remaining) {
+        document.getElementById(wrapperId).classList.add('force-hidden');
+        document.getElementById(emptyId).classList.remove('hidden');
+        countEl.classList.add('hidden');
+      }
+    }
+
+    loadProducts();
+    loadCategories();
+  </script>
+</body>
+</html>

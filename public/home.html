@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<hea
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <title>Dashboard</title>
+  <style>
+    .snooze-toggle {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      width: 44px;
+      height: 24px;
+      cursor: pointer;
+      vertical-align: middle;
+    }
+    .snooze-toggle input { display: none; }
+    .snooze-slider {
+      position: absolute;
+      inset: 0;
+      background: #22c55e;
+      border-radius: 9999px;
+      transition: background 0.3s ease;
+    }
+    .snooze-slider::before {
+      content: '';
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      left: 3px;
+      top: 3px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.3s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+    .snooze-toggle input:checked + .snooze-slider { background: #f59e0b; }
+    .snooze-toggle input:checked + .snooze-slider::before { transform: translateX(20px); }
+    td .snooze-toggle { display: flex; margin: 0 auto; }
+
+    .product-row { transition: opacity 0.2s ease, background 0.2s ease; }
+    .product-row.snoozed { opacity: 0.55; }
+    .product-row:hover { background: rgba(255,255,255,0.04); }
+
+    .fade-in { animation: fadeIn 0.4s ease both; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    .card-product { transition: box-shadow 0.2s; }
+    .card-product:hover { box-shadow: 0 0 0 1px rgba(99,102,241,0.3); }
+
+    #search-input:focus { outline: none; box-shadow: 0 0 0 2px rgba(99,102,241,0.4); }
+
+    .badge-snoozed { background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
+    .badge-active { background: rgba(34,197,94,0.12); color: #22c55e; border: 1px solid rgba(34,197,94,0.3); }
+  
+    #table-wrapper { display: none; }
+    #products-cards { display: flex; flex-direction: column; gap: 0.75rem; }
+    @media (min-width: 640px) {
+      #table-wrapper { display: block; }
+      #products-cards { display: none; }
+    }
+    #table-wrapper.force-hidden,
+    #products-cards.force-hidden { display: none !important; }
+</style>
+</head>
+<body class="min-h-screen bg-base-200">
+
+  <div id="container" class="flex-1 min-h-screen text-base-content overflow-x-hidden">
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+      <!-- Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
+        <div>
+          <h1 class="text-xl sm:text-2xl font-bold tracking-tight">Products</h1>
+          <p class="text-sm opacity-50 mt-0.5">Manage snooze status for Snoonu products</p>
+        </div>
+        <div id="stats" class="flex gap-3 text-xs sm:text-sm hidden">
+          <span class="badge badge-outline px-3 py-2">Total: <span id="stat-total" class="font-bold ml-1">0</span></span>
+          <span class="badge badge-warning badge-outline px-3 py-2">Snoozed: <span id="stat-snoozed" class="font-bold ml-1">0</span></span>
+        </div>
+      </div>
+
+      <!-- Search -->
+      <div class="relative mb-5">
+        <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 opacity-40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input
+          id="search-input"
+          type="text"
+          placeholder="Search by name, ID or price..."
+          class="input input-bordered w-full pl-9 pr-4 text-sm bg-base-100 transition-all"
+          autocomplete="off"
+        />
+        <button id="clear-search" class="absolute right-3 top-1/2 -translate-y-1/2 opacity-0 pointer-events-none transition-opacity text-xs opacity-40 hover:opacity-80" onclick="clearSearch()">✕</button>
+      </div>
+
+      <!-- No results -->
+      <div id="no-results" class="hidden text-center py-16 opacity-40">
+        <div class="text-4xl mb-2">🔍</div>
+        <p class="text-sm">No products match your search.</p>
+      </div>
+
+      <!-- Desktop Table -->
+        <div id="table-wrapper" class="overflow-x-auto rounded-xl border border-base-300 bg-base-100 shadow-sm">
+      <table class="table table-sm w-full">
+          <thead>
+            <tr class="text-xs uppercase tracking-wider opacity-50 border-b border-base-300">
+              <th class="py-3 px-4 w-16">#ID</th>
+              <th class="py-3 px-4">Name (EN)</th>
+              <th class="py-3 px-4">Name (AR)</th>
+              <th class="py-3 px-4 w-28 text-right">Price (QAR)</th>
+              <th class="py-3 px-4 w-24 text-center">Status</th>
+              <th class="py-3 px-4 w-24 text-center">Snooze</th>
+            </tr>
+          </thead>
+          <tbody id="products-tbody"></tbody>
+        </table>
+      </div>
+
+      <!-- Mobile Cards -->
+        <div id="products-cards"></div>
+     <!-- Loading -->
+      <div id="loading" class="flex flex-col gap-3 py-4">
+        <div class="skeleton h-12 w-full rounded-xl"></div>
+        <div class="skeleton h-12 w-full rounded-xl"></div>
+        <div class="skeleton h-12 w-full rounded-xl"></div>
+        <div class="skeleton h-12 w-full rounded-xl opacity-60"></div>
+        <div class="skeleton h-12 w-full rounded-xl opacity-30"></div>
+      </div>
+
+      <!-- Error -->
+      <div id="error-state" class="hidden text-center py-16">
+        <div class="text-4xl mb-3">⚠️</div>
+        <p class="text-sm opacity-60">Failed to load products.</p>
+        <button class="btn btn-sm btn-outline mt-4" onclick="loadProducts()">Retry</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="./js/cdn.js"></script>
+  <script>
+    let allProducts = [];
+
+    async function loadProducts() {
+      const loading = document.getElementById('loading');
+      const errorState = document.getElementById('error-state');
+      const tableWrapper = document.getElementById('table-wrapper');
+      const cards = document.getElementById('products-cards');
+      const stats = document.getElementById('stats');
+
+      loading.classList.remove('hidden');
+      errorState.classList.add('hidden');
+        tableWrapper.classList.add('force-hidden');
+      cards.classList.add('force-hidden');
+    cards.innerHTML = '';
+      stats.classList.add('hidden');
+
+      try {
+          const res = await fetch('/snooze/products', { credentials: 'include' });
+      const data = await res.json();
+        allProducts = Array.isArray(data) ? data : [];
+        renderProducts(allProducts);
+        updateStats();
+        stats.classList.remove('hidden');
+      } catch (e) {
+        console.error(e);
+        errorState.classList.remove('hidden');
+      } finally {
+        loading.classList.add('hidden');
+      }
+    }
+
+    function getPrice(variants) {
+      if (!Array.isArray(variants) || !variants.length) return '—';
+      const p = variants[0]?.price;
+      return (p != null && p !== '') ? Number(p).toFixed(2) : '—';
+    }
+
+    function updateStats() {
+      document.getElementById('stat-total').textContent = allProducts.length;
+      document.getElementById('stat-snoozed').textContent = allProducts.filter(p => p.isSnoozed).length;
+    }
+
+    function renderProducts(products) {
+      const tbody = document.getElementById('products-tbody');
+      const cards = document.getElementById('products-cards');
+      const tableWrapper = document.getElementById('table-wrapper');
+      const noResults = document.getElementById('no-results');
+
+      tbody.innerHTML = '';
+      cards.innerHTML = '';
+
+      if (!products.length) {
+        noResults.classList.remove('hidden');
+          tableWrapper.classList.add('force-hidden');
+        cards.classList.add('force-hidden');
+        return;
+      }
+
+      noResults.classList.add('hidden');
+      tableWrapper.classList.remove('force-hidden');
+      cards.classList.remove('force-hidden');
+     products.forEach((product, i) => {
+        const price = getPrice(product.variants);
+        const snoozed = product.isSnoozed;
+
+        // Desktop row
+        const tr = document.createElement('tr');
+        tr.className = `product-row border-b border-base-200 fade-in${snoozed ? ' snoozed' : ''}`;
+        tr.style.animationDelay = `${Math.min(i * 30, 300)}ms`;
+        tr.dataset.id = product.productId;
+        tr.innerHTML = `
+          <td class="py-3 px-4 font-mono text-xs opacity-60">${product.productId}</td>
+          <td class="py-3 px-4 font-medium text-sm">${escHtml(product.productNameEn)}</td>
+          <td class="py-3 px-4 text-sm opacity-80 font-arabic" dir="rtl">${escHtml(product.productNameAr || '—')}</td>
+          <td class="py-3 px-4 text-right text-sm tabular-nums">${price}</td>
+          <td class="py-3 px-4 text-center">
+            <span class="badge text-xs px-2 py-1 rounded-full ${snoozed ? 'badge-snoozed' : 'badge-active'}" id="badge-${product.productId}">
+              ${snoozed ? 'Snoozed' : 'Active'}
+            </span>
+          </td>
+          <td class="py-3 px-4 text-center">
+            <label class="snooze-toggle" title="${snoozed ? 'Unsnoze' : 'Snooze'}">
+              <input type="checkbox" ${snoozed ? 'checked' : ''} onchange="toggleSnooze(${product.productId}, this)">
+              <span class="snooze-slider"></span>
+            </label>
+          </td>
+        `;
+        tbody.appendChild(tr);
+
+        // Mobile card
+        const card = document.createElement('div');
+        card.className = `card-product bg-base-100 rounded-xl border border-base-300 px-4 py-3 flex items-center gap-3 fade-in${snoozed ? ' opacity-60' : ''}`;
+        card.style.animationDelay = `${Math.min(i * 30, 300)}ms`;
+        card.dataset.id = product.productId;
+        card.innerHTML = `
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="font-mono text-xs opacity-40">#${product.productId}</span>
+              <span class="font-semibold text-sm truncate">${escHtml(product.productNameEn)}</span>
+            </div>
+            <div class="text-xs opacity-60 mt-0.5 truncate" dir="rtl">${escHtml(product.productNameAr || '')}</div>
+            <div class="flex items-center gap-2 mt-1.5">
+              <span class="text-xs font-medium">${price !== '—' ? price + ' QAR' : '—'}</span>
+              <span class="badge text-xs px-2 rounded-full ${snoozed ? 'badge-snoozed' : 'badge-active'}" id="badge-m-${product.productId}">
+                ${snoozed ? 'Snoozed' : 'Active'}
+              </span>
+            </div>
+          </div>
+          <label class="snooze-toggle shrink-0">
+            <input type="checkbox" ${snoozed ? 'checked' : ''} onchange="toggleSnooze(${product.productId}, this)">
+            <span class="snooze-slider"></span>
+          </label>
+        `;
+        cards.appendChild(card);
+      });
+    }
+
+    async function toggleSnooze(productId, checkbox) {
+      checkbox.disabled = true;
+      try {
+          const res = await fetch(`/snooze/products/${productId}/snooze`, {
+        method: 'PATCH',
+          credentials: 'include',
+        });
+        const data = await res.json();
+
+        if (!data.success) throw new Error(data.message);
+
+        const isSnoozed = data.isSnoozed;
+
+        // Update in-memory state
+        const product = allProducts.find(p => p.productId === productId);
+        if (product) product.isSnoozed = isSnoozed;
+
+        // Update desktop row
+        const row = document.querySelector(`tr[data-id="${productId}"]`);
+        if (row) {
+          row.classList.toggle('snoozed', isSnoozed);
+          const badge = document.getElementById(`badge-${productId}`);
+          if (badge) {
+            badge.textContent = isSnoozed ? 'Snoozed' : 'Active';
+            badge.className = `badge text-xs px-2 py-1 rounded-full ${isSnoozed ? 'badge-snoozed' : 'badge-active'}`;
+          }
+        }
+
+        // Update mobile card
+        const mCard = document.querySelector(`.card-product[data-id="${productId}"]`);
+        if (mCard) {
+          mCard.classList.toggle('opacity-60', isSnoozed);
+          const mBadge = document.getElementById(`badge-m-${productId}`);
+          if (mBadge) {
+            mBadge.textContent = isSnoozed ? 'Snoozed' : 'Active';
+            mBadge.className = `badge text-xs px-2 rounded-full ${isSnoozed ? 'badge-snoozed' : 'badge-active'}`;
+          }
+        }
+
+        updateStats();
+        showToast(isSnoozed ? 'Product snoozed' : 'Product unsnoozed', isSnoozed ? 'warning' : 'success');
+      } catch (e) {
+        console.error(e);
+        checkbox.checked = !checkbox.checked;
+        showToast('Failed to update snooze status', 'error');
+      } finally {
+        checkbox.disabled = false;
+      }
+    }
+
+    function clearSearch() {
+      document.getElementById('search-input').value = '';
+      document.getElementById('search-input').dispatchEvent(new Event('input'));
+    }
+
+    function escHtml(str) {
+      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    document.getElementById('search-input').addEventListener('input', function () {
+      const q = this.value.trim().toLowerCase();
+      const clearBtn = document.getElementById('clear-search');
+      clearBtn.style.opacity = q ? '1' : '0';
+      clearBtn.style.pointerEvents = q ? 'auto' : 'none';
+
+      if (!q) {
+        renderProducts(allProducts);
+        return;
+      }
+
+      const filtered = allProducts.filter(p => {
+        const price = getPrice(p.variants);
+        return (
+          String(p.productId).includes(q) ||
+          (p.productNameEn || '').toLowerCase().includes(q) ||
+          (p.productNameAr || '').toLowerCase().includes(q) ||
+          price.includes(q)
+        );
+      });
+
+      renderProducts(filtered);
+    });
+
+    loadProducts();
+  </script>
+</body>
+</html>
+ody>
+</html>
