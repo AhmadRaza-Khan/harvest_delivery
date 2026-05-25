@@ -20,8 +20,6 @@ jobs:
           cd /var/www/harvestdelivery
 
           git fetch origin
-          git reset --hard origin/master
-          git clean -fd
 
           npm install --production
 
