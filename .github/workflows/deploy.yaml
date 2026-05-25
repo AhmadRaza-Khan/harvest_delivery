@@ -20,6 +20,8 @@ jobs:
           cd /var/www/harvestdelivery
 
           git fetch origin
+          git reset --hard origin/master
+          git clean -fd
 
           npm install --production
 
@@ -28,6 +30,6 @@ jobs:
 
           npm run build
 
-          pm2 restart harvestdelivery || pm2 start ecosystem.config.js
+          pm2 restart harvestdelivery || pm2 start /root/ecosystem.config.js
           pm2 save
           
