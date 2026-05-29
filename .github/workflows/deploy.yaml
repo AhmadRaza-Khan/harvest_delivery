@@ -23,13 +23,13 @@ jobs:
           git reset --hard origin/master
           git clean -fd
 
-          npm install --production
+          npm install
 
           npm run prisma:generate
           npx prisma migrate deploy
 
           npm run build
 
-          pm2 restart harvestdelivery || pm2 start /root/ecosystem.config.js
+          pm2 restart harvestdelivery || pm2 start dist/main.js --name harvestdelivery
           pm2 save
           

@@ -19,3 +19,36 @@ model Token {
   accessToken String
   expiration  DateTime
 }
+
+model Category {
+  id           Int      @id @default(autoincrement())
+  categoryId   Int      @unique
+  categoryEng  String
+  categoryArb  String?
+  products     Json     @default("[]")
+  isSynced     Boolean  @default(false)
+  isSnoozed    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Product {
+  id            Int      @id @default(autoincrement())
+  productId     Int      @unique
+  imageUrl      String   @default("")
+  variants      Json     @default("[]")
+  attributes    Json     @default("[]")
+  isSynced      Boolean  @default(false)
+  isSnoozed     Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  productNameAr String   @default("")
+  productNameEn String
+}
+
+model Order {
+  id        Int     @id @default(autoincrement())
+  snoonu_id String  @unique
+  odoo_id   String  @unique
+  status    String?
+}
