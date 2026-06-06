@@ -8,9 +8,10 @@ import { channels } from '../menu/CONSTANTS';
 @Injectable()
 export class OrderService {
   private readonly channelId: string;
-
+  private readonly posId: string;
   constructor(private readonly config: ConfigService, private readonly handler: HandlerService, private readonly prisma: PrismaService){
           this.channelId = this.config.get<string>("CHANNELL_ID")!;
+          this.posId = this.config.get<string>("POS_ID")!;
   }
 
   async test(){
@@ -236,6 +237,7 @@ export class OrderService {
           where: { snoonu_id: String(payload.orderId) },
           data: { status: "cancelled" },
         });
+        console.log(`Order with Snoonu ID ${payload.orderId} has been cancelled in the database.`);
         return { success: true, message: "Order cancelled successfully" };
       }
       return { success: false, message: "Failed to cancel order in Odoo" };
@@ -245,9 +247,10 @@ export class OrderService {
     }
   }
 
-  async rejectOrderWebhook(payload: OdooWebhookDto): Promise<any> {
+  async rejectOrderWebhook(payload: any): Promise<any> {
     try {
       const webhook = await this.webhookHandler(payload, "rejected", `/api/v1/orders/reject`, 7);
+      console.log(`Order ${payload.order_name} with ID ${payload.order_id} has been rejected.`);
       return { success: true, message: "Webhook received for order rejection" };
     } catch (error: any) {
       console.error("Error rejecting order:", error.message);
@@ -255,11 +258,12 @@ export class OrderService {
     }
   }
 
-  async acceptOrderWebhook(payload: OdooWebhookDto): Promise<any> {
+  async acceptOrderWebhook(payload: any): Promise<any> {
     try {      
       await this.webhookHandler(payload, "accepted", `/api/v1/orders/accept`, 2);
       await this.delay(3000);
       await this.webhookHandler(payload, "preparing", `/api/v1/orders/prepare`, 3);
+      console.log(`Order ${payload.order_name} with ID ${payload.order_id} has been accepted.`);
       return { success: true, message: "Webhook received for order acceptance" };
     } catch (error: any) {
       console.error("Error accepting order:", error.message);
@@ -267,10 +271,15 @@ export class OrderService {
     }
   }
 
-  async readyForPickupWebhook(payload: OdooWebhookDto): Promise<any> {
-    const { order_id, order_name } = payload;
-    console.log(`Order ${order_name} with ID ${order_id} is ready for pickup.`);
+  async readyForPickupWebhook(payload: any): Promise<any> {
+    try {
+      await this.webhookHandler(payload, "ready", `/api/v1/orders/ready`, 8);
+      console.log(`Order ${payload.order_name} with ID ${payload.order_id} is ready for pickup.`);
     return { success: true, message: "Webhook received for order ready for pickup" };
+    } catch (error: any) {
+      console.error("Error processing ready for pickup webhook:", error.message);
+      return { success: false, message: "Failed to process ready for pickup webhook" };
+    }
   }
 
   async webhookHandler(payload: any, webhookType: string, endpoint: string, status: number): Promise<any> {
@@ -294,6 +303,29 @@ export class OrderService {
     } catch (error: any) {
       console.error("Error rejecting order:", error.message);
       return { success: false, message: "Failed to reject order" };
+    }
+  }
+
+  async registerWebhook(): Promise<any> {
+    const BASE_URL = "https://baristrosnoonu.cyberboost.io";
+    try {
+      const payload = {
+        "id": this.posId,
+        "webhooks": {
+          "orderCreateWebhook": `${BASE_URL}/order/place`,
+          "orderCancelWebhook": `${BASE_URL}/order/cancel`,
+          "menuSyncStatusWebhook": `${BASE_URL}/menu/sync-status`,
+          "orderUpdateWebhook": `${BASE_URL}/order/update`,
+          "orderStatusUpdateWebhook": `${BASE_URL}/order/status`,
+          "loginWebhook": null
+        }
+      }
+      const response = await this.handler.apiHandler('/api/v1/pos/register-webhooks', 'POST', payload);
+      console.log('Webhook registration response is :', response);
+      return { success: true, message: response };
+    } catch (error: any) {
+      console.error("Error registering webhooks:", error.message);
+      return { success: false, message: "Failed to register webhooks" };
     }
   }
 }

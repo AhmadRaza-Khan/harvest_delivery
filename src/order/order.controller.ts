@@ -11,6 +11,18 @@ export class OrderController {
     return this.service.test();
   }
 
+  @Post("/update")
+  async updateOrder(@Body() payload: any){
+    console.log("Received order update with payload: ", payload);
+    return { success: true };
+  }
+
+  @Post("/status")
+  async updateOrderStatus(@Body() payload: any){
+    console.log("Received order status update with payload: ", payload);
+    return { success: true };
+  }
+
   @Post("/place")
   async placeOrder(@Body() payload: any){
     return await this.service.placeOrderWebhook(payload);

@@ -6,11 +6,11 @@ import { channels } from './CONSTANTS';
 
 @Injectable()
 export class MenuService {
-    private readonly snoonuApiUrl: string;
+    private readonly brandId: string;
     constructor(
         private handler: HandlerService, private prisma: PrismaService, private config: ConfigService
     ) {
-        this.snoonuApiUrl = this.config.get<string>('SNOONU_API_URL')!;
+        this.brandId = this.config.get<string>('BRAND_ID')!;
     }
 
     async saveCategoriesToDB(): Promise<any> {
@@ -36,6 +36,24 @@ export class MenuService {
     async saveProductsToDB(): Promise<any> {
         try {
             const response = await this.handler.odooApiHandler("/api/pos/products", "GET");
+            return response;
+
+            // await Promise.all((response?.products ?? []).map(async (product: any)=> {
+            //     await this.prisma.product.create({
+            //         data: {
+            //             productId: product.id,
+            //             imageUrl: product.image,
+            //             variants: product.variants as any,
+            //             attributes: product.attributes as any,
+            //             productNameEn: product.name.en,
+            //             productNameAr: product.name.ar
+            //         }
+            //     })
+            // }))
+
+
+
+            // return { success: true, saved: (response?.products ?? []).length };
 
             await Promise.all((response?.products ?? []).map(async (product: any) => {
                 const attributes = product.attributes || [];
@@ -51,6 +69,28 @@ export class MenuService {
             console.log(`Error occurred during saving products to database: \n ${error.message}`);
             return { success: false, message: `Error occurred during saving products to database: \n ${error.message}` }
         }
+    }
+
+    async saveMenuToAVO(): Promise<any> {
+        const dbProducts = await this.prisma.product.findMany({});
+        const payload = {
+            brandId: 0,
+            products: dbProducts.map(product => ({
+                name: product.productNameEn,
+                posId: product.productId,
+                price: product.variants?.[0]?.price || 0,
+                additions: product?.attributes ? (product.attributes as any[]).flatMap((attribute: any) =>
+                attribute.values.map(value => ({
+                    name: value.name.en,
+                    posId: value.id,
+                    price: value.price_extra || 0,
+                }))
+                ) : [],
+            })),
+            };
+        const response = await this.handler.AvoApiHandler("/api/services/app/Odoo/ReceiveMenuFromOdoo", "POST", payload);
+        console.log("Response from AVO API after syncing menu: ", response);
+        return response;
     }
 
     async saveMenu(): Promise<any> {

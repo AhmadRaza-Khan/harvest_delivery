@@ -7,10 +7,14 @@ export class HandlerService {
     private readonly snoonuApiUrl: string;
     private readonly baseUrl: string;
     private readonly apiKey: string;
+    private readonly avoUrl: string;
+    private readonly avoAccessToken: string;
     constructor(private config: ConfigService, private authService: AuthService) {
         this.snoonuApiUrl = this.config.get<string>('SNOONU_API_URL')!;
         this.baseUrl = this.config.get<string>('ODOO_URL')!;
         this.apiKey = this.config.get<string>('ODOO_API_KEY')!;
+        this.avoUrl = this.config.get<string>('AVO_URL')!;
+        this.avoAccessToken = this.config.get<string>('AVO_ACCESS_TOKEN')!;
     }
     async apiHandler(endpoint: string, method: string, payload: any = null): Promise<any> {
         try {
@@ -49,7 +53,46 @@ export class HandlerService {
         } catch (error: any) {
             throw new Error(`apiHandler failed: ${error.message}`);
         }
-}
+    }
+
+    async AvoApiHandler(endpoint: string, method: string, payload: any = null): Promise<any> {
+        try {
+            const url = `${this.avoUrl}${endpoint}`;
+
+            const headers: Record<string, string> = {
+            'Content-Type': 'application/json',
+            Authorization: this.avoAccessToken,
+            };
+
+            const options: RequestInit = {
+            method: method.toUpperCase(),
+            headers,
+            };
+
+            if (payload && !['GET', 'HEAD'].includes(method.toUpperCase())) {
+            options.body = JSON.stringify(payload);
+            }
+
+            const response = await fetch(url, options);
+
+            const contentType = response.headers.get('content-type');
+
+            const data =
+            contentType?.includes('application/json')
+                ? await response.json()
+                : await response.text();
+
+            if (!response.ok) {
+            throw new Error(
+                `Avo API Error ${response.status}: ${JSON.stringify(data)}`,
+            );
+            }
+
+            return data;
+        } catch (error: any) {
+            throw new Error(`AvoApiHandler failed: ${error.message}`);
+        }
+    }
 
     async odooApiHandler(endpoint: string, method: string, payload: any = null): Promise<any> {
     try {

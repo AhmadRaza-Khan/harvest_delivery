@@ -1,10 +1,21 @@
-import { Controller, Delete, Get, Param, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Res } from '@nestjs/common';
 import { join } from 'path';
 import { MenuService } from './menu.service';
 
 @Controller('menu')
 export class MenuController {
     constructor(private readonly service: MenuService){}
+
+    @Post("sync-status")
+    async syncStatus(@Body() payload: any) {
+        console.log("Received menu sync status update with payload: ", payload);
+        return { success: true };
+    }
+
+    @Get("sync-to-avo")
+    async syncToAVO() {
+        return this.service.saveMenuToAVO();
+    }
 
     @Get("/page")
     menuPage(@Res() res: any) {
