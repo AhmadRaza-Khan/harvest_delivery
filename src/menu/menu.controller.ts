@@ -6,6 +6,11 @@ import { MenuService } from './menu.service';
 export class MenuController {
     constructor(private readonly service: MenuService){}
 
+    @Get("test")
+    async test(){
+        await this.service.test();
+    }
+
     @Post("sync-status")
     async syncStatus(@Body() payload: any) {
         console.log("Received menu sync status update with payload: ", payload);

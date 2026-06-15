@@ -1,0 +1,5052 @@
+{
+  "brandId": 23,
+  "products": [
+    {
+      "name": "(KIDS) PEANUT BUTTER & JAM",
+      "posId": 5931,
+      "price": 26,
+      "additions": []
+    },
+    {
+      "name": "360 SIP LID/12OZ MATTE GR",
+      "posId": 5876,
+      "price": 125,
+      "additions": []
+    },
+    {
+      "name": "ALMONDS",
+      "posId": 6067,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "360 SIP LID/12OZ MATTE WH",
+      "posId": 5875,
+      "price": 125,
+      "additions": []
+    },
+    {
+      "name": "BALANCE",
+      "posId": 6005,
+      "price": 40,
+      "additions": []
+    },
+    {
+      "name": "BANANA MILKSHAKE",
+      "posId": 5934,
+      "price": 25,
+      "additions": []
+    },
+    {
+      "name": "4.5OZ CORTADO MATTE WHITE",
+      "posId": 5879,
+      "price": 75,
+      "additions": []
+    },
+    {
+      "name": "AEROPRESS",
+      "posId": 5756,
+      "price": 28,
+      "additions": [
+        {
+          "name": "Cold",
+          "posId": 23,
+          "price": 0
+        },
+        {
+          "name": "Warm",
+          "posId": 24,
+          "price": 0
+        },
+        {
+          "name": "Ice On The Side",
+          "posId": 208,
+          "price": 0
+        },
+        {
+          "name": "With Ice",
+          "posId": 209,
+          "price": 0
+        },
+        {
+          "name": "No Ice",
+          "posId": 210,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "BERRY ICED TEA",
+      "posId": 5785,
+      "price": 28,
+      "additions": [
+        {
+          "name": "Ice On The Side",
+          "posId": 208,
+          "price": 0
+        },
+        {
+          "name": "With Ice",
+          "posId": 209,
+          "price": 0
+        },
+        {
+          "name": "No Ice",
+          "posId": 210,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "ALMOND SNACK",
+      "posId": 5842,
+      "price": 14,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "12OZ MATTE BLACK COPPER",
+      "posId": 5874,
+      "price": 110,
+      "additions": []
+    },
+    {
+      "name": "AMERICANO",
+      "posId": 5730,
+      "price": 19,
+      "additions": [
+        {
+          "name": "Extra Shot",
+          "posId": 211,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "BANANA",
+      "posId": 5910,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "CHAMOMILE TEA",
+      "posId": 5788,
+      "price": 21,
+      "additions": []
+    },
+    {
+      "name": "BRONZE",
+      "posId": 5892,
+      "price": 375,
+      "additions": []
+    },
+    {
+      "name": "CHICKEN PESTO SANDWICH",
+      "posId": 5802,
+      "price": 32,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "ENERGY SHAKE",
+      "posId": 5999,
+      "price": 38,
+      "additions": []
+    },
+    {
+      "name": "CHEESE BLINTZ",
+      "posId": 5686,
+      "price": 45,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "ESPRESSO BANANA PROTEIN SHAKE",
+      "posId": 5998,
+      "price": 38,
+      "additions": [
+        {
+          "name": "Extra Protein 15 Grams",
+          "posId": 213,
+          "price": 5
+        },
+        {
+          "name": "Extra Shot",
+          "posId": 211,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "HOT CHOCOLATE",
+      "posId": 6267,
+      "price": 30,
+      "additions": [
+        {
+          "name": "Full Fat Milk",
+          "posId": 6,
+          "price": 0
+        },
+        {
+          "name": "Low Fat Milk",
+          "posId": 7,
+          "price": 0
+        },
+        {
+          "name": "Skim Milk",
+          "posId": 8,
+          "price": 0
+        },
+        {
+          "name": "Almond Milk",
+          "posId": 9,
+          "price": 4
+        },
+        {
+          "name": "Coconut Milk",
+          "posId": 10,
+          "price": 4
+        },
+        {
+          "name": "Oat Milk",
+          "posId": 11,
+          "price": 4
+        },
+        {
+          "name": "Lactose Free Milk",
+          "posId": 12,
+          "price": 0
+        },
+        {
+          "name": "Oatley",
+          "posId": 13,
+          "price": 4
+        }
+      ]
+    },
+    {
+      "name": "LETTUCE",
+      "posId": 6027,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "24OZ MATTE BLACK & WALNUT",
+      "posId": 5886,
+      "price": 470,
+      "additions": []
+    },
+    {
+      "name": "BATCH BREW",
+      "posId": 5747,
+      "price": 18,
+      "additions": []
+    },
+    {
+      "name": "BANANA BREAD WHOLE",
+      "posId": 5769,
+      "price": 140,
+      "additions": []
+    },
+    {
+      "name": "BARISTA",
+      "posId": 6356,
+      "price": 0,
+      "additions": []
+    },
+    {
+      "name": "CAPPUCCINO",
+      "posId": 38,
+      "price": 24,
+      "additions": [
+        {
+          "name": "Full Fat Milk",
+          "posId": 6,
+          "price": 0
+        },
+        {
+          "name": "Low Fat Milk",
+          "posId": 7,
+          "price": 0
+        },
+        {
+          "name": "Skim Milk",
+          "posId": 8,
+          "price": 0
+        },
+        {
+          "name": "Almond Milk",
+          "posId": 9,
+          "price": 4
+        },
+        {
+          "name": "Coconut Milk",
+          "posId": 10,
+          "price": 4
+        },
+        {
+          "name": "Oat Milk",
+          "posId": 11,
+          "price": 4
+        },
+        {
+          "name": "Lactose Free Milk",
+          "posId": 12,
+          "price": 0
+        },
+        {
+          "name": "Oatley",
+          "posId": 13,
+          "price": 4
+        },
+        {
+          "name": "Extra Shot",
+          "posId": 211,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "CLUB CHICKEN SANDWHICH",
+      "posId": 5803,
+      "price": 42,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        },
+        {
+          "name": "Bacon",
+          "posId": 189,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "GEISHA 1KG",
+      "posId": 5941,
+      "price": 300,
+      "additions": []
+    },
+    {
+      "name": "GOAT CHEESE WALNUTS TOAST",
+      "posId": 5807,
+      "price": 34,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "HALF MOON 3 CUP FILTERS",
+      "posId": 5967,
+      "price": 65,
+      "additions": []
+    },
+    {
+      "name": "GUACAMOLE",
+      "posId": 5912,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "ICED MOROCCAN MINT",
+      "posId": 5795,
+      "price": 28,
+      "additions": [
+        {
+          "name": "Ice On The Side",
+          "posId": 208,
+          "price": 0
+        },
+        {
+          "name": "With Ice",
+          "posId": 209,
+          "price": 0
+        },
+        {
+          "name": "No Ice",
+          "posId": 210,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "Dates",
+      "posId": 6348,
+      "price": 3,
+      "additions": []
+    },
+    {
+      "name": "24OZ MATTE BLACK",
+      "posId": 5887,
+      "price": 360,
+      "additions": []
+    },
+    {
+      "name": "0.7L BLACK",
+      "posId": 5891,
+      "price": 140,
+      "additions": []
+    },
+    {
+      "name": "BLUEBERRY COMPOTE",
+      "posId": 6086,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "CAFETTO EVO ESPRESSO MACH",
+      "posId": 5975,
+      "price": 70,
+      "additions": []
+    },
+    {
+      "name": "CLASSIC GRANOLA BOWL",
+      "posId": 5858,
+      "price": 40,
+      "additions": [
+        {
+          "name": "Honey",
+          "posId": 192,
+          "price": 5
+        },
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "CRANBERRY LEMONADE (1 LIT",
+      "posId": 5767,
+      "price": 125,
+      "additions": []
+    },
+    {
+      "name": "ESPRESSO TONIC",
+      "posId": 5576,
+      "price": 28,
+      "additions": [
+        {
+          "name": "Extra Shot",
+          "posId": 211,
+          "price": 0
+        },
+        {
+          "name": "Ice On The Side",
+          "posId": 208,
+          "price": 0
+        },
+        {
+          "name": "With Ice",
+          "posId": 209,
+          "price": 0
+        },
+        {
+          "name": "No Ice",
+          "posId": 210,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "Furniture Assembly",
+      "posId": 6298,
+      "price": 2000,
+      "additions": []
+    },
+    {
+      "name": "DOUBLE MACHIATTO ",
+      "posId": 5729,
+      "price": 18,
+      "additions": [
+        {
+          "name": "Full Fat Milk",
+          "posId": 6,
+          "price": 0
+        },
+        {
+          "name": "Low Fat Milk",
+          "posId": 7,
+          "price": 0
+        },
+        {
+          "name": "Skim Milk",
+          "posId": 8,
+          "price": 0
+        },
+        {
+          "name": "Almond Milk",
+          "posId": 9,
+          "price": 4
+        },
+        {
+          "name": "Coconut Milk",
+          "posId": 10,
+          "price": 4
+        },
+        {
+          "name": "Oat Milk",
+          "posId": 11,
+          "price": 4
+        },
+        {
+          "name": "Lactose Free Milk",
+          "posId": 12,
+          "price": 0
+        },
+        {
+          "name": "Oatley",
+          "posId": 13,
+          "price": 4
+        }
+      ]
+    },
+    {
+      "name": "JORGE 250G",
+      "posId": 5951,
+      "price": 90,
+      "additions": []
+    },
+    {
+      "name": "ICEDCHEMEX",
+      "posId": 5759,
+      "price": 28,
+      "additions": []
+    },
+    {
+      "name": "MOFA 10%",
+      "posId": 6315,
+      "price": 0,
+      "additions": []
+    },
+    {
+      "name": "2.3OZ MATTE BLACK COPPER",
+      "posId": 5896,
+      "price": 135,
+      "additions": []
+    },
+    {
+      "name": "AMIRI",
+      "posId": 6255,
+      "price": 0,
+      "additions": []
+    },
+    {
+      "name": "BLUBERRY GRILLED CHEESE SANDWICH",
+      "posId": 5801,
+      "price": 26,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "BREAKFAST BURRITO",
+      "posId": 5682,
+      "price": 56,
+      "additions": [
+        {
+          "name": "Scrambled Egg",
+          "posId": 20,
+          "price": 0
+        },
+        {
+          "name": "Scrambled Medium",
+          "posId": 21,
+          "price": 0
+        },
+        {
+          "name": "Scrambled Well-done",
+          "posId": 22,
+          "price": 0
+        },
+        {
+          "name": "Extra Labneh",
+          "posId": 175,
+          "price": 6
+        },
+        {
+          "name": "Extra Guacamole",
+          "posId": 176,
+          "price": 8
+        },
+        {
+          "name": "Extra Parmesan Sautéed mashrooms",
+          "posId": 177,
+          "price": 10
+        },
+        {
+          "name": "Extra Feta Cheese",
+          "posId": 178,
+          "price": 6
+        },
+        {
+          "name": "Extra Brioche",
+          "posId": 179,
+          "price": 4
+        },
+        {
+          "name": "Extra One Egg",
+          "posId": 180,
+          "price": 5
+        },
+        {
+          "name": "Extra Mayo Sriracha Sauce",
+          "posId": 181,
+          "price": 6
+        },
+        {
+          "name": "Extra Spinach Feta Puree",
+          "posId": 182,
+          "price": 8
+        },
+        {
+          "name": "Extra Whipped Cream Cheese",
+          "posId": 183,
+          "price": 6
+        },
+        {
+          "name": "Extra Pesto Sauce",
+          "posId": 184,
+          "price": 8
+        },
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "BURRATA PESTO TOAST",
+      "posId": 5814,
+      "price": 48,
+      "additions": []
+    },
+    {
+      "name": "CORTADO",
+      "posId": 36,
+      "price": 21,
+      "additions": [
+        {
+          "name": "Full Fat Milk",
+          "posId": 6,
+          "price": 0
+        },
+        {
+          "name": "Low Fat Milk",
+          "posId": 7,
+          "price": 0
+        },
+        {
+          "name": "Skim Milk",
+          "posId": 8,
+          "price": 0
+        },
+        {
+          "name": "Almond Milk",
+          "posId": 9,
+          "price": 4
+        },
+        {
+          "name": "Coconut Milk",
+          "posId": 10,
+          "price": 4
+        },
+        {
+          "name": "Oat Milk",
+          "posId": 11,
+          "price": 4
+        },
+        {
+          "name": "Lactose Free Milk",
+          "posId": 12,
+          "price": 0
+        },
+        {
+          "name": "Oatley",
+          "posId": 13,
+          "price": 4
+        },
+        {
+          "name": "Extra Shot",
+          "posId": 211,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "EXTRA MATCHA SHOT",
+      "posId": 6185,
+      "price": 7,
+      "additions": []
+    },
+    {
+      "name": "GUATEMALA",
+      "posId": 6015,
+      "price": 65,
+      "additions": []
+    },
+    {
+      "name": "HAZELNUT",
+      "posId": 6068,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "ICED AMERICANO",
+      "posId": 5627,
+      "price": 22,
+      "additions": [
+        {
+          "name": "Ice On The Side",
+          "posId": 208,
+          "price": 0
+        },
+        {
+          "name": "With Ice",
+          "posId": 209,
+          "price": 0
+        },
+        {
+          "name": "No Ice",
+          "posId": 210,
+          "price": 0
+        },
+        {
+          "name": "Extra Shot",
+          "posId": 211,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "1.2L CLEAR",
+      "posId": 5889,
+      "price": 140,
+      "additions": []
+    },
+    {
+      "name": "ALMOND BUTTER",
+      "posId": 5902,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "ACAI BOWL-VEGAN",
+      "posId": 5868,
+      "price": 55,
+      "additions": [
+        {
+          "name": "Strawberry",
+          "posId": 25,
+          "price": 0
+        },
+        {
+          "name": "Peanut Butter",
+          "posId": 26,
+          "price": 0
+        },
+        {
+          "name": "Raspberry",
+          "posId": 27,
+          "price": 0
+        },
+        {
+          "name": "Banana",
+          "posId": 28,
+          "price": 0
+        },
+        {
+          "name": "Almond Butter",
+          "posId": 29,
+          "price": 0
+        },
+        {
+          "name": "Blueberry",
+          "posId": 30,
+          "price": 0
+        },
+        {
+          "name": "Granola 25g",
+          "posId": 31,
+          "price": 0
+        },
+        {
+          "name": "Chia Seed",
+          "posId": 32,
+          "price": 0
+        },
+        {
+          "name": "Pumpkin Seeds",
+          "posId": 33,
+          "price": 0
+        },
+        {
+          "name": "Coconut Powder",
+          "posId": 34,
+          "price": 0
+        },
+        {
+          "name": "Peanut Butter",
+          "posId": 190,
+          "price": 5
+        },
+        {
+          "name": "Banana",
+          "posId": 191,
+          "price": 5
+        },
+        {
+          "name": "Almond Butter",
+          "posId": 193,
+          "price": 5
+        },
+        {
+          "name": "Strawberry",
+          "posId": 199,
+          "price": 5
+        },
+        {
+          "name": "blueberry",
+          "posId": 200,
+          "price": 5
+        },
+        {
+          "name": "Chia Seeds",
+          "posId": 201,
+          "price": 3
+        },
+        {
+          "name": "Granola 50g",
+          "posId": 202,
+          "price": 10
+        }
+      ]
+    },
+    {
+      "name": "CHOCOLATE COOKIE",
+      "posId": 5838,
+      "price": 22,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "CARROT CAKE",
+      "posId": 5853,
+      "price": 22,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "ELECTRONIC MATTE BLACK",
+      "posId": 5643,
+      "price": 700,
+      "additions": []
+    },
+    {
+      "name": "EARL GREY TEA",
+      "posId": 5789,
+      "price": 21,
+      "additions": []
+    },
+    {
+      "name": "GUATEMALA EL COYEGO 1KG",
+      "posId": 5960,
+      "price": 280,
+      "additions": []
+    },
+    {
+      "name": "DRIED CRANBERRIES",
+      "posId": 6020,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "ICED V60",
+      "posId": 5755,
+      "price": 28,
+      "additions": [
+        {
+          "name": "COSTARICA BEANS",
+          "posId": 160,
+          "price": 0
+        },
+        {
+          "name": "KENYA",
+          "posId": 161,
+          "price": 0
+        },
+        {
+          "name": "RUWANDA",
+          "posId": 162,
+          "price": 0
+        },
+        {
+          "name": "GUATAMALA",
+          "posId": 163,
+          "price": 0
+        },
+        {
+          "name": "DCAF",
+          "posId": 164,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "0.7L CLEAR",
+      "posId": 5888,
+      "price": 120,
+      "additions": []
+    },
+    {
+      "name": "BALLS MATCHA PROTEIN",
+      "posId": 5848,
+      "price": 16,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "BONANZA 2 250G",
+      "posId": 5947,
+      "price": 90,
+      "additions": []
+    },
+    {
+      "name": "BRIOCHE",
+      "posId": 5994,
+      "price": 4,
+      "additions": []
+    },
+    {
+      "name": "COFFEE MAKER 3 CUPS",
+      "posId": 5969,
+      "price": 240,
+      "additions": []
+    },
+    {
+      "name": "EARL GREY MADELEINE",
+      "posId": 6012,
+      "price": 16,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "GEISHA ESPRESSO",
+      "posId": 5746,
+      "price": 28,
+      "additions": []
+    },
+    {
+      "name": "GOGOGU 1KG",
+      "posId": 5936,
+      "price": 240,
+      "additions": []
+    },
+    {
+      "name": "HOMEMADE GRANOLA",
+      "posId": 5649,
+      "price": 45,
+      "additions": []
+    },
+    {
+      "name": "ICED MAPLE LATTE",
+      "posId": 5740,
+      "price": 27,
+      "additions": [
+        {
+          "name": "Full Fat Milk",
+          "posId": 6,
+          "price": 0
+        },
+        {
+          "name": "Low Fat Milk",
+          "posId": 7,
+          "price": 0
+        },
+        {
+          "name": "Skim Milk",
+          "posId": 8,
+          "price": 0
+        },
+        {
+          "name": "Almond Milk",
+          "posId": 9,
+          "price": 4
+        },
+        {
+          "name": "Coconut Milk",
+          "posId": 10,
+          "price": 4
+        },
+        {
+          "name": "Oat Milk",
+          "posId": 11,
+          "price": 4
+        },
+        {
+          "name": "Lactose Free Milk",
+          "posId": 12,
+          "price": 0
+        },
+        {
+          "name": "Oatley",
+          "posId": 13,
+          "price": 4
+        },
+        {
+          "name": "Ice On The Side",
+          "posId": 208,
+          "price": 0
+        },
+        {
+          "name": "With Ice",
+          "posId": 209,
+          "price": 0
+        },
+        {
+          "name": "No Ice",
+          "posId": 210,
+          "price": 0
+        },
+        {
+          "name": "Extra Shot",
+          "posId": 211,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "LATTE",
+      "posId": 5737,
+      "price": 24,
+      "additions": [
+        {
+          "name": "Full Fat Milk",
+          "posId": 6,
+          "price": 0
+        },
+        {
+          "name": "Low Fat Milk",
+          "posId": 7,
+          "price": 0
+        },
+        {
+          "name": "Skim Milk",
+          "posId": 8,
+          "price": 0
+        },
+        {
+          "name": "Almond Milk",
+          "posId": 9,
+          "price": 4
+        },
+        {
+          "name": "Coconut Milk",
+          "posId": 10,
+          "price": 4
+        },
+        {
+          "name": "Oat Milk",
+          "posId": 11,
+          "price": 4
+        },
+        {
+          "name": "Lactose Free Milk",
+          "posId": 12,
+          "price": 0
+        },
+        {
+          "name": "Oatley",
+          "posId": 13,
+          "price": 4
+        },
+        {
+          "name": "Extra Shot",
+          "posId": 211,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "12OZ LAVENDER PURPLE",
+      "posId": 5873,
+      "price": 125,
+      "additions": []
+    },
+    {
+      "name": "BLUE BERRY",
+      "posId": 5907,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "BUTTER",
+      "posId": 6084,
+      "price": 3,
+      "additions": []
+    },
+    {
+      "name": "CHOCOLATE",
+      "posId": 5925,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "CROISSANT SCRAMBLED EGGS",
+      "posId": 5825,
+      "price": 38,
+      "additions": [
+        {
+          "name": "Scrambled Egg",
+          "posId": 20,
+          "price": 0
+        },
+        {
+          "name": "Scrambled Medium",
+          "posId": 21,
+          "price": 0
+        },
+        {
+          "name": "Scrambled Well-done",
+          "posId": 22,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "EXTRA FETA CHEESE",
+      "posId": 5992,
+      "price": 6,
+      "additions": []
+    },
+    {
+      "name": "FLATWHITE",
+      "posId": 5734,
+      "price": 23,
+      "additions": [
+        {
+          "name": "Full Fat Milk",
+          "posId": 6,
+          "price": 0
+        },
+        {
+          "name": "Low Fat Milk",
+          "posId": 7,
+          "price": 0
+        },
+        {
+          "name": "Skim Milk",
+          "posId": 8,
+          "price": 0
+        },
+        {
+          "name": "Almond Milk",
+          "posId": 9,
+          "price": 4
+        },
+        {
+          "name": "Coconut Milk",
+          "posId": 10,
+          "price": 4
+        },
+        {
+          "name": "Oat Milk",
+          "posId": 11,
+          "price": 4
+        },
+        {
+          "name": "Lactose Free Milk",
+          "posId": 12,
+          "price": 0
+        },
+        {
+          "name": "Oatley",
+          "posId": 13,
+          "price": 4
+        },
+        {
+          "name": "Extra Shot",
+          "posId": 211,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "HARVEST X FLICK",
+      "posId": 5679,
+      "price": 90,
+      "additions": []
+    },
+    {
+      "name": "HONEY",
+      "posId": 5903,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "LABNEH",
+      "posId": 6092,
+      "price": 6,
+      "additions": []
+    },
+    {
+      "name": "Deposit",
+      "posId": 3,
+      "price": 1,
+      "additions": []
+    },
+    {
+      "name": "Oatly Milk",
+      "posId": 6263,
+      "price": 4,
+      "additions": []
+    },
+    {
+      "name": "PROTEIN",
+      "posId": 5987,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "RWANDA GITESI 250G",
+      "posId": 5957,
+      "price": 80,
+      "additions": []
+    },
+    {
+      "name": "Settle Invoice",
+      "posId": 4,
+      "price": 1,
+      "additions": []
+    },
+    {
+      "name": "V60 CERAMIC DRIPPER",
+      "posId": 5640,
+      "price": 115,
+      "additions": []
+    },
+    {
+      "name": "[DE25] MINI DATE CAKE",
+      "posId": 6354,
+      "price": 0,
+      "additions": []
+    },
+    {
+      "name": "2.3OZ MATTE WHITE COPPER",
+      "posId": 5897,
+      "price": 135,
+      "additions": []
+    },
+    {
+      "name": "BERRY ICED TEA BOTTLE (1",
+      "posId": 5766,
+      "price": 125,
+      "additions": []
+    },
+    {
+      "name": "CAMP CUP (12 OZ)",
+      "posId": 5962,
+      "price": 150,
+      "additions": []
+    },
+    {
+      "name": "COCONUT MILK",
+      "posId": 5922,
+      "price": 4,
+      "additions": []
+    },
+    {
+      "name": "DALE HARRIS CUP SET OF 3",
+      "posId": 5645,
+      "price": 120,
+      "additions": []
+    },
+    {
+      "name": "FOLDED CIRCLES 100 PACKS",
+      "posId": 5966,
+      "price": 65,
+      "additions": []
+    },
+    {
+      "name": "EXTRA SHOT ESPRESSO",
+      "posId": 5901,
+      "price": 7,
+      "additions": []
+    },
+    {
+      "name": "ICED AEROCANO",
+      "posId": 5745,
+      "price": 22,
+      "additions": []
+    },
+    {
+      "name": "HOT MATCHA BLEND",
+      "posId": 5777,
+      "price": 28,
+      "additions": [
+        {
+          "name": "Extra Matcha Shot",
+          "posId": 207,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "MAYO SRIRACHA SAUCE",
+      "posId": 5995,
+      "price": 6,
+      "additions": []
+    },
+    {
+      "name": "MUSHROOM TOAST BOILED",
+      "posId": 5820,
+      "price": 58,
+      "additions": [
+        {
+          "name": "Runny Egg",
+          "posId": 14,
+          "price": 0
+        },
+        {
+          "name": "Boiled Egg",
+          "posId": 15,
+          "price": 0
+        },
+        {
+          "name": "Well Done Egg",
+          "posId": 16,
+          "price": 0
+        },
+        {
+          "name": "Poached Runny",
+          "posId": 17,
+          "price": 0
+        },
+        {
+          "name": "Poached Medium",
+          "posId": 18,
+          "price": 0
+        },
+        {
+          "name": "Poached Well-done",
+          "posId": 19,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "PESTO GRILLED CHEESE SANDWICH",
+      "posId": 5804,
+      "price": 30,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "(BR) ROASTED MUHAMARA TOA",
+      "posId": 5824,
+      "price": 52,
+      "additions": [
+        {
+          "name": "Runny Egg",
+          "posId": 14,
+          "price": 0
+        },
+        {
+          "name": "Boiled Egg",
+          "posId": 15,
+          "price": 0
+        },
+        {
+          "name": "Well Done Egg",
+          "posId": 16,
+          "price": 0
+        },
+        {
+          "name": "Poached Runny",
+          "posId": 17,
+          "price": 0
+        },
+        {
+          "name": "Poached Medium",
+          "posId": 18,
+          "price": 0
+        },
+        {
+          "name": "Poached Well-done",
+          "posId": 19,
+          "price": 0
+        },
+        {
+          "name": "Scrambled Egg",
+          "posId": 20,
+          "price": 0
+        },
+        {
+          "name": "Scrambled Medium",
+          "posId": 21,
+          "price": 0
+        },
+        {
+          "name": "Scrambled Well-done",
+          "posId": 22,
+          "price": 0
+        },
+        {
+          "name": "Extra Labneh",
+          "posId": 175,
+          "price": 6
+        },
+        {
+          "name": "Extra Guacamole",
+          "posId": 176,
+          "price": 8
+        },
+        {
+          "name": "Extra Parmesan Sautéed mashrooms",
+          "posId": 177,
+          "price": 10
+        },
+        {
+          "name": "Extra Feta Cheese",
+          "posId": 178,
+          "price": 6
+        },
+        {
+          "name": "Extra Brioche",
+          "posId": 179,
+          "price": 4
+        },
+        {
+          "name": "Extra One Egg",
+          "posId": 180,
+          "price": 5
+        },
+        {
+          "name": "Extra Mayo Sriracha Sauce",
+          "posId": 181,
+          "price": 6
+        },
+        {
+          "name": "Extra Spinach Feta Puree",
+          "posId": 182,
+          "price": 8
+        },
+        {
+          "name": "Extra Whipped Cream Cheese",
+          "posId": 183,
+          "price": 6
+        },
+        {
+          "name": "Extra Pesto Sauce",
+          "posId": 184,
+          "price": 8
+        },
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "BECHAMEL",
+      "posId": 6052,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "BANANA TOAST W/AB",
+      "posId": 5832,
+      "price": 29,
+      "additions": [
+        {
+          "name": "Peanut Butter",
+          "posId": 203,
+          "price": 0
+        },
+        {
+          "name": "Melted Almond Butter",
+          "posId": 204,
+          "price": 0
+        },
+        {
+          "name": "Peanut Butter",
+          "posId": 190,
+          "price": 5
+        },
+        {
+          "name": "Almond Butter",
+          "posId": 193,
+          "price": 5
+        }
+      ]
+    },
+    {
+      "name": "COOLER",
+      "posId": 5784,
+      "price": 28,
+      "additions": []
+    },
+    {
+      "name": "DESICCATED COCONUT",
+      "posId": 5928,
+      "price": 3,
+      "additions": []
+    },
+    {
+      "name": "COMANDANTE C40",
+      "posId": 5644,
+      "price": 950,
+      "additions": []
+    },
+    {
+      "name": "GREEN SAUCE",
+      "posId": 6094,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "HONDURAS 250G",
+      "posId": 5949,
+      "price": 90,
+      "additions": []
+    },
+    {
+      "name": "KIRI",
+      "posId": 6048,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "MAYONNAISE",
+      "posId": 5989,
+      "price": 3,
+      "additions": []
+    },
+    {
+      "name": "OVERNIGHT OATMEAL (PB& Jam)",
+      "posId": 5860,
+      "price": 38,
+      "additions": [
+        {
+          "name": "Cold",
+          "posId": 23,
+          "price": 0
+        },
+        {
+          "name": "Warm",
+          "posId": 24,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "12OZ STONE BLUE",
+      "posId": 5871,
+      "price": 125,
+      "additions": []
+    },
+    {
+      "name": "BANANA BREAD MATCHA LATTE",
+      "posId": 5796,
+      "price": 35,
+      "additions": [
+        {
+          "name": "Full Fat Milk",
+          "posId": 6,
+          "price": 0
+        },
+        {
+          "name": "Low Fat Milk",
+          "posId": 7,
+          "price": 0
+        },
+        {
+          "name": "Skim Milk",
+          "posId": 8,
+          "price": 0
+        },
+        {
+          "name": "Almond Milk",
+          "posId": 9,
+          "price": 0
+        },
+        {
+          "name": "Coconut Milk",
+          "posId": 10,
+          "price": 0
+        },
+        {
+          "name": "Oat Milk",
+          "posId": 11,
+          "price": 0
+        },
+        {
+          "name": "Lactose Free Milk",
+          "posId": 12,
+          "price": 0
+        },
+        {
+          "name": "Oatley",
+          "posId": 13,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "ACTIVE SHAKE",
+      "posId": 6000,
+      "price": 38,
+      "additions": []
+    },
+    {
+      "name": "COFFEE & NON COFFEE DRINKS",
+      "posId": 6355,
+      "price": 0,
+      "additions": []
+    },
+    {
+      "name": "COLD MATCHA BLEND",
+      "posId": 5778,
+      "price": 30,
+      "additions": [
+        {
+          "name": "Ice On The Side",
+          "posId": 208,
+          "price": 0
+        },
+        {
+          "name": "With Ice",
+          "posId": 209,
+          "price": 0
+        },
+        {
+          "name": "No Ice",
+          "posId": 210,
+          "price": 0
+        },
+        {
+          "name": "Extra Matcha Shot",
+          "posId": 207,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "ETHIOPAN",
+      "posId": 6016,
+      "price": 65,
+      "additions": []
+    },
+    {
+      "name": "GESHA 100/150 GRMS.",
+      "posId": 5648,
+      "price": 130,
+      "additions": []
+    },
+    {
+      "name": "HARVEST BAG",
+      "posId": 5880,
+      "price": 90,
+      "additions": []
+    },
+    {
+      "name": "KENYA NGANDU 250G",
+      "posId": 5959,
+      "price": 90,
+      "additions": []
+    },
+    {
+      "name": "ICED LATTE",
+      "posId": 5571,
+      "price": 25,
+      "additions": [
+        {
+          "name": "Full Fat Milk",
+          "posId": 6,
+          "price": 0
+        },
+        {
+          "name": "Low Fat Milk",
+          "posId": 7,
+          "price": 0
+        },
+        {
+          "name": "Skim Milk",
+          "posId": 8,
+          "price": 0
+        },
+        {
+          "name": "Almond Milk",
+          "posId": 9,
+          "price": 4
+        },
+        {
+          "name": "Coconut Milk",
+          "posId": 10,
+          "price": 4
+        },
+        {
+          "name": "Oat Milk",
+          "posId": 11,
+          "price": 4
+        },
+        {
+          "name": "Lactose Free Milk",
+          "posId": 12,
+          "price": 0
+        },
+        {
+          "name": "Oatley",
+          "posId": 13,
+          "price": 4
+        },
+        {
+          "name": "Ice On The Side",
+          "posId": 208,
+          "price": 0
+        },
+        {
+          "name": "With Ice",
+          "posId": 209,
+          "price": 0
+        },
+        {
+          "name": "No Ice",
+          "posId": 210,
+          "price": 0
+        },
+        {
+          "name": "Extra Shot",
+          "posId": 211,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "PEACH GRANOLA BOWL",
+      "posId": 5601,
+      "price": 44,
+      "additions": []
+    },
+    {
+      "name": "12OZ RED",
+      "posId": 5870,
+      "price": 125,
+      "additions": []
+    },
+    {
+      "name": "AVOCADO TOAST- VEGAN",
+      "posId": 5828,
+      "price": 48,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "CHEDDAR",
+      "posId": 6045,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "COSTA RICA LA PITINA 1KG",
+      "posId": 5944,
+      "price": 240,
+      "additions": []
+    },
+    {
+      "name": "DECAF V60 BOTTLE",
+      "posId": 5774,
+      "price": 31,
+      "additions": []
+    },
+    {
+      "name": "GEISHA BONANZA 250G",
+      "posId": 5650,
+      "price": 150,
+      "additions": []
+    },
+    {
+      "name": "HALLOUMI",
+      "posId": 6051,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "ICED AEROPRESS",
+      "posId": 5757,
+      "price": 28,
+      "additions": []
+    },
+    {
+      "name": "ICED TEA",
+      "posId": 6333,
+      "price": 24,
+      "additions": []
+    },
+    {
+      "name": "MINI PANCAKES",
+      "posId": 5932,
+      "price": 28,
+      "additions": [
+        {
+          "name": "Scrambled Egg",
+          "posId": 20,
+          "price": 0
+        },
+        {
+          "name": "Scrambled Medium",
+          "posId": 21,
+          "price": 0
+        },
+        {
+          "name": "Scrambled Well-done",
+          "posId": 22,
+          "price": 0
+        },
+        {
+          "name": "Dulce",
+          "posId": 165,
+          "price": 0
+        },
+        {
+          "name": "Chocolate",
+          "posId": 166,
+          "price": 0
+        },
+        {
+          "name": "Maple",
+          "posId": 154,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "PECAN",
+      "posId": 5985,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "360 SIP LID/12OZ MATTE BL",
+      "posId": 5877,
+      "price": 125,
+      "additions": []
+    },
+    {
+      "name": "BLACK",
+      "posId": 5894,
+      "price": 220,
+      "additions": []
+    },
+    {
+      "name": "AEROCANO",
+      "posId": 6331,
+      "price": 22,
+      "additions": [
+        {
+          "name": "Extra Shot",
+          "posId": 211,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "CLEAR",
+      "posId": 5893,
+      "price": 140,
+      "additions": []
+    },
+    {
+      "name": "COLD MATCHA LATTE",
+      "posId": 5776,
+      "price": 28,
+      "additions": [
+        {
+          "name": "Full Fat Milk",
+          "posId": 6,
+          "price": 0
+        },
+        {
+          "name": "Low Fat Milk",
+          "posId": 7,
+          "price": 0
+        },
+        {
+          "name": "Skim Milk",
+          "posId": 8,
+          "price": 0
+        },
+        {
+          "name": "Almond Milk",
+          "posId": 9,
+          "price": 0
+        },
+        {
+          "name": "Coconut Milk",
+          "posId": 10,
+          "price": 0
+        },
+        {
+          "name": "Oat Milk",
+          "posId": 11,
+          "price": 0
+        },
+        {
+          "name": "Lactose Free Milk",
+          "posId": 12,
+          "price": 0
+        },
+        {
+          "name": "Oatley",
+          "posId": 13,
+          "price": 0
+        },
+        {
+          "name": "Sugar Syrup",
+          "posId": 151,
+          "price": 0
+        },
+        {
+          "name": "Vanilla",
+          "posId": 153,
+          "price": 0
+        },
+        {
+          "name": "Maple",
+          "posId": 154,
+          "price": 0
+        },
+        {
+          "name": "Agave",
+          "posId": 155,
+          "price": 0
+        },
+        {
+          "name": "Honey",
+          "posId": 156,
+          "price": 0
+        },
+        {
+          "name": "Extra Matcha Shot",
+          "posId": 207,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "ENGLISH BREAKFAST TEA",
+      "posId": 5786,
+      "price": 21,
+      "additions": []
+    },
+    {
+      "name": "FELLOW FILTER PAPER",
+      "posId": 5882,
+      "price": 50,
+      "additions": []
+    },
+    {
+      "name": "Harvest Gift Card (300 QR)",
+      "posId": 6336,
+      "price": 300,
+      "additions": []
+    },
+    {
+      "name": "KENYA NGANDU 1KG",
+      "posId": 5958,
+      "price": 280,
+      "additions": []
+    },
+    {
+      "name": "OATS (HALF PORTION)",
+      "posId": 6070,
+      "price": 8,
+      "additions": []
+    },
+    {
+      "name": "PEANUT BUTTER BROWNIE",
+      "posId": 5844,
+      "price": 24,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "(BR) LABNEH AVOCADO TOAST",
+      "posId": 5823,
+      "price": 52,
+      "additions": [
+        {
+          "name": "Runny Egg",
+          "posId": 14,
+          "price": 0
+        },
+        {
+          "name": "Boiled Egg",
+          "posId": 15,
+          "price": 0
+        },
+        {
+          "name": "Well Done Egg",
+          "posId": 16,
+          "price": 0
+        },
+        {
+          "name": "Poached Runny",
+          "posId": 17,
+          "price": 0
+        },
+        {
+          "name": "Poached Medium",
+          "posId": 18,
+          "price": 0
+        },
+        {
+          "name": "Poached Well-done",
+          "posId": 19,
+          "price": 0
+        },
+        {
+          "name": "Scrambled Egg",
+          "posId": 20,
+          "price": 0
+        },
+        {
+          "name": "Scrambled Medium",
+          "posId": 21,
+          "price": 0
+        },
+        {
+          "name": "Scrambled Well-done",
+          "posId": 22,
+          "price": 0
+        },
+        {
+          "name": "Extra Labneh",
+          "posId": 175,
+          "price": 6
+        },
+        {
+          "name": "Extra Guacamole",
+          "posId": 176,
+          "price": 8
+        },
+        {
+          "name": "Extra Parmesan Sautéed mashrooms",
+          "posId": 177,
+          "price": 10
+        },
+        {
+          "name": "Extra Feta Cheese",
+          "posId": 178,
+          "price": 6
+        },
+        {
+          "name": "Extra Brioche",
+          "posId": 179,
+          "price": 4
+        },
+        {
+          "name": "Extra One Egg",
+          "posId": 180,
+          "price": 5
+        },
+        {
+          "name": "Extra Mayo Sriracha Sauce",
+          "posId": 181,
+          "price": 6
+        },
+        {
+          "name": "Extra Spinach Feta Puree",
+          "posId": 182,
+          "price": 8
+        },
+        {
+          "name": "Extra Whipped Cream Cheese",
+          "posId": 183,
+          "price": 6
+        },
+        {
+          "name": "Extra Pesto Sauce",
+          "posId": 184,
+          "price": 8
+        },
+        {
+          "name": "Labneh",
+          "posId": 185,
+          "price": 0
+        },
+        {
+          "name": "Pesto",
+          "posId": 186,
+          "price": 0
+        },
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "ALMOND MILK",
+      "posId": 5900,
+      "price": 4,
+      "additions": []
+    },
+    {
+      "name": "CAFETTO GRINDER CLEANER 4",
+      "posId": 5976,
+      "price": 160,
+      "additions": []
+    },
+    {
+      "name": "COLD BREW",
+      "posId": 5760,
+      "price": 24,
+      "additions": [
+        {
+          "name": "Ice On The Side",
+          "posId": 208,
+          "price": 0
+        },
+        {
+          "name": "With Ice",
+          "posId": 209,
+          "price": 0
+        },
+        {
+          "name": "No Ice",
+          "posId": 210,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "COSTA RICA LA LAGUNA 1KG",
+      "posId": 5942,
+      "price": 300,
+      "additions": []
+    },
+    {
+      "name": "ETHIOPIA GOGOGU DECA 250G",
+      "posId": 5953,
+      "price": 90,
+      "additions": []
+    },
+    {
+      "name": "CHEESE CAKE WHOLE",
+      "posId": 5768,
+      "price": 350,
+      "additions": []
+    },
+    {
+      "name": "HARIO PAPER FILTER",
+      "posId": 5641,
+      "price": 45,
+      "additions": []
+    },
+    {
+      "name": "JORGE 1KG",
+      "posId": 5950,
+      "price": 270,
+      "additions": []
+    },
+    {
+      "name": "MATCHA PROTEIN SHAKE",
+      "posId": 6001,
+      "price": 38,
+      "additions": [
+        {
+          "name": "Extra Protein 15 Grams",
+          "posId": 213,
+          "price": 5
+        }
+      ]
+    },
+    {
+      "name": "16OZ MATTE WHITE",
+      "posId": 5884,
+      "price": 125,
+      "additions": []
+    },
+    {
+      "name": "BANANA PORRIDGE",
+      "posId": 5859,
+      "price": 42,
+      "additions": [
+        {
+          "name": "Banana",
+          "posId": 191,
+          "price": 5
+        },
+        {
+          "name": "Honey",
+          "posId": 192,
+          "price": 5
+        },
+        {
+          "name": "Almond Butter",
+          "posId": 193,
+          "price": 5
+        },
+        {
+          "name": "Pecan",
+          "posId": 194,
+          "price": 5
+        },
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        },
+        {
+          "name": "Cold",
+          "posId": 23,
+          "price": 0
+        },
+        {
+          "name": "Warm",
+          "posId": 24,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "BREWERS GLASS JUG 500ML",
+      "posId": 5647,
+      "price": 70,
+      "additions": []
+    },
+    {
+      "name": "COLD BREW BOTTLE",
+      "posId": 5584,
+      "price": 29,
+      "additions": []
+    },
+    {
+      "name": "DOUBLE ESPRESSO",
+      "posId": 5726,
+      "price": 18,
+      "additions": [
+        {
+          "name": "Extra Shot",
+          "posId": 211,
+          "price": 7
+        }
+      ]
+    },
+    {
+      "name": "ETHIOPIA GOGOGU DECAF 1KG",
+      "posId": 5952,
+      "price": 280,
+      "additions": []
+    },
+    {
+      "name": "GOGOGU 250G",
+      "posId": 5937,
+      "price": 80,
+      "additions": []
+    },
+    {
+      "name": "ICED CAPPUCCINO",
+      "posId": 5744,
+      "price": 24,
+      "additions": [
+        {
+          "name": "Full Fat Milk",
+          "posId": 6,
+          "price": 0
+        },
+        {
+          "name": "Low Fat Milk",
+          "posId": 7,
+          "price": 0
+        },
+        {
+          "name": "Skim Milk",
+          "posId": 8,
+          "price": 0
+        },
+        {
+          "name": "Almond Milk",
+          "posId": 9,
+          "price": 4
+        },
+        {
+          "name": "Coconut Milk",
+          "posId": 10,
+          "price": 4
+        },
+        {
+          "name": "Oat Milk",
+          "posId": 11,
+          "price": 4
+        },
+        {
+          "name": "Lactose Free Milk",
+          "posId": 12,
+          "price": 0
+        },
+        {
+          "name": "Oatley",
+          "posId": 13,
+          "price": 4
+        },
+        {
+          "name": "Ice On The Side",
+          "posId": 208,
+          "price": 0
+        },
+        {
+          "name": "With Ice",
+          "posId": 209,
+          "price": 0
+        },
+        {
+          "name": "No Ice",
+          "posId": 210,
+          "price": 0
+        },
+        {
+          "name": "Extra Shot",
+          "posId": 211,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "ICED CORTADO",
+      "posId": 5752,
+      "price": 22,
+      "additions": [
+        {
+          "name": "Full Fat Milk",
+          "posId": 6,
+          "price": 0
+        },
+        {
+          "name": "Low Fat Milk",
+          "posId": 7,
+          "price": 0
+        },
+        {
+          "name": "Skim Milk",
+          "posId": 8,
+          "price": 0
+        },
+        {
+          "name": "Almond Milk",
+          "posId": 9,
+          "price": 4
+        },
+        {
+          "name": "Coconut Milk",
+          "posId": 10,
+          "price": 4
+        },
+        {
+          "name": "Oat Milk",
+          "posId": 11,
+          "price": 4
+        },
+        {
+          "name": "Lactose Free Milk",
+          "posId": 12,
+          "price": 0
+        },
+        {
+          "name": "Oatley",
+          "posId": 13,
+          "price": 4
+        },
+        {
+          "name": "Ice On The Side",
+          "posId": 208,
+          "price": 0
+        },
+        {
+          "name": "With Ice",
+          "posId": 209,
+          "price": 0
+        },
+        {
+          "name": "No Ice",
+          "posId": 210,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "MINI PECAN TART",
+      "posId": 5857,
+      "price": 15,
+      "additions": []
+    },
+    {
+      "name": "16OZ STONE BLUE",
+      "posId": 5883,
+      "price": 125,
+      "additions": []
+    },
+    {
+      "name": "BLUEBERRY SMOOTHIE",
+      "posId": 5935,
+      "price": 25,
+      "additions": []
+    },
+    {
+      "name": "CAFETTO MILK FROTHER CLEA",
+      "posId": 5977,
+      "price": 85,
+      "additions": []
+    },
+    {
+      "name": "CHOCOLATE SAUCE",
+      "posId": 6095,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "COSTA RICA LA LAGUNA 250G",
+      "posId": 5943,
+      "price": 150,
+      "additions": []
+    },
+    {
+      "name": "EDAM",
+      "posId": 6047,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "GOAT CHEESE",
+      "posId": 5906,
+      "price": 9,
+      "additions": []
+    },
+    {
+      "name": "JOE GLO PALLO GROUPHEAD B",
+      "posId": 5981,
+      "price": 55,
+      "additions": []
+    },
+    {
+      "name": "LABNEH AVOCADO TOAST",
+      "posId": 5826,
+      "price": 42,
+      "additions": [
+        {
+          "name": "Labneh",
+          "posId": 185,
+          "price": 0
+        },
+        {
+          "name": "Pesto",
+          "posId": 186,
+          "price": 0
+        },
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "LEMON CAKE",
+      "posId": 5855,
+      "price": 22,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "PESTO SAUCE",
+      "posId": 6093,
+      "price": 8,
+      "additions": []
+    },
+    {
+      "name": "PUMPKIN SPICE LATTE",
+      "posId": 5753,
+      "price": 26,
+      "additions": [
+        {
+          "name": "Full Fat Milk",
+          "posId": 6,
+          "price": 0
+        },
+        {
+          "name": "Low Fat Milk",
+          "posId": 7,
+          "price": 0
+        },
+        {
+          "name": "Skim Milk",
+          "posId": 8,
+          "price": 0
+        },
+        {
+          "name": "Almond Milk",
+          "posId": 9,
+          "price": 4
+        },
+        {
+          "name": "Coconut Milk",
+          "posId": 10,
+          "price": 4
+        },
+        {
+          "name": "Oat Milk",
+          "posId": 11,
+          "price": 4
+        },
+        {
+          "name": "Lactose Free Milk",
+          "posId": 12,
+          "price": 0
+        },
+        {
+          "name": "Oatley",
+          "posId": 13,
+          "price": 4
+        }
+      ]
+    },
+    {
+      "name": "11OZ LATTEE MATTE BLACK",
+      "posId": 5881,
+      "price": 110,
+      "additions": []
+    },
+    {
+      "name": "BONANZA 1KG",
+      "posId": 5652,
+      "price": 200,
+      "additions": []
+    },
+    {
+      "name": "CHICKEN SPREAD SANDWICH",
+      "posId": 5812,
+      "price": 28,
+      "additions": [
+        {
+          "name": "Tabasco",
+          "posId": 197,
+          "price": 0
+        },
+        {
+          "name": "Jalapeno",
+          "posId": 198,
+          "price": 0
+        },
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "CHICKEN CAESAR",
+      "posId": 6008,
+      "price": 44,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "COCONUT CUPCAKE",
+      "posId": 5834,
+      "price": 15,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "FRIED EGG",
+      "posId": 5921,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "GUATEMALA EL COYEGO 250G",
+      "posId": 5961,
+      "price": 90,
+      "additions": []
+    },
+    {
+      "name": "Hotel Accommodation",
+      "posId": 6271,
+      "price": 400,
+      "additions": []
+    },
+    {
+      "name": "KETO PEANUT",
+      "posId": 5843,
+      "price": 25,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "8OZ MATTE BLACK COPPER",
+      "posId": 5898,
+      "price": 90,
+      "additions": []
+    },
+    {
+      "name": "BONANZA 2 1KG",
+      "posId": 5946,
+      "price": 240,
+      "additions": []
+    },
+    {
+      "name": "CHIPS",
+      "posId": 5923,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "COSTA RICA LA PITINA 250G",
+      "posId": 5945,
+      "price": 90,
+      "additions": []
+    },
+    {
+      "name": "FELLOW STAGG X DRIPPERS",
+      "posId": 5773,
+      "price": 220,
+      "additions": []
+    },
+    {
+      "name": "GEISHA BONANZA 250G",
+      "posId": 5940,
+      "price": 150,
+      "additions": []
+    },
+    {
+      "name": "HONDURAS 1KG",
+      "posId": 5948,
+      "price": 240,
+      "additions": []
+    },
+    {
+      "name": "HARVEST TUNA TOASTIE",
+      "posId": 5813,
+      "price": 32,
+      "additions": [
+        {
+          "name": "Tabasco",
+          "posId": 197,
+          "price": 0
+        },
+        {
+          "name": "Jalapeno",
+          "posId": 198,
+          "price": 0
+        },
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "MADELEINE",
+      "posId": 5592,
+      "price": 15,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "OAT MILK",
+      "posId": 5899,
+      "price": 4,
+      "additions": []
+    },
+    {
+      "name": "PHILADELPHIA",
+      "posId": 6046,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "16OZ MATTE BLACK",
+      "posId": 5885,
+      "price": 125,
+      "additions": []
+    },
+    {
+      "name": "BANANA BREAD",
+      "posId": 5831,
+      "price": 24,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "CHIA SEEDS",
+      "posId": 5927,
+      "price": 3,
+      "additions": []
+    },
+    {
+      "name": "COFFEE MAKER 6 CUPS",
+      "posId": 5968,
+      "price": 270,
+      "additions": []
+    },
+    {
+      "name": "COLOMBIA DECAF",
+      "posId": 6014,
+      "price": 65,
+      "additions": []
+    },
+    {
+      "name": "GEISHA V60",
+      "posId": 5761,
+      "price": 32,
+      "additions": []
+    },
+    {
+      "name": "HARIO V60-02W BLEACHED P",
+      "posId": 5974,
+      "price": 45,
+      "additions": []
+    },
+    {
+      "name": "ICED TAMER OAT LATTE",
+      "posId": 5751,
+      "price": 29,
+      "additions": [
+        {
+          "name": "Ice On The Side",
+          "posId": 208,
+          "price": 0
+        },
+        {
+          "name": "With Ice",
+          "posId": 209,
+          "price": 0
+        },
+        {
+          "name": "No Ice",
+          "posId": 210,
+          "price": 0
+        },
+        {
+          "name": "Extra Shot",
+          "posId": 211,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "MASCARPONE",
+      "posId": 6049,
+      "price": 8,
+      "additions": []
+    },
+    {
+      "name": "OVERNIGHT OATMEAL",
+      "posId": 5598,
+      "price": 32,
+      "additions": []
+    },
+    {
+      "name": "PEANUTS",
+      "posId": 6066,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "RASPBERRY JAM",
+      "posId": 6085,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "12OZ WARM PINK",
+      "posId": 5872,
+      "price": 125,
+      "additions": []
+    },
+    {
+      "name": "BANANA BREAD WHOLE WITH ALMOND BUTTER",
+      "posId": 5770,
+      "price": 170,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "COFFEE MAKER CLEAR",
+      "posId": 5971,
+      "price": 240,
+      "additions": []
+    },
+    {
+      "name": "CASHEW",
+      "posId": 5986,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "EVERYWHERE VACUUM MUG",
+      "posId": 5646,
+      "price": 125,
+      "additions": []
+    },
+    {
+      "name": "GRANOLA 50G",
+      "posId": 5905,
+      "price": 10,
+      "additions": []
+    },
+    {
+      "name": "HALLOUMI PESTO SANDWICH",
+      "posId": 5809,
+      "price": 32,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "ICED FLATWHITE",
+      "posId": 5569,
+      "price": 24,
+      "additions": [
+        {
+          "name": "Full Fat Milk",
+          "posId": 6,
+          "price": 0
+        },
+        {
+          "name": "Low Fat Milk",
+          "posId": 7,
+          "price": 0
+        },
+        {
+          "name": "Skim Milk",
+          "posId": 8,
+          "price": 0
+        },
+        {
+          "name": "Almond Milk",
+          "posId": 9,
+          "price": 4
+        },
+        {
+          "name": "Coconut Milk",
+          "posId": 10,
+          "price": 4
+        },
+        {
+          "name": "Oat Milk",
+          "posId": 11,
+          "price": 4
+        },
+        {
+          "name": "Lactose Free Milk",
+          "posId": 12,
+          "price": 0
+        },
+        {
+          "name": "Oatley",
+          "posId": 13,
+          "price": 4
+        }
+      ]
+    },
+    {
+      "name": "0.7L WHITE",
+      "posId": 5890,
+      "price": 140,
+      "additions": []
+    },
+    {
+      "name": "BONANZA 250G",
+      "posId": 5653,
+      "price": 80,
+      "additions": []
+    },
+    {
+      "name": "BENEDICT",
+      "posId": 5702,
+      "price": 62,
+      "additions": [
+        {
+          "name": "Runny Egg",
+          "posId": 14,
+          "price": 0
+        },
+        {
+          "name": "Boiled Egg",
+          "posId": 15,
+          "price": 0
+        },
+        {
+          "name": "Well Done Egg",
+          "posId": 16,
+          "price": 0
+        },
+        {
+          "name": "Poached Runny",
+          "posId": 17,
+          "price": 0
+        },
+        {
+          "name": "Poached Medium",
+          "posId": 18,
+          "price": 0
+        },
+        {
+          "name": "Poached Well-done",
+          "posId": 19,
+          "price": 0
+        },
+        {
+          "name": "Scrambled Egg",
+          "posId": 20,
+          "price": 0
+        },
+        {
+          "name": "Scrambled Medium",
+          "posId": 21,
+          "price": 0
+        },
+        {
+          "name": "Scrambled Well-done",
+          "posId": 22,
+          "price": 0
+        },
+        {
+          "name": "Extra Labneh",
+          "posId": 175,
+          "price": 6
+        },
+        {
+          "name": "Extra Guacamole",
+          "posId": 176,
+          "price": 8
+        },
+        {
+          "name": "Extra Parmesan Sautéed mashrooms",
+          "posId": 177,
+          "price": 10
+        },
+        {
+          "name": "Extra Feta Cheese",
+          "posId": 178,
+          "price": 6
+        },
+        {
+          "name": "Extra Brioche",
+          "posId": 179,
+          "price": 4
+        },
+        {
+          "name": "Extra One Egg",
+          "posId": 180,
+          "price": 5
+        },
+        {
+          "name": "Extra Mayo Sriracha Sauce",
+          "posId": 181,
+          "price": 6
+        },
+        {
+          "name": "Extra Spinach Feta Puree",
+          "posId": 182,
+          "price": 8
+        },
+        {
+          "name": "Extra Whipped Cream Cheese",
+          "posId": 183,
+          "price": 6
+        },
+        {
+          "name": "Extra Pesto Sauce",
+          "posId": 184,
+          "price": 8
+        },
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "CHOCOLATE TART",
+      "posId": 5609,
+      "price": 36,
+      "additions": []
+    },
+    {
+      "name": "EXTRA CHICKEN",
+      "posId": 5920,
+      "price": 10,
+      "additions": []
+    },
+    {
+      "name": "HARIO V60 GLASS COFFEE DR",
+      "posId": 5964,
+      "price": 115,
+      "additions": []
+    },
+    {
+      "name": "GREEN SCRAMBLED",
+      "posId": 5681,
+      "price": 58,
+      "additions": [
+        {
+          "name": "Scrambled Egg",
+          "posId": 20,
+          "price": 0
+        },
+        {
+          "name": "Scrambled Medium",
+          "posId": 21,
+          "price": 0
+        },
+        {
+          "name": "Scrambled Well-done",
+          "posId": 22,
+          "price": 0
+        },
+        {
+          "name": "Extra Labneh",
+          "posId": 175,
+          "price": 6
+        },
+        {
+          "name": "Extra Guacamole",
+          "posId": 176,
+          "price": 8
+        },
+        {
+          "name": "Extra Parmesan Sautéed mashrooms",
+          "posId": 177,
+          "price": 10
+        },
+        {
+          "name": "Extra Feta Cheese",
+          "posId": 178,
+          "price": 6
+        },
+        {
+          "name": "Extra Brioche",
+          "posId": 179,
+          "price": 4
+        },
+        {
+          "name": "Extra One Egg",
+          "posId": 180,
+          "price": 5
+        },
+        {
+          "name": "Extra Mayo Sriracha Sauce",
+          "posId": 181,
+          "price": 6
+        },
+        {
+          "name": "Extra Spinach Feta Puree",
+          "posId": 182,
+          "price": 8
+        },
+        {
+          "name": "Extra Whipped Cream Cheese",
+          "posId": 183,
+          "price": 6
+        },
+        {
+          "name": "Extra Pesto Sauce",
+          "posId": 184,
+          "price": 8
+        },
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "IN THE JUNGLE",
+      "posId": 5690,
+      "price": 58,
+      "additions": []
+    },
+    {
+      "name": "ORIGINAL COFFEE PRESS",
+      "posId": 5970,
+      "price": 190,
+      "additions": []
+    },
+    {
+      "name": "PANNA COTTA CAKE",
+      "posId": 5606,
+      "price": 38,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "REPLACEMENT FILTER PAPER",
+      "posId": 5972,
+      "price": 40,
+      "additions": []
+    },
+    {
+      "name": "CHEMEX",
+      "posId": 5758,
+      "price": 28,
+      "additions": [
+        {
+          "name": "Cold",
+          "posId": 23,
+          "price": 0
+        },
+        {
+          "name": "Warm",
+          "posId": 24,
+          "price": 0
+        },
+        {
+          "name": "Ice On The Side",
+          "posId": 208,
+          "price": 0
+        },
+        {
+          "name": "With Ice",
+          "posId": 209,
+          "price": 0
+        },
+        {
+          "name": "No Ice",
+          "posId": 210,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "CHOCOLATE HAZELNUT CAKE",
+      "posId": 5849,
+      "price": 34,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "CREAMY MUSHROOM",
+      "posId": 6017,
+      "price": 10,
+      "additions": []
+    },
+    {
+      "name": "EXTRA BOILED EGG",
+      "posId": 5913,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "EGG CROISSANT",
+      "posId": 6334,
+      "price": 28,
+      "additions": []
+    },
+    {
+      "name": "Harvest Gift Card (100 QR)",
+      "posId": 6335,
+      "price": 100,
+      "additions": []
+    },
+    {
+      "name": "KARKADEH",
+      "posId": 5780,
+      "price": 28,
+      "additions": []
+    },
+    {
+      "name": "DULCE SAUCE",
+      "posId": 5917,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "MAPLE SYRUP",
+      "posId": 5911,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "PEANUT BUTTER",
+      "posId": 5904,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "FLEX",
+      "posId": 6344,
+      "price": 43,
+      "additions": []
+    },
+    {
+      "name": "SMOKED TURKEY",
+      "posId": 5919,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "MANGO CAKE",
+      "posId": 5593,
+      "price": 42,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "ORANGE",
+      "posId": 6025,
+      "price": 3,
+      "additions": []
+    },
+    {
+      "name": "ORANGE JUICE",
+      "posId": 5793,
+      "price": 25,
+      "additions": []
+    },
+    {
+      "name": "PUMPKIN SEEDS",
+      "posId": 5926,
+      "price": 3,
+      "additions": []
+    },
+    {
+      "name": "SAFFRON CAKE",
+      "posId": 6328,
+      "price": 42,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "SUNDAY IN DOHA",
+      "posId": 5685,
+      "price": 57,
+      "additions": [
+        {
+          "name": "Dulce",
+          "posId": 165,
+          "price": 0
+        },
+        {
+          "name": "Chocolate",
+          "posId": 166,
+          "price": 0
+        },
+        {
+          "name": "Maple",
+          "posId": 154,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "TURKEY CROISSANT",
+      "posId": 5810,
+      "price": 28,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "YOGURT",
+      "posId": 5909,
+      "price": 7,
+      "additions": []
+    },
+    {
+      "name": "ICED TAMER LATTE",
+      "posId": 5749,
+      "price": 27,
+      "additions": [
+        {
+          "name": "Ice On The Side",
+          "posId": 208,
+          "price": 0
+        },
+        {
+          "name": "With Ice",
+          "posId": 209,
+          "price": 0
+        },
+        {
+          "name": "No Ice",
+          "posId": 210,
+          "price": 0
+        },
+        {
+          "name": "Extra Shot",
+          "posId": 211,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "MOONLIGHT",
+      "posId": 5781,
+      "price": 23,
+      "additions": [
+        {
+          "name": "Full Fat Milk",
+          "posId": 6,
+          "price": 0
+        },
+        {
+          "name": "Low Fat Milk",
+          "posId": 7,
+          "price": 0
+        },
+        {
+          "name": "Skim Milk",
+          "posId": 8,
+          "price": 0
+        },
+        {
+          "name": "Almond Milk",
+          "posId": 9,
+          "price": 4
+        },
+        {
+          "name": "Coconut Milk",
+          "posId": 10,
+          "price": 4
+        },
+        {
+          "name": "Oat Milk",
+          "posId": 11,
+          "price": 4
+        },
+        {
+          "name": "Lactose Free Milk",
+          "posId": 12,
+          "price": 0
+        },
+        {
+          "name": "Oatley",
+          "posId": 13,
+          "price": 4
+        }
+      ]
+    },
+    {
+      "name": "PEANUT BUTTER & JAM CHIA PUDDING",
+      "posId": 6265,
+      "price": 32,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "QUINOA & KALE SALAD",
+      "posId": 6006,
+      "price": 38,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "SOURCREAM W/ CHEESE",
+      "posId": 6050,
+      "price": 6,
+      "additions": []
+    },
+    {
+      "name": "TOMATO",
+      "posId": 6029,
+      "price": 2,
+      "additions": []
+    },
+    {
+      "name": "VOSS WATER",
+      "posId": 5798,
+      "price": 15,
+      "additions": []
+    },
+    {
+      "name": "MANGO LEMONADE",
+      "posId": 5783,
+      "price": 30,
+      "additions": [
+        {
+          "name": "Ice On The Side",
+          "posId": 208,
+          "price": 0
+        },
+        {
+          "name": "With Ice",
+          "posId": 209,
+          "price": 0
+        },
+        {
+          "name": "No Ice",
+          "posId": 210,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "PANCAKE",
+      "posId": 5924,
+      "price": 10,
+      "additions": []
+    },
+    {
+      "name": "Print Cups",
+      "posId": 6347,
+      "price": 0,
+      "additions": []
+    },
+    {
+      "name": "SCRAMBLED EGG TOAST",
+      "posId": 5930,
+      "price": 26,
+      "additions": [
+        {
+          "name": "Scrambled Egg",
+          "posId": 20,
+          "price": 0
+        },
+        {
+          "name": "Scrambled Medium",
+          "posId": 21,
+          "price": 0
+        },
+        {
+          "name": "Scrambled Well-done",
+          "posId": 22,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "TODDY COLD BREWED FELT FI",
+      "posId": 5982,
+      "price": 35,
+      "additions": []
+    },
+    {
+      "name": "WALLNUTS",
+      "posId": 6063,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "MUSCLE UP",
+      "posId": 6002,
+      "price": 40,
+      "additions": []
+    },
+    {
+      "name": "MOROCCAN MINT TEA",
+      "posId": 5787,
+      "price": 21,
+      "additions": []
+    },
+    {
+      "name": "PITCHER FOR LATTE ART 600",
+      "posId": 5980,
+      "price": 175,
+      "additions": []
+    },
+    {
+      "name": "ROCA",
+      "posId": 6028,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "SUNDRIED TOMATO",
+      "posId": 5990,
+      "price": 3,
+      "additions": []
+    },
+    {
+      "name": "TEA",
+      "posId": 6346,
+      "price": 21,
+      "additions": [
+        {
+          "name": "English Breakfast Tea",
+          "posId": 171,
+          "price": 0
+        },
+        {
+          "name": "Moroccan Mint Tea",
+          "posId": 172,
+          "price": 0
+        },
+        {
+          "name": "Chamomile Tea",
+          "posId": 173,
+          "price": 0
+        },
+        {
+          "name": "French Earl Grey Tea",
+          "posId": 174,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "Tahini Date Porridge",
+      "posId": 6340,
+      "price": 42,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        },
+        {
+          "name": "Cold",
+          "posId": 23,
+          "price": 0
+        },
+        {
+          "name": "Warm",
+          "posId": 24,
+          "price": 0
+        },
+        {
+          "name": "Extra Date",
+          "posId": 205,
+          "price": 3
+        },
+        {
+          "name": "Extra Almond Butter",
+          "posId": 206,
+          "price": 5
+        }
+      ]
+    },
+    {
+      "name": "MAPLE LATTE",
+      "posId": 5739,
+      "price": 24,
+      "additions": [
+        {
+          "name": "Full Fat Milk",
+          "posId": 6,
+          "price": 0
+        },
+        {
+          "name": "Low Fat Milk",
+          "posId": 7,
+          "price": 0
+        },
+        {
+          "name": "Skim Milk",
+          "posId": 8,
+          "price": 0
+        },
+        {
+          "name": "Almond Milk",
+          "posId": 9,
+          "price": 4
+        },
+        {
+          "name": "Coconut Milk",
+          "posId": 10,
+          "price": 4
+        },
+        {
+          "name": "Oat Milk",
+          "posId": 11,
+          "price": 4
+        },
+        {
+          "name": "Lactose Free Milk",
+          "posId": 12,
+          "price": 0
+        },
+        {
+          "name": "Oatley",
+          "posId": 13,
+          "price": 4
+        },
+        {
+          "name": "Extra Shot",
+          "posId": 211,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "PEANUT BUTTER JAM TOAST",
+      "posId": 5806,
+      "price": 32,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "PITCHER FOR LATTE ART 450",
+      "posId": 5979,
+      "price": 170,
+      "additions": []
+    },
+    {
+      "name": "SHORT",
+      "posId": 5732,
+      "price": 20,
+      "additions": [
+        {
+          "name": "Full Fat Milk",
+          "posId": 6,
+          "price": 0
+        },
+        {
+          "name": "Low Fat Milk",
+          "posId": 7,
+          "price": 0
+        },
+        {
+          "name": "Skim Milk",
+          "posId": 8,
+          "price": 0
+        },
+        {
+          "name": "Almond Milk",
+          "posId": 9,
+          "price": 4
+        },
+        {
+          "name": "Coconut Milk",
+          "posId": 10,
+          "price": 4
+        },
+        {
+          "name": "Oat Milk",
+          "posId": 11,
+          "price": 4
+        },
+        {
+          "name": "Lactose Free Milk",
+          "posId": 12,
+          "price": 0
+        },
+        {
+          "name": "Oatley",
+          "posId": 13,
+          "price": 4
+        },
+        {
+          "name": "Extra Shot",
+          "posId": 211,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "TAMER LATTE OAT",
+      "posId": 5750,
+      "price": 26,
+      "additions": [
+        {
+          "name": "Extra Shot",
+          "posId": 211,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "V60",
+      "posId": 5754,
+      "price": 28,
+      "additions": [
+        {
+          "name": "COSTARICA BEANS",
+          "posId": 160,
+          "price": 0
+        },
+        {
+          "name": "KENYA",
+          "posId": 161,
+          "price": 0
+        },
+        {
+          "name": "RUWANDA",
+          "posId": 162,
+          "price": 0
+        },
+        {
+          "name": "GUATAMALA",
+          "posId": 163,
+          "price": 0
+        },
+        {
+          "name": "DCAF",
+          "posId": 164,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "MINI DATE CAKE ",
+      "posId": 5846,
+      "price": 9,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "PISTACHIO",
+      "posId": 6064,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "RASPBERRY",
+      "posId": 5984,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "SOURDOUGH",
+      "posId": 5993,
+      "price": 4,
+      "additions": []
+    },
+    {
+      "name": "TAMER LATTE",
+      "posId": 5748,
+      "price": 25,
+      "additions": [
+        {
+          "name": "Extra Shot",
+          "posId": 211,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "VST FILTER BASKET 18G RID",
+      "posId": 5973,
+      "price": 195,
+      "additions": []
+    },
+    {
+      "name": "ORANGE CAKE",
+      "posId": 5722,
+      "price": 24,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "ICED ESPRESSO",
+      "posId": 5566,
+      "price": 20,
+      "additions": []
+    },
+    {
+      "name": "Restaurant Expenses",
+      "posId": 6270,
+      "price": 14,
+      "additions": []
+    },
+    {
+      "name": "Settle Due",
+      "posId": 2,
+      "price": 1,
+      "additions": []
+    },
+    {
+      "name": "TRI-SMOOTHIE BOWL",
+      "posId": 5597,
+      "price": 42,
+      "additions": []
+    },
+    {
+      "name": "WHEY PROTEIN 15G",
+      "posId": 6071,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "PB & Jam Chia Pudding",
+      "posId": 6262,
+      "price": 32,
+      "additions": []
+    },
+    {
+      "name": "PITCHER FOR LATTE ART 350",
+      "posId": 5978,
+      "price": 165,
+      "additions": []
+    },
+    {
+      "name": "ROASTED MUHAMARA (VEGETARIAN)",
+      "posId": 5827,
+      "price": 42,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "SPECIAL HARVEST",
+      "posId": 5762,
+      "price": 38,
+      "additions": [
+        {
+          "name": "Cold",
+          "posId": 23,
+          "price": 0
+        },
+        {
+          "name": "Warm",
+          "posId": 24,
+          "price": 0
+        },
+        {
+          "name": "Ice On The Side",
+          "posId": 208,
+          "price": 0
+        },
+        {
+          "name": "With Ice",
+          "posId": 209,
+          "price": 0
+        },
+        {
+          "name": "No Ice",
+          "posId": 210,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "TURKEY BACON",
+      "posId": 6188,
+      "price": 8,
+      "additions": []
+    },
+    {
+      "name": "WHITE",
+      "posId": 5895,
+      "price": 50,
+      "additions": []
+    },
+    {
+      "name": "Dirty Latte",
+      "posId": 6349,
+      "price": 25,
+      "additions": [
+        {
+          "name": "Full Fat Milk",
+          "posId": 6,
+          "price": 0
+        },
+        {
+          "name": "Low Fat Milk",
+          "posId": 7,
+          "price": 0
+        },
+        {
+          "name": "Skim Milk",
+          "posId": 8,
+          "price": 0
+        },
+        {
+          "name": "Almond Milk",
+          "posId": 9,
+          "price": 4
+        },
+        {
+          "name": "Coconut Milk",
+          "posId": 10,
+          "price": 4
+        },
+        {
+          "name": "Oat Milk",
+          "posId": 11,
+          "price": 4
+        },
+        {
+          "name": "Lactose Free Milk",
+          "posId": 12,
+          "price": 0
+        },
+        {
+          "name": "Oatley",
+          "posId": 13,
+          "price": 4
+        }
+      ]
+    },
+    {
+      "name": "PLAIN CROISSANT",
+      "posId": 5830,
+      "price": 14,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "SERVER",
+      "posId": 6357,
+      "price": 0,
+      "additions": []
+    },
+    {
+      "name": "SPINACH FETA PURÉE",
+      "posId": 5996,
+      "price": 8,
+      "additions": []
+    },
+    {
+      "name": "V60 RANGE SERVER 360 CLEA",
+      "posId": 5983,
+      "price": 150,
+      "additions": []
+    },
+    {
+      "name": "PEANUT CRUNCH",
+      "posId": 6345,
+      "price": 14,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "HOT MATCHA LATTE",
+      "posId": 5775,
+      "price": 26,
+      "additions": [
+        {
+          "name": "Full Fat Milk",
+          "posId": 6,
+          "price": 0
+        },
+        {
+          "name": "Low Fat Milk",
+          "posId": 7,
+          "price": 0
+        },
+        {
+          "name": "Skim Milk",
+          "posId": 8,
+          "price": 0
+        },
+        {
+          "name": "Almond Milk",
+          "posId": 9,
+          "price": 0
+        },
+        {
+          "name": "Coconut Milk",
+          "posId": 10,
+          "price": 0
+        },
+        {
+          "name": "Oat Milk",
+          "posId": 11,
+          "price": 0
+        },
+        {
+          "name": "Lactose Free Milk",
+          "posId": 12,
+          "price": 0
+        },
+        {
+          "name": "Oatley",
+          "posId": 13,
+          "price": 0
+        },
+        {
+          "name": "Sugar Syrup",
+          "posId": 151,
+          "price": 0
+        },
+        {
+          "name": "Vanilla",
+          "posId": 153,
+          "price": 0
+        },
+        {
+          "name": "Maple",
+          "posId": 154,
+          "price": 0
+        },
+        {
+          "name": "Agave",
+          "posId": 155,
+          "price": 0
+        },
+        {
+          "name": "Honey",
+          "posId": 156,
+          "price": 0
+        },
+        {
+          "name": "Extra Matcha Shot",
+          "posId": 207,
+          "price": 7
+        }
+      ]
+    },
+    {
+      "name": "STRAWBERRY",
+      "posId": 5908,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "TUMBLER (8 OZ)",
+      "posId": 5963,
+      "price": 110,
+      "additions": []
+    },
+    {
+      "name": "[ST07] HALLOUMI PESTO SANDWICH",
+      "posId": 6351,
+      "price": 0,
+      "additions": []
+    },
+    {
+      "name": "PHILADELPHIA CHEESECAKE",
+      "posId": 5837,
+      "price": 40,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "RWANDA GITESI 1KG",
+      "posId": 5956,
+      "price": 250,
+      "additions": []
+    },
+    {
+      "name": "SUNNY SIDE UP EGG TOAST",
+      "posId": 5929,
+      "price": 26,
+      "additions": []
+    },
+    {
+      "name": "V60 Bottle",
+      "posId": 5765,
+      "price": 31,
+      "additions": []
+    },
+    {
+      "name": "[ST09] CHICKEN SPREAD SANDWICH",
+      "posId": 6352,
+      "price": 0,
+      "additions": []
+    },
+    {
+      "name": "PECAN DATE SMOOTHIE",
+      "posId": 6260,
+      "price": 35,
+      "additions": [
+        {
+          "name": "Full Fat Milk",
+          "posId": 6,
+          "price": 0
+        },
+        {
+          "name": "Low Fat Milk",
+          "posId": 7,
+          "price": 0
+        },
+        {
+          "name": "Skim Milk",
+          "posId": 8,
+          "price": 0
+        },
+        {
+          "name": "Almond Milk",
+          "posId": 9,
+          "price": 4
+        },
+        {
+          "name": "Coconut Milk",
+          "posId": 10,
+          "price": 4
+        },
+        {
+          "name": "Oat Milk",
+          "posId": 11,
+          "price": 4
+        },
+        {
+          "name": "Lactose Free Milk",
+          "posId": 12,
+          "price": 0
+        },
+        {
+          "name": "Oatley",
+          "posId": 13,
+          "price": 4
+        }
+      ]
+    },
+    {
+      "name": "SCRAMBLED EGG",
+      "posId": 5914,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "STRAWBERRY MILKSHAKE",
+      "posId": 5933,
+      "price": 25,
+      "additions": []
+    },
+    {
+      "name": "TAHINI BROWNIE",
+      "posId": 6013,
+      "price": 21,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "MUSHROOM TOAST SCRAMBLED",
+      "posId": 5819,
+      "price": 60,
+      "additions": [
+        {
+          "name": "Scrambled Egg",
+          "posId": 20,
+          "price": 0
+        },
+        {
+          "name": "Scrambled Medium",
+          "posId": 21,
+          "price": 0
+        },
+        {
+          "name": "Scrambled Well-done",
+          "posId": 22,
+          "price": 0
+        },
+        {
+          "name": "Extra Labneh",
+          "posId": 175,
+          "price": 6
+        },
+        {
+          "name": "Extra Guacamole",
+          "posId": 176,
+          "price": 8
+        },
+        {
+          "name": "Extra Parmesan Sautéed mashrooms",
+          "posId": 177,
+          "price": 10
+        },
+        {
+          "name": "Extra Feta Cheese",
+          "posId": 178,
+          "price": 6
+        },
+        {
+          "name": "Extra Brioche",
+          "posId": 179,
+          "price": 4
+        },
+        {
+          "name": "Extra One Egg",
+          "posId": 180,
+          "price": 5
+        },
+        {
+          "name": "Extra Mayo Sriracha Sauce",
+          "posId": 181,
+          "price": 6
+        },
+        {
+          "name": "Extra Spinach Feta Puree",
+          "posId": 182,
+          "price": 8
+        },
+        {
+          "name": "Extra Whipped Cream Cheese",
+          "posId": 183,
+          "price": 6
+        },
+        {
+          "name": "Extra Pesto Sauce",
+          "posId": 184,
+          "price": 8
+        },
+        {
+          "name": "Mushroom",
+          "posId": 195,
+          "price": 0
+        },
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "SLICED AVOCADO",
+      "posId": 6018,
+      "price": 8,
+      "additions": []
+    },
+    {
+      "name": "TODDY 2.2L",
+      "posId": 5772,
+      "price": 320,
+      "additions": []
+    },
+    {
+      "name": "VEGAN HOLLANDAISE",
+      "posId": 5918,
+      "price": 5,
+      "additions": []
+    },
+    {
+      "name": "QUEEN ALMOND CROISSANT",
+      "posId": 5829,
+      "price": 18,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "SINGLE ESPRESSO",
+      "posId": 5725,
+      "price": 16,
+      "additions": []
+    },
+    {
+      "name": "Speciality Instant Coffee",
+      "posId": 6343,
+      "price": 65,
+      "additions": [
+        {
+          "name": "Ethiopia",
+          "posId": 168,
+          "price": 0
+        },
+        {
+          "name": "Guatemala",
+          "posId": 169,
+          "price": 0
+        },
+        {
+          "name": "Colombia Decaf",
+          "posId": 170,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "VOSS SPARKLING",
+      "posId": 5799,
+      "price": 15,
+      "additions": []
+    },
+    {
+      "name": "PERFECT BOWL",
+      "posId": 5861,
+      "price": 48,
+      "additions": [
+        {
+          "name": "Peanut Butter",
+          "posId": 190,
+          "price": 5
+        },
+        {
+          "name": "Banana",
+          "posId": 191,
+          "price": 5
+        },
+        {
+          "name": "Honey",
+          "posId": 192,
+          "price": 5
+        },
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "SPECIAL BURGER SAUCE",
+      "posId": 5916,
+      "price": 4,
+      "additions": []
+    },
+    {
+      "name": "TRIPLE SMOOTHIE",
+      "posId": 5862,
+      "price": 42,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "WHOLE ORANGE CAKE",
+      "posId": 5771,
+      "price": 140,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "QUINOA & KALE SALAD + CHICKEN",
+      "posId": 6007,
+      "price": 48,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "SUKE QUTO 250G",
+      "posId": 5955,
+      "price": 80,
+      "additions": []
+    },
+    {
+      "name": "Tips",
+      "posId": 1,
+      "price": 1,
+      "additions": []
+    },
+    {
+      "name": "[BR13] ROASTED MUHAMARA (VEGETARIAN)",
+      "posId": 6353,
+      "price": 0,
+      "additions": []
+    },
+    {
+      "name": "SUKE QUTO 1KG",
+      "posId": 5954,
+      "price": 250,
+      "additions": []
+    },
+    {
+      "name": "Tahini Date Porridge",
+      "posId": 6327,
+      "price": 42,
+      "additions": []
+    },
+    {
+      "name": "[DE04] BANANA TOAST W/AB",
+      "posId": 6350,
+      "price": 0,
+      "additions": []
+    },
+    {
+      "name": "SPECIAL HARVEST INDONESIA",
+      "posId": 5763,
+      "price": 38,
+      "additions": []
+    },
+    {
+      "name": "SUNSET MATCHA",
+      "posId": 5779,
+      "price": 32,
+      "additions": [
+        {
+          "name": "Full Fat Milk",
+          "posId": 6,
+          "price": 0
+        },
+        {
+          "name": "Low Fat Milk",
+          "posId": 7,
+          "price": 0
+        },
+        {
+          "name": "Skim Milk",
+          "posId": 8,
+          "price": 0
+        },
+        {
+          "name": "Almond Milk",
+          "posId": 9,
+          "price": 0
+        },
+        {
+          "name": "Coconut Milk",
+          "posId": 10,
+          "price": 0
+        },
+        {
+          "name": "Oat Milk",
+          "posId": 11,
+          "price": 0
+        },
+        {
+          "name": "Lactose Free Milk",
+          "posId": 12,
+          "price": 0
+        },
+        {
+          "name": "Oatley",
+          "posId": 13,
+          "price": 0
+        },
+        {
+          "name": "Sugar Syrup",
+          "posId": 151,
+          "price": 0
+        },
+        {
+          "name": "Vanilla",
+          "posId": 153,
+          "price": 0
+        },
+        {
+          "name": "Maple",
+          "posId": 154,
+          "price": 0
+        },
+        {
+          "name": "Agave",
+          "posId": 155,
+          "price": 0
+        },
+        {
+          "name": "Honey",
+          "posId": 156,
+          "price": 0
+        },
+        {
+          "name": "Ice On The Side",
+          "posId": 208,
+          "price": 0
+        },
+        {
+          "name": "With Ice",
+          "posId": 209,
+          "price": 0
+        },
+        {
+          "name": "No Ice",
+          "posId": 210,
+          "price": 0
+        },
+        {
+          "name": "Extra Matcha Shot",
+          "posId": 207,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "SINGLE MACHIATTO",
+      "posId": 5728,
+      "price": 16,
+      "additions": [
+        {
+          "name": "Full Fat Milk",
+          "posId": 6,
+          "price": 1
+        },
+        {
+          "name": "Low Fat Milk",
+          "posId": 7,
+          "price": 0
+        },
+        {
+          "name": "Skim Milk",
+          "posId": 8,
+          "price": 0
+        },
+        {
+          "name": "Almond Milk",
+          "posId": 9,
+          "price": 4
+        },
+        {
+          "name": "Coconut Milk",
+          "posId": 10,
+          "price": 4
+        },
+        {
+          "name": "Oat Milk",
+          "posId": 11,
+          "price": 4
+        },
+        {
+          "name": "Lactose Free Milk",
+          "posId": 12,
+          "price": 0
+        },
+        {
+          "name": "Oatley",
+          "posId": 13,
+          "price": 4
+        }
+      ]
+    },
+    {
+      "name": "V60 CRAFT COFFEE MAKER",
+      "posId": 5642,
+      "price": 140,
+      "additions": []
+    },
+    {
+      "name": "gfghfhf",
+      "posId": 6341,
+      "price": 1,
+      "additions": []
+    },
+    {
+      "name": "STRAWBERRY TART",
+      "posId": 5840,
+      "price": 28,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "Tropical Chia Pudding",
+      "posId": 6261,
+      "price": 35,
+      "additions": [
+        {
+          "name": "With Cutlery",
+          "posId": 187,
+          "price": 0
+        },
+        {
+          "name": "With Out Cutlery",
+          "posId": 188,
+          "price": 0
+        }
+      ]
+    },
+    {
+      "name": "WINTER FLAT WHITE",
+      "posId": 5743,
+      "price": 26,
+      "additions": [
+        {
+          "name": "Full Fat Milk",
+          "posId": 6,
+          "price": 0
+        },
+        {
+          "name": "Low Fat Milk",
+          "posId": 7,
+          "price": 0
+        },
+        {
+          "name": "Skim Milk",
+          "posId": 8,
+          "price": 0
+        },
+        {
+          "name": "Almond Milk",
+          "posId": 9,
+          "price": 4
+        },
+        {
+          "name": "Coconut Milk",
+          "posId": 10,
+          "price": 4
+        },
+        {
+          "name": "Oat Milk",
+          "posId": 11,
+          "price": 4
+        },
+        {
+          "name": "Lactose Free Milk",
+          "posId": 12,
+          "price": 0
+        },
+        {
+          "name": "Oatley",
+          "posId": 13,
+          "price": 4
+        },
+        {
+          "name": "Extra Shot",
+          "posId": 211,
+          "price": 0
+        },
+        {
+          "name": "Ice On The Side",
+          "posId": 208,
+          "price": 0
+        },
+        {
+          "name": "With Ice",
+          "posId": 209,
+          "price": 0
+        },
+        {
+          "name": "No Ice",
+          "posId": 210,
+          "price": 0
+        }
+      ]
+    }
+  ]
+}

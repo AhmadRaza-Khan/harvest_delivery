@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { HandlerService } from '../handler/handler.service';
-import { OdooWebhookDto } from './dto';
 import { PrismaService } from '../prisma/prisma.service';
-import { channels } from '../menu/CONSTANTS';
+import { branchConfig, channels } from './CONSTANTS';
 
 @Injectable()
 export class OrderService {
@@ -20,10 +19,60 @@ export class OrderService {
   }
 
   delay (ms: number){ new Promise(resolve => setTimeout(resolve, ms)) };
-  
+
   async placeOrderWebhook(payload: any): Promise<any> {
     const channelId = payload.channelId;
-    const configId = channels.find(c => c.channelId === channelId)?.branchId;
+    const channel = branchConfig.find(c => c.channelId === channelId);
+
+    if(channel?.partner === "Avo"){
+      try {
+        const phone = payload.customer?.phone?.split(":::")?.pop() ?? payload.customer?.phone;
+        const email = payload.customer?.email?.split(":::")?.pop() ?? payload.customer?.email;
+
+        const lines = (payload.items as any[]).map((item: any) => ({
+          product_id: item.product_pos_id,
+          name: item.product_name,
+          qty: item.quantity,
+          price_unit: item.unit_price,
+          attribute_value_ids: (item.additions ?? []).map((a: any) => a.addition_pos_id),
+        }));
+
+        const data = {
+          partner_ref: `Avo-${payload.order_id}`,
+          config_id: channel.branchId,
+          customer_name: payload.customer.name,
+          phone,
+          email,
+          street: payload.delivery_address ?? "",
+          city: "",
+          amount_tax: 0,
+          amount_total: payload.total_amount,
+          amount_paid: payload.total_amount,
+          amount_return: 0,
+          pos_reference: `Avo-${payload.order_id}`,
+          pickup_time: payload.scheduled_time,
+          lines,
+        };
+
+        const response = await this.handler.odooApiHandler('/api/pos/create-order', 'POST', data);
+        if (response && response.status == "success") {
+          await this.prisma.order.create({
+            data: {
+              partnerId: String(payload.order_id),
+              odoo_id: String(response.order_id),
+              status: "received",
+            },
+          });
+          return { success: true, message: "Order received successfully!" };
+        } else {
+          console.log('Failed to create order in Odoo. Response:', response);
+          return { success: false, message: "Failed to validate order" };
+        }
+      } catch (error: any) {
+        console.log("Error placing order:", error.message);
+        return { success: false, message: "Failed to place order" };
+      }
+    }
 
     try {
       const products = payload.products.map((product: any) => {
@@ -40,145 +89,10 @@ export class OrderService {
           attribute_value_ids: modifiers.map((modifier: any) => Number(modifier.id)),
         };
       });
-// outgoing_payload_example = {
-    //   "snoonu_ref": "003",
-    //   "customer_name": "Ahamad",
-    //   "phone": "+923177518507",
-    //   "email": "ahmad@test.com",
-    //   "street": "Abc, Raji Mansion",
-    //   "city": "Doha",
-
-    //   "amount_tax": 1,
-    //   "amount_total": 91,
-    //   "amount_paid": 91,
-    //   "amount_return": 0,
-
-    //   "pos_reference": "SNOONU-001",
-
-    //   "lines": [
-    //     {
-    //       "product_id": 618,
-    //       "qty": 1,
-    //       "price_unit": 120.0,
-    //       "discount": 10.0,
-    //       "price_subtotal": 110.0,
-    //       "price_subtotal_incl": 110.0,
-    //       "attribute_value_ids": [15, 22]
-    //     }
-    //   ]
-    // }
-
-// incoming_payload_example =
-// {
-//   "channelName" : "externalname",
-//   "channelId" : "channelId",
-//   "orderId" : 10084452,
-//   "by" : "SN",
-//   "orderType" : 1,
-//   "note" : null,
-//   "isScheduler" : false,
-//   "createdAt" : "2025-04-30T10:53:01.487734Z",
-//   "pickupTime" : "2025-04-30T11:08:01.487734Z",
-//   "isDeliveryBySnoonu" : true,
-//   "customer" : {
-//     "name" : "test",
-//     "phoneNumber" : "+97421343339",
-//     "email" : "test@gmail.com",
-//     "carDetail" : null
-//   },
-//   "deliveryAddress" : {
-//     "description" : "Gharrafat Al Rayyan, Ar-Rayyan, Zone 51, Al Rayyan Municipality, Qatar. , B12",
-//     "state" : "Ad Dawhah",
-//     "country" : "Qatar",
-//     "notes" : "",
-//     "flatNumber" : null,
-//     "building" : null,
-//     "coordinate" : {
-//       "latitude" : 25.3325814,
-//       "longitude" : 51.44670929999999
-//     }
-//   },
-//   "payment" : {
-//     "amount" : 11600,
-//     "totalPaid" : 0,
-//     "totalUnPaid" : 11600,
-//     "types" : [ 0 ],
-//     "currency" : "QAR"
-//   },
-//   "products" : [ {
-//     "productId" : "",
-//     "name" : "2 For 40 Mighty Steakhouse Meal",
-//     "price" : 0,
-//     "originalPrice": 0,
-//     "discountAmount": 0,
-//     "quantity" : 2,
-//     "remark" : "",
-//     "modifierGroups" : [ {
-//       "id" : "",
-//       "name" : "Your Choice of Meal",
-//       "modifiers" : [ {
-//         "id" : "",
-//         "name" : "2 Steakhouse Meal",
-//         "price" : 4000,
-//         "quantity" : 1
-//       } ]
-//     }, {
-//       "id" : "",
-//       "name" : "Size It Your Way for Meal 1",
-//       "modifiers" : [ {
-//         "id" : "",
-//         "name" : "Go XXL",
-//         "price" : 400,
-//         "quantity" : 1
-//       } ]
-//     }, {
-//       "id" : "",
-//       "name" : "Size It Your Way for Meal 2",
-//       "modifiers" : [ {
-//         "id" : "",
-//         "name" : "Go XXL",
-//         "price" : 400,
-//         "quantity" : 1
-//       } ]
-//     }, {
-//       "id" : "",
-//       "name" : "Your Choice Of Drinks For Meal 1",
-//       "modifiers" : [ {
-//         "id" : "",
-//         "name" : "Fanta Orange",
-//         "price" : 0,
-//         "quantity" : 1
-//       } ]
-//     }, {
-//       "id" : "",
-//       "name" : "Your Choice Of Drinks For Meal 2",
-//       "modifiers" : [ {
-//         "id" : "",
-//         "name" : "Fanta Orange",
-//         "price" : 0,
-//         "quantity" : 1
-//       } ]
-//     } ]
-//   } ],
-//   "totalDiscount" : 0,
-//   "deliveryFee" : 2000,
-//   "promotions" : [ {
-//     "code" : "PIPETEST",
-//     "amountBeforePromotion" : 4800,
-//     "amountAfterPromotion" : 3550,
-//     "type" : 1 //Order
-//   }, {
-//     "code" : "PIPETEST",
-//     "amountBeforePromotion" : 2000,
-//     "amountAfterPromotion" : 2000,
-//     "type" : 0 //DeliveryFee
-//   } ]
-// }
-
 
     const data =  {
-      "snoonu_ref": payload.orderId,
-      "config_id": configId,
+      "partner_ref": "Snoono-" + payload.orderId,
+      "config_id": channel?.branchId,
       "customer_name": payload.customer.name,
       "phone": payload.customer.phoneNumber,
       "email": payload.customer.email,
@@ -203,7 +117,7 @@ export class OrderService {
 
       await this.prisma.order.create({
         data: {
-          snoonu_id: String(payload.orderId),
+          partnerId: String(payload.orderId),
           odoo_id: String(response.order_id),
           status: "validated"
         }
@@ -227,17 +141,45 @@ export class OrderService {
         return { success: false, message: "Invalid channel ID" };
       }
 
-      const order = await this.prisma.order.findUnique({ where: { snoonu_id: String(payload.orderId) } });
+      const order = await this.prisma.order.findUnique({ where: { partnerId: String(payload.orderId) } });
       if (!order) return { success: false, message: `Order ${payload.orderId} not found in database` };
 
       const response = await this.handler.odooApiHandler('/api/pos/order/cancel', 'POST', { snoonu_ref: payload.orderId, "reason": payload.cancellationReason });
       if (response && response.status === "success") {
         console.log('Order successfully cancelled in Odoo with response:', response);
         await this.prisma.order.update({
-          where: { snoonu_id: String(payload.orderId) },
+          where: { partnerId: String(payload.orderId) },
           data: { status: "cancelled" },
         });
-        console.log(`Order with Snoonu ID ${payload.orderId} has been cancelled in the database.`);
+        console.log(`Order with Partner ID ${payload.orderId} has been cancelled in the database.`);
+        return { success: true, message: "Order cancelled successfully" };
+      }
+      return { success: false, message: "Failed to cancel order in Odoo" };
+    } catch (error: any) {
+      console.error("Error cancelling order:", error.message);
+      return { success: false, message: "Failed to cancel order" };
+    }
+  }
+
+  async cancelOrderWebhookFromAvo(payload: any): Promise<any> {
+    try {
+      if (!payload.orderId) return { success: false, message: "Order ID is required for cancellation" };
+
+      if (payload.channelId !== this.channelId) {
+        return { success: false, message: "Invalid channel ID" };
+      }
+
+      const order = await this.prisma.order.findUnique({ where: { partnerId: String(payload.orderId) } });
+      if (!order) return { success: false, message: `Order ${payload.orderId} not found in database` };
+
+      const response = await this.handler.odooApiHandler('/api/pos/order/cancel', 'POST', { snoonu_ref: payload.orderId, "reason": payload.cancellationReason });
+      if (response && response.status === "success") {
+        console.log('Order successfully cancelled in Odoo with response:', response);
+        await this.prisma.order.update({
+          where: { partnerId: String(payload.orderId) },
+          data: { status: "cancelled" },
+        });
+        console.log(`Order with Partner ID ${payload.orderId} has been cancelled in the database.`);
         return { success: true, message: "Order cancelled successfully" };
       }
       return { success: false, message: "Failed to cancel order in Odoo" };
@@ -248,6 +190,16 @@ export class OrderService {
   }
 
   async rejectOrderWebhook(payload: any): Promise<any> {
+    let partner = payload.order_name.split("-")[0];
+    if(partner === "Avo"){
+      try {
+        const response = await this.webhookHandlerForAvo(payload, "rejected", "/UpdateOdooOrderStatus", "Pos rejected Order");
+        return {success: true, message: "Webhook received for order rejection"};
+      } catch (error: any) {
+        console.error("Error rejecting order:", error.message);
+        return { success: false, message: "Failed to reject order" };
+      }
+    } else{
     try {
       const webhook = await this.webhookHandler(payload, "rejected", `/api/v1/orders/reject`, 7);
       console.log(`Order ${payload.order_name} with ID ${payload.order_id} has been rejected.`);
@@ -257,8 +209,21 @@ export class OrderService {
       return { success: false, message: "Failed to reject order" };
     }
   }
+  }
+
+  
 
   async acceptOrderWebhook(payload: any): Promise<any> {
+    let partner = payload.order_name.split("-")[0];
+    if(partner === "Avo"){
+      try {
+        const response = await this.webhookHandlerForAvo(payload, "accepted", "/UpdateOdooOrderStatus", "Pos accepted Order");
+        return {success: true, message: "Webhook received for order acceptance"};
+      } catch (error: any) {
+        console.error("Error accepting order:", error.message);
+        return { success: false, message: "Failed to accept order" };
+      }
+    } else{
     try {      
       await this.webhookHandler(payload, "accepted", `/api/v1/orders/accept`, 2);
       await this.delay(3000);
@@ -269,9 +234,20 @@ export class OrderService {
       console.error("Error accepting order:", error.message);
       return { success: false, message: "Failed to accept order" };
     }
+    }
   }
 
   async readyForPickupWebhook(payload: any): Promise<any> {
+    let partner = payload.order_name.split("-")[0];
+    if(partner === "Avo"){
+      try {
+        const response = await this.webhookHandlerForAvo(payload, "readyForPickup", "/UpdateOdooOrderStatus", "Pos ready for pickup Order");
+        return {success: true, message: "Webhook received for order ready for pickup"};
+      } catch (error: any) {
+        console.error("Error ready for pickup order:", error.message);
+        return { success: false, message: "Failed to ready for pickup order" };
+      }
+    } else{
     try {
       await this.webhookHandler(payload, "ready", `/api/v1/orders/ready`, 8);
       console.log(`Order ${payload.order_name} with ID ${payload.order_id} is ready for pickup.`);
@@ -281,17 +257,42 @@ export class OrderService {
       return { success: false, message: "Failed to process ready for pickup webhook" };
     }
   }
+  }
 
   async webhookHandler(payload: any, webhookType: string, endpoint: string, status: number): Promise<any> {
     try {
       const { order_id, order_name } = payload;
       const order = await this.prisma.order.findUnique({ where: { odoo_id: String(order_id) } });
       const requestData = {
-        "orderId": order?.snoonu_id,
+        "orderId": order?.partnerId,
         "status": status,
         "channelId": this.channelId,
       }
       await this.handler.apiHandler(endpoint, 'POST', requestData);
+
+      await this.prisma.order.update({
+        where: { odoo_id: String(order_id) },
+        data: { status: webhookType },
+      });
+  
+      console.log(`Order ${order_name} with ID ${order_id} has been ${webhookType}.`);
+      return { success: true, message: `Webhook received for order ${webhookType}` };
+    } catch (error: any) {
+      console.error("Error rejecting order:", error.message);
+      return { success: false, message: "Failed to reject order" };
+    }
+  }
+
+    async webhookHandlerForAvo(payload: any, webhookType: string, endpoint: string, reason: string | null = null): Promise<any> {
+    try {
+      const { order_id, order_name } = payload;
+      const order = await this.prisma.order.findUnique({ where: { odoo_id: String(order_id) } });
+      const requestData = {
+        "orderId": order?.partnerId,
+        "status": webhookType,
+        "reason": reason
+      }
+      await this.handler.AvoApiHandler(endpoint, 'PUT', requestData);
 
       await this.prisma.order.update({
         where: { odoo_id: String(order_id) },

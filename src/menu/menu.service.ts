@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { ConfigService } from '@nestjs/config';
 import { HandlerService } from '../handler/handler.service';
-import { channels } from './CONSTANTS';
+import { channels } from '../order/CONSTANTS';
 
 @Injectable()
 export class MenuService {
@@ -74,7 +74,7 @@ export class MenuService {
     async saveMenuToAVO(): Promise<any> {
         const dbProducts = await this.prisma.product.findMany({});
         const payload = {
-            brandId: 0,
+            brandId: 23,
             products: dbProducts.map(product => ({
                 name: product.productNameEn,
                 posId: product.productId,
@@ -88,14 +88,17 @@ export class MenuService {
                 ) : [],
             })),
             };
-        const response = await this.handler.AvoApiHandler("/api/services/app/Odoo/ReceiveMenuFromOdoo", "POST", payload);
+            return payload;
+        const response = await this.handler.AvoApiHandler("/ReceiveMenuFromOdoo", "POST", payload);
         console.log("Response from AVO API after syncing menu: ", response);
         return response;
     }
 
     async saveMenu(): Promise<any> {
+        // await this.prisma.product.updateMany({where: {isSynced: true}, data: { isSynced: false}})
+        // return "hello"
         try {
-            const channelId = this.config.get<string>('CHANNELL_ID')!;
+            const channelId = "019dd37a-3afb-7823-b033-8d542494ec1a";
             const posId = this.config.get<string>('POS_ID')!;
             const menuName = this.config.get<string>('MENU_NAME') ?? 'Menu';
             const menuNameAr = this.config.get<string>('MENU_NAME_AR') ?? 'قائمة';
@@ -354,5 +357,14 @@ export class MenuService {
             console.error('Error saving menu:', error);
             throw error;
         }
+    }
+
+    async test(){
+        const requestId1 = "019eac3d-29f0-7500-89d5-42ec5942d256";
+
+        const channelId = "019dd37a-3afb-7823-b033-8d542494ec1a";
+        const response =  await this.handler.apiHandler(`/api/v1/channels/${channelId}`, "GET");
+        console.log(response);
+        return {response}
     }
 }
