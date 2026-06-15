@@ -21,6 +21,7 @@ export class OrderService {
   delay (ms: number){ new Promise(resolve => setTimeout(resolve, ms)) };
 
   async placeOrderWebhook(payload: any): Promise<any> {
+    console.log("Avo Payload: ", payload);
     const channelId = payload.channelId;
     const channel = branchConfig.find(c => c.channelId === channelId);
 
@@ -142,6 +143,7 @@ export class OrderService {
   }
 
   async cancelOrderWebhook(payload: any): Promise<any> {
+    console.log("Avo cancel Payload: ", payload);
     try {
       if (!payload.orderId) return { success: false, message: "Order ID is required for cancellation" };
 
