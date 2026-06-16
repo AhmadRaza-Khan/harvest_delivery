@@ -257,7 +257,7 @@ export class OrderService {
   }
 
   async rejectOrderWebhook(payload: any): Promise<any> {
-    let partner = payload.order_name.split("-")[0];
+    let partner = payload.order_name.split("-")[1];
     if(partner === "Avo"){
       try {
         const response = await this.webhookHandlerForAvo(payload, "rejected", "/UpdateOdooOrderStatus", "Pos rejected Order");
