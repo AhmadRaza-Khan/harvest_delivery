@@ -22,7 +22,7 @@ export class OrderService {
 
   async placeOrderWebhook(payload: any): Promise<any> {
     console.log("Avo Payload: ", payload);
-    const channelId = payload.channelId;
+    const channelId = payload.branch_id;
     const channel = branchConfig.find(c => c.channelId === channelId);
 
     if(channel?.partner === "Avo"){
@@ -57,9 +57,9 @@ export class OrderService {
           pickup_time: payload.scheduled_time,
           lines,
         };
-        console.log(`[Avo][PlaceOrder] Sending order to Odoo:`, JSON.stringify(data));
 
         const response = await this.handler.odooApiHandler('/api/pos/create-order', 'POST', data);
+        console.log("odoo response: ", response)
         console.log(`[Avo][PlaceOrder] Odoo response:`, JSON.stringify(response));
 
         if (response && response.status == "success") {
@@ -143,7 +143,47 @@ export class OrderService {
   }
 
   async cancelOrderWebhook(payload: any): Promise<any> {
-    console.log("Avo cancel  Payload: ", payload);
+    const channel = branchConfig.find(c => c.channelId === payload.branch_id);
+    if(channel?.partner === "Avo"){
+      try {
+      if (!payload.orderId) {
+        console.warn(`[Avo][CancelOrder] Missing orderId in payload.`);
+        return { success: false, message: "Order ID is required for cancellation" };
+      }
+
+      if (payload.branch_id !== channel?.channelId) {
+        console.warn(`[Avo][CancelOrder] Invalid channelId: ${payload.branch_id}. Expected: ${channel}`);
+        return { success: false, message: "Invalid channel ID" };
+      }
+
+      console.log(`[Avo][CancelOrder] Looking up order ${payload.orderId} in database...`);
+      const order = await this.prisma.order.findUnique({ where: { partnerId: String(payload.orderId) } });
+      if (!order) {
+        console.warn(`[Avo][CancelOrder] Order ${payload.orderId} not found in database.`);
+        return { success: false, message: `Order ${payload.orderId} not found in database` };
+      }
+      console.log(`[Avo][CancelOrder] Order found: odoo_id=${order.odoo_id}, current status=${order.status}`);
+
+      console.log(`[Avo][CancelOrder] Sending cancel request to Odoo for orderId: ${payload.orderId}, reason: ${payload.cancellationReason}`);
+      const response = await this.handler.odooApiHandler('/api/pos/order/cancel', 'POST', { partner_ref: `Avo-${payload.orderId}`, "reason": payload.cancellationReason });
+      console.log(`[Avo][CancelOrder] Odoo response:`, JSON.stringify(response));
+
+      if (response && response.status === "success") {
+        console.log(`[Avo][CancelOrder] Order ${payload.orderId} successfully cancelled in Odoo. Updating database...`);
+        await this.prisma.order.update({
+          where: { partnerId: String(payload.orderId) },
+          data: { status: "cancelled" },
+        });
+        console.log(`[Avo][CancelOrder] Order ${payload.orderId} status updated to "cancelled" in database.`);
+        return { success: true, message: "Order cancelled successfully" };
+      }
+      console.log(`[Avo][CancelOrder] Failed to cancel order ${payload.orderId} in Odoo. Response:`, response);
+      return { success: false, message: "Failed to cancel order in Odoo" };
+    } catch (error: any) {
+      console.error(`[Avo][CancelOrder] Error cancelling order ${payload.orderId}:`, error.message);
+      return { success: false, message: "Failed to cancel order" };
+    }
+  } else {
     try {
       if (!payload.orderId) return { success: false, message: "Order ID is required for cancellation" };
 
@@ -154,7 +194,7 @@ export class OrderService {
       const order = await this.prisma.order.findUnique({ where: { partnerId: String(payload.orderId) } });
       if (!order) return { success: false, message: `Order ${payload.orderId} not found in database` };
 
-      const response = await this.handler.odooApiHandler('/api/pos/order/cancel', 'POST', { snoonu_ref: payload.orderId, "reason": payload.cancellationReason });
+      const response = await this.handler.odooApiHandler('/api/pos/order/cancel', 'POST', { partner_ref: `Snoono-${payload.order_id}`, "reason": payload.cancellationReason });
       if (response && response.status === "success") {
         console.log('Order successfully cancelled in Odoo with response:', response);
         await this.prisma.order.update({
@@ -170,17 +210,20 @@ export class OrderService {
       return { success: false, message: "Failed to cancel order" };
     }
   }
+  }
 
   async cancelOrderWebhookFromAvo(payload: any): Promise<any> {
-    console.log(`[Avo][CancelOrder] Received cancel order webhook for orderId: ${payload.orderId}, channelId: ${payload.channelId}`);
+    const channelId = payload.branch_id;
+    const channel = branchConfig.find(c => c.channelId === channelId);
+    console.log(`[Avo][CancelOrder] Received cancel order webhook for orderId: ${payload.orderId}, channelId: ${payload.branch_id}`);
     try {
       if (!payload.orderId) {
         console.warn(`[Avo][CancelOrder] Missing orderId in payload.`);
         return { success: false, message: "Order ID is required for cancellation" };
       }
 
-      if (payload.channelId !== this.channelId) {
-        console.warn(`[Avo][CancelOrder] Invalid channelId: ${payload.channelId}. Expected: ${this.channelId}`);
+      if (payload.branch_id !== channel?.channelId) {
+        console.warn(`[Avo][CancelOrder] Invalid channelId: ${payload.branch_id}. Expected: ${channel}`);
         return { success: false, message: "Invalid channel ID" };
       }
 
