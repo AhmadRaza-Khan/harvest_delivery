@@ -21,9 +21,9 @@ export class OrderService {
   delay (ms: number){ new Promise(resolve => setTimeout(resolve, ms)) };
 
   async placeOrderWebhook(payload: any): Promise<any> {
-    console.log("Avo Payload: ", payload);
-    const channelId = payload.branch_id;
+    const channelId = payload.branch_id || payload.channelId;
     const channel = branchConfig.find(c => c.channelId === channelId);
+    console.log(channel)
 
     if(channel?.partner === "Avo"){
       console.log(`[Avo][PlaceOrder] Received place order webhook for order_id: ${payload.order_id}, channelId: ${channelId}`);
@@ -38,6 +38,7 @@ export class OrderService {
           qty: item.quantity,
           price_unit: item.unit_price,
           attribute_value_ids: (item.additions ?? []).map((a: any) => a.addition_pos_id),
+          items_redeem: item.ItemRedeem,
         }));
         console.log(`[Avo][PlaceOrder] Mapped ${lines.length} order line(s):`, JSON.stringify(lines));
 
@@ -53,6 +54,7 @@ export class OrderService {
           amount_total: payload.total_amount,
           amount_paid: payload.total_amount,
           amount_return: 0,
+          delivery_fee: payload.delivery_fee,
           pos_reference: `Avo-${payload.order_id}`,
           pickup_time: payload.scheduled_time,
           lines,
@@ -81,7 +83,7 @@ export class OrderService {
         console.error(`[Avo][PlaceOrder] Error placing order ${payload.order_id}:`, error.message);
         return { success: false, message: "Failed to place order" };
       }
-    }
+    } else if(channel?.partner === "Snoonu") {
 
     try {
       const products = payload.products.map((product: any) => {
@@ -100,13 +102,14 @@ export class OrderService {
       });
 
     const data =  {
-      "partner_ref": "Snoono-" + payload.orderId,
+      "partner_ref": "Snoonu-" + payload.orderId,
       "config_id": channel?.branchId,
       "customer_name": payload.customer.name,
       "phone": payload.customer.phoneNumber,
       "email": payload.customer.email,
       "street": payload.deliveryAddress.description,
       "city": payload.deliveryAddress.state,
+      "delivery_fee": payload.deliveryFee,
 
       "amount_tax": 0,
       "amount_total": payload.payment.amount,
@@ -139,6 +142,7 @@ export class OrderService {
     } catch (error: any) {
       console.log("Error placing order:", error.message);
       return { success: false, message: "Failed to place order" };
+    }
     }
   }
 
@@ -194,7 +198,7 @@ export class OrderService {
       const order = await this.prisma.order.findUnique({ where: { partnerId: String(payload.orderId) } });
       if (!order) return { success: false, message: `Order ${payload.orderId} not found in database` };
 
-      const response = await this.handler.odooApiHandler('/api/pos/order/cancel', 'POST', { partner_ref: `Snoono-${payload.order_id}`, "reason": payload.cancellationReason });
+      const response = await this.handler.odooApiHandler('/api/pos/order/cancel', 'POST', { partner_ref: `Snoonu-${payload.order_id}`, "reason": payload.cancellationReason });
       if (response && response.status === "success") {
         console.log('Order successfully cancelled in Odoo with response:', response);
         await this.prisma.order.update({
@@ -266,7 +270,7 @@ export class OrderService {
         console.error("Error rejecting order:", error.message);
         return { success: false, message: "Failed to reject order" };
       }
-    } else{
+    } else if(partner === "Snoonu"){
     try {
       const webhook = await this.webhookHandler(payload, "rejected", `/api/v1/orders/reject`, 7);
       console.log(`Order ${payload.order_name} with ID ${payload.order_id} has been rejected.`);
@@ -290,7 +294,7 @@ export class OrderService {
         console.error("Error accepting order:", error.message);
         return { success: false, message: "Failed to accept order" };
       }
-    } else{
+    } else if(partner === "Snoonu"){
     try {      
       await this.webhookHandler(payload, "accepted", `/api/v1/orders/accept`, 2);
       await this.delay(3000);
@@ -314,7 +318,7 @@ export class OrderService {
         console.error("Error ready for pickup order:", error.message);
         return { success: false, message: "Failed to ready for pickup order" };
       }
-    } else{
+    } else if(partner === "Snoonu"){
     try {
       await this.webhookHandler(payload, "ready", `/api/v1/orders/ready`, 8);
       console.log(`Order ${payload.order_name} with ID ${payload.order_id} is ready for pickup.`);
@@ -329,9 +333,9 @@ export class OrderService {
   async webhookHandler(payload: any, webhookType: string, endpoint: string, status: number): Promise<any> {
     try {
       const { order_id, order_name } = payload;
-      const order = await this.prisma.order.findUnique({ where: { odoo_id: String(order_id) } });
+      const partnerId = order_name.split('-')[1];
       const requestData = {
-        "orderId": order?.partnerId,
+        "orderId": partnerId,
         "status": status,
         "channelId": this.channelId,
       }
@@ -351,14 +355,16 @@ export class OrderService {
   }
 
     async webhookHandlerForAvo(payload: any, webhookType: string, endpoint: string, reason: string | null = null): Promise<any> {
+      console.log("webhook payload: ", payload)
     try {
       const { order_id, order_name } = payload;
-      const order = await this.prisma.order.findUnique({ where: { odoo_id: String(order_id) } });
+      const partnerId = order_name.split('-')[1];
       const requestData = {
-        "orderId": order?.partnerId,
+        "orderId": partnerId,
         "status": webhookType,
         "reason": reason
       }
+      console.log("request data ", requestData);
       await this.handler.AvoApiHandler(endpoint, 'PUT', requestData);
 
       await this.prisma.order.update({

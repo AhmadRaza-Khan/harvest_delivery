@@ -39,5 +39,17 @@ export const branchConfig = [
         name: "West Walk",
         branchId: 11,
         partner: "Avo"
+    },
+    {
+        channelId: "1234",
+        name: "Test",
+        branchId: 4,
+        partner: "Avo"
+    },
+    {
+        channelId: "12345",
+        name: "Test",
+        branchId: 4,
+        partner: "Snoonu"
     }
 ]
