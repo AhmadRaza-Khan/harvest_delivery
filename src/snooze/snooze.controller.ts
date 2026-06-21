@@ -1,4 +1,4 @@
-import { Controller, Get, Patch, Param, Res, UseGuards, Body, Post } from '@nestjs/common';
+import { Controller, Get, Patch, Param, Res, UseGuards, Body, Post, Query } from '@nestjs/common';
 import { SnoozeService } from './snooze.service';
 import { JwtGuard } from '../auth/guard';
 
@@ -29,5 +29,15 @@ export class SnoozeController {
     @Post('/snooze/unsnooze-branch')
     async unSnoozeBranch(@Body() branchId: string) {
         return await this.service.unSnoozeBranch(branchId);
+    }
+
+    @Get("/snooze/product")
+    async snoozeProduct(@Query('id') id: number, @Query('branch') branch: string){
+        return await this.service.snoozeProduct(id, branch);
+    }
+
+    @Get("/unsnooze/product")
+    async unSnoozeProduct(@Query('id') id: number, @Query('branch') branch: string){
+        return await this.service.unSnoozeProduct(id, branch);
     }
 }
