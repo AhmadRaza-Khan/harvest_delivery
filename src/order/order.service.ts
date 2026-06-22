@@ -312,7 +312,7 @@ export class OrderService {
     let partner = payload.order_name.split("-")[0];
     if(partner === "Avo"){
       try {
-        const response = await this.webhookHandlerForAvo(payload, "readyForPickup", "/UpdateOdooOrderStatus", "Pos ready for pickup Order");
+        const response = await this.webhookHandlerForAvo(payload, "Ready", "/UpdateOdooOrderStatus", "Pos ready for pickup Order");
         return {success: true, message: "Webhook received for order ready for pickup"};
       } catch (error: any) {
         console.error("Error ready for pickup order:", error.message);

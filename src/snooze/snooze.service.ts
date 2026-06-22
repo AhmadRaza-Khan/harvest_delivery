@@ -51,11 +51,12 @@ export class SnoozeService {
 
     async snoozeProduct(productId: number, branch: string): Promise<any> {
         const branchData = branchConfig.find(b => b.name === branch && b.partner === 'Avo');
+        const isAddon = true;
         try {
             const requestPayload = {
                 "branchId": branchData?.channelId,
                 "itemPosId": productId,
-                "status": "Unavailable"
+                "isAddon": isAddon
                 };
             const response = await this.handler.AvoApiHandler("/SnoozeItemFromOdoo", "POST", requestPayload)
             console.log(response);
@@ -68,11 +69,12 @@ export class SnoozeService {
 
     async unSnoozeProduct(productId: number, branch: string): Promise<any> {
         const branchData = branchConfig.find(b => b.name === branch && b.partner === 'Avo');
+        let isAddon = true;
         try {
             const requestPayload = {
                 "branchId": branchData?.channelId,
                 "itemPosId": productId,
-                "status": "Unavailable"
+                "isAddon": isAddon
                 };
             const response = await this.handler.AvoApiHandler("/UnsnoozeItemFromOdoo", "POST", requestPayload)
             console.log(response);
