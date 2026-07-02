@@ -23,14 +23,49 @@ export class OrderService {
   async placeOrderWebhook(payload: any): Promise<any> {
     const channelId = payload.branch_id || payload.channelId;
     const channel = branchConfig.find(c => c.channelId === channelId);
-    console.log(channel)
+
+    function mapOrderType(partner: string, id: any) {
+      switch (partner) {
+        case "Avo":
+          switch (id) {
+            case 1:
+              return 5;
+
+            case 3:
+              return 6;
+
+            case 4:
+              return 7;
+
+            default:
+              throw new Error(`Unknown Avo ID: ${id}`);
+          }
+
+        case "Snoonu":
+          switch (id) {
+            case "Delivery":
+              return 6;
+
+            case "Takeaway":
+              return 2;
+
+            case "DriveThru":
+              return 7;
+
+            default:
+              throw new Error(`Unknown Snoonu ID: ${id}`);
+          }
+
+        default:
+          throw new Error(`Unknown partner: ${partner}`);
+      }
+    }
 
     if(channel?.partner === "Avo"){
       console.log(`[Avo][PlaceOrder] Received place order webhook for order_id: ${payload.order_id}, channelId: ${channelId}`);
       try {
         const phone = payload.customer?.phone?.split(":::")?.pop() ?? payload.customer?.phone;
         const email = payload.customer?.email?.split(":::")?.pop() ?? payload.customer?.email;
-        console.log(`[Avo][PlaceOrder] Customer: name=${payload.customer?.name}, phone=${phone}, email=${email}`);
 
         const lines = (payload.items as any[]).map((item: any) => ({
           product_id: item.product_pos_id,
@@ -44,6 +79,7 @@ export class OrderService {
 
         const data = {
           partner_ref: `Avo-${payload.order_id}`,
+          OrderType: mapOrderType("Avo", payload.order_type),
           config_id: channel.branchId,
           customer_name: payload.customer.name,
           phone,
@@ -103,6 +139,7 @@ export class OrderService {
 
     const data =  {
       "partner_ref": "Snoonu-" + payload.orderId,
+      "order_type": mapOrderType("Snoonu", payload.OrderType),
       "config_id": channel?.branchId,
       "customer_name": payload.customer.name,
       "phone": payload.customer.phoneNumber,

@@ -1,0 +1,7 @@
+ID: 1 | Name: DINE IN
+ID: 2 | Name: TAKE AWAY
+ID: 3 | Name: ONLINE
+ID: 4 | Name: CARHOP
+ID: 5 | Name: PICKUP
+ID: 6 | Name: DELIVERY
+ID: 7 | Name: DRIVETHRU

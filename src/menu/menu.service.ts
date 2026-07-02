@@ -109,7 +109,7 @@ export class MenuService {
             });
 
             const [allProducts, categories] = await Promise.all([
-                this.prisma.product.findMany({ where: { isSynced: false } }),
+                this.prisma.product.findMany({ where: { isSynced: true } }),
                 this.prisma.category.findMany({}),
             ]);
 
@@ -315,12 +315,14 @@ export class MenuService {
                 modifiers: Array.from(modifierMap.values()),
             };
 
-            const result = await this.handler.apiHandler(`/api/v1/menu/save`, 'POST', menu);
-            await this.prisma.product.updateMany({
-                where: { productId: { in: products.map(p => p.productId) } },
-                data: { isSynced: true },
-            });
-            return { success: true, result };
+            return { menu }
+
+            // const result = await this.handler.apiHandler(`/api/v1/menu/save`, 'POST', menu);
+            // await this.prisma.product.updateMany({
+            //     where: { productId: { in: products.map(p => p.productId) } },
+            //     data: { isSynced: true },
+            // });
+            // return { success: true, result };
         } catch (error: any) {
             console.error('Error saving menu:', error);
             return { success: false, message: error.message };
