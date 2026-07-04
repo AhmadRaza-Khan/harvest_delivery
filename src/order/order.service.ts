@@ -124,8 +124,8 @@ export class OrderService {
     try {
       const products = payload.products.map((product: any) => {
         const modifiers = (product.modifierGroups ?? []).flatMap((group: any) => group.modifiers ?? []);
-        const price = product.price / 100;
-        const discount = product.discountAmount / 100;
+        const price = product.price;
+        const discount = product.discountAmount;
         return {
           product_id: Number(product.productId),
           qty: product.quantity,
@@ -139,7 +139,7 @@ export class OrderService {
 
     const data =  {
       "partner_ref": "Snoonu-" + payload.orderId,
-      "order_type": mapOrderType("Snoonu", payload.OrderType),
+      "order_type": mapOrderType("Snoonu", payload.orderType),
       "config_id": channel?.branchId,
       "customer_name": payload.customer.name,
       "phone": payload.customer.phoneNumber,

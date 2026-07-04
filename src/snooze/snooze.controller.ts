@@ -12,32 +12,43 @@ export class SnoozeController {
         await this.service.index(res);
     }
 
-    @Get('snooze/products')
-    async getProducts() {
-        return this.service.getProducts();
+    @Get('/snooze/test')
+    async test() {
+        return await this.service.test();
     }
 
-    @Patch('snooze/products/:id/snooze')
-    async toggleSnooze(@Param('id') id: string) {
-        return this.service.toggleProductSnooze(+id);
+    @Get('/snooze/branches')
+    async listBranches() {
+        return await this.service.listBranches();
     }
+
     @Post('/snooze/snooze-branch')
-    async snoozeBranch(@Body() branchId: string) {
-        return await this.service.snoozeBranch(branchId);
+    async snoozeBranch(@Query('branch') branch: string) {
+        return await this.service.snoozeBranch(branch);
     }
 
     @Post('/snooze/unsnooze-branch')
-    async unSnoozeBranch(@Body() branchId: string) {
-        return await this.service.unSnoozeBranch(branchId);
+    async unSnoozeBranch(@Query('branch') branch: string) {
+        return await this.service.unSnoozeBranch(branch);
+    }
+
+    @Get('/snooze/products')
+    async listProducts(@Query('branch') branch: string) {
+        return await this.service.listProductsForBranch(branch);
+    }
+
+    @Get('/snooze/addons')
+    async listAddons(@Query('branch') branch: string) {
+        return await this.service.listAddonsForBranch(branch);
     }
 
     @Get("/snooze/product")
-    async snoozeProduct(@Query('id') id: number, @Query('branch') branch: string){
-        return await this.service.snoozeProduct(id, branch);
+    async snoozeProduct(@Query('id') id: string, @Query('branch') branch: string, @Query('isAddon') isAddon: string){
+        return await this.service.snoozeProduct(+id, branch, isAddon === 'true');
     }
 
     @Get("/unsnooze/product")
-    async unSnoozeProduct(@Query('id') id: number, @Query('branch') branch: string){
-        return await this.service.unSnoozeProduct(id, branch);
+    async unSnoozeProduct(@Query('id') id: string, @Query('branch') branch: string, @Query('isAddon') isAddon: string){
+        return await this.service.unSnoozeProduct(+id, branch, isAddon === 'true');
     }
 }

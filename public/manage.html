@@ -19,6 +19,41 @@
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col gap-10">
 
+    <!-- Branches -->
+    <section>
+      <div class="flex items-center justify-between mb-3">
+        <div>
+          <h2 class="text-lg font-bold">Branches</h2>
+          <p class="text-xs opacity-50">Snooze/unsnooze an entire branch on Avo</p>
+        </div>
+      </div>
+
+      <div id="branches-loading" class="flex flex-col gap-2">
+        <div class="skeleton h-10 w-full rounded-xl"></div>
+        <div class="skeleton h-10 w-full rounded-xl opacity-70"></div>
+      </div>
+
+      <div id="branches-error" class="hidden text-center py-10 opacity-50">
+        <p class="text-sm">Failed to load branches.</p>
+        <button class="btn btn-xs btn-outline mt-3" onclick="loadBranches()">Retry</button>
+      </div>
+
+      <div id="branches-wrapper" class="section-table force-hidden overflow-x-auto rounded-xl border border-base-300 bg-base-100 shadow-sm">
+        <table class="table table-sm w-full">
+          <thead>
+            <tr class="text-xs uppercase tracking-wider opacity-50 border-b border-base-300">
+              <th class="py-3 px-4">Branch</th>
+              <th class="py-3 px-4 w-24 text-center">Status</th>
+              <th class="py-3 px-4 w-24 text-center">Snooze</th>
+            </tr>
+          </thead>
+          <tbody id="branches-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
     <!-- Products -->
     <section>
       <div class="flex items-center justify-between mb-3">
@@ -140,6 +175,75 @@
       };
       btn.addEventListener('click', handler);
       modal.showModal();
+    }
+
+    // ── Branches ─────────────────────────────────────────────
+
+    async function loadBranches() {
+      const loading = document.getElementById('branches-loading');
+      const error   = document.getElementById('branches-error');
+      const wrapper = document.getElementById('branches-wrapper');
+
+      loading.classList.remove('hidden');
+      error.classList.add('hidden');
+      wrapper.classList.add('force-hidden');
+
+      try {
+        const res = await fetch('/snooze/branches', { credentials: 'include' });
+        const branches = await res.json();
+
+        loading.classList.add('hidden');
+
+        const tbody = document.getElementById('branches-tbody');
+        tbody.innerHTML = '';
+        branches.forEach((b, i) => {
+          const snoozed = b.isSnoozed;
+          const tr = document.createElement('tr');
+          tr.className = 'border-b border-base-200 fade-in';
+          tr.style.animationDelay = `${Math.min(i * 25, 250)}ms`;
+          tr.id = `branch-row-${escHtml(b.name)}`;
+          tr.innerHTML = `
+            <td class="py-3 px-4 font-medium text-sm">${escHtml(b.name)}</td>
+            <td class="py-3 px-4 text-center">
+              <span class="badge text-xs px-2 py-1 rounded-full ${snoozed ? 'badge-warning' : 'badge-success'} badge-outline" id="branch-badge-${escHtml(b.name)}">
+                ${snoozed ? 'Snoozed' : 'Active'}
+              </span>
+            </td>
+            <td class="py-3 px-4 text-center">
+              <input type="checkbox" class="toggle toggle-sm toggle-warning" ${snoozed ? 'checked' : ''} onchange="toggleBranch('${b.name}', this)">
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+        wrapper.classList.remove('force-hidden');
+      } catch (e) {
+        loading.classList.add('hidden');
+        error.classList.remove('hidden');
+      }
+    }
+
+    async function toggleBranch(name, checkbox) {
+      checkbox.disabled = true;
+      const snooze = checkbox.checked;
+      const path = snooze ? '/snooze/snooze-branch' : '/snooze/unsnooze-branch';
+      try {
+        const res = await fetch(`${path}?branch=${encodeURIComponent(name)}`, { method: 'POST', credentials: 'include' });
+        const data = await res.json();
+        if (!data.success) throw new Error(data.message);
+
+        const badge = document.getElementById(`branch-badge-${name}`);
+        if (badge) {
+          badge.textContent = snooze ? 'Snoozed' : 'Active';
+          badge.className = `badge text-xs px-2 py-1 rounded-full ${snooze ? 'badge-warning' : 'badge-success'} badge-outline`;
+        }
+        showToast(snooze ? `${name} snoozed` : `${name} unsnoozed`, snooze ? 'warning' : 'success');
+      } catch (e) {
+        checkbox.checked = !snooze;
+        showToast(`Failed to update ${name} snooze status`, 'error');
+      } finally {
+        checkbox.disabled = false;
+      }
     }
 
     // ── Products ─────────────────────────────────────────────
@@ -292,6 +396,7 @@
       }
     }
 
+    loadBranches();
     loadProducts();
     loadCategories();
   </script>

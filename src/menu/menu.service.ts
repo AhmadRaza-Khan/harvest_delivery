@@ -315,14 +315,13 @@ export class MenuService {
                 modifiers: Array.from(modifierMap.values()),
             };
 
-            return { menu }
 
-            // const result = await this.handler.apiHandler(`/api/v1/menu/save`, 'POST', menu);
-            // await this.prisma.product.updateMany({
-            //     where: { productId: { in: products.map(p => p.productId) } },
-            //     data: { isSynced: true },
-            // });
-            // return { success: true, result };
+            const result = await this.handler.apiHandler(`/api/v1/menu/save`, 'POST', menu);
+            await this.prisma.product.updateMany({
+                where: { productId: { in: products.map(p => p.productId) } },
+                data: { isSynced: true },
+            });
+            return { success: true, result };
         } catch (error: any) {
             console.error('Error saving menu:', error);
             return { success: false, message: error.message };
@@ -363,9 +362,10 @@ export class MenuService {
 
     async test(){
         const requestId1 = "019eac3d-29f0-7500-89d5-42ec5942d256";
+        const requestId2 = "019f227f-b7b0-7796-9c9c-505030e239be";
 
         const channelId = "019dd37a-3afb-7823-b033-8d542494ec1a";
-        const response =  await this.handler.apiHandler(`/api/v1/channels/${channelId}`, "GET");
+        const response =  await this.handler.apiHandler(`/api/v1/menu/${requestId2}/status`, "GET");
         console.log(response);
         return {response}
     }

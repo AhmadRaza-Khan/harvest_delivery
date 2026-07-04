@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<hea
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -10,10 +10,11 @@
       position: relative;
       display: inline-flex;
       align-items: center;
-      width: 44px;
-      height: 24px;
+      width: 40px;
+      height: 22px;
       cursor: pointer;
       vertical-align: middle;
+      flex-shrink: 0;
     }
     .snooze-toggle input { display: none; }
     .snooze-slider {
@@ -26,8 +27,8 @@
     .snooze-slider::before {
       content: '';
       position: absolute;
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
       left: 3px;
       top: 3px;
       background: white;
@@ -36,50 +37,49 @@
       box-shadow: 0 1px 3px rgba(0,0,0,0.3);
     }
     .snooze-toggle input:checked + .snooze-slider { background: #f59e0b; }
-    .snooze-toggle input:checked + .snooze-slider::before { transform: translateX(20px); }
-    td .snooze-toggle { display: flex; margin: 0 auto; }
+    .snooze-toggle input:checked + .snooze-slider::before { transform: translateX(18px); }
+    .snooze-toggle input:disabled + .snooze-slider { opacity: 0.5; cursor: wait; }
 
-    .product-row { transition: opacity 0.2s ease, background 0.2s ease; }
-    .product-row.snoozed { opacity: 0.55; }
-    .product-row:hover { background: rgba(255,255,255,0.04); }
+    .product-card { transition: opacity 0.2s ease, box-shadow 0.2s ease; }
+    .product-card.snoozed { opacity: 0.6; }
+    .product-card:hover { box-shadow: 0 0 0 1px rgba(99,102,241,0.3); }
 
-    .fade-in { animation: fadeIn 0.4s ease both; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .addon-row { transition: opacity 0.2s ease; }
+    .addon-row.snoozed { opacity: 0.55; }
 
-    .card-product { transition: box-shadow 0.2s; }
-    .card-product:hover { box-shadow: 0 0 0 1px rgba(99,102,241,0.3); }
+    .fade-in { animation: fadeIn 0.35s ease both; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
     #search-input:focus { outline: none; box-shadow: 0 0 0 2px rgba(99,102,241,0.4); }
 
     .badge-snoozed { background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
     .badge-active { background: rgba(34,197,94,0.12); color: #22c55e; border: 1px solid rgba(34,197,94,0.3); }
-  
-    #table-wrapper { display: none; }
-    #products-cards { display: flex; flex-direction: column; gap: 0.75rem; }
-    @media (min-width: 640px) {
-      #table-wrapper { display: block; }
-      #products-cards { display: none; }
-    }
-    #table-wrapper.force-hidden,
-    #products-cards.force-hidden { display: none !important; }
-</style>
+
+    .attr-group + .attr-group { margin-top: 0.5rem; }
+  </style>
 </head>
 <body class="min-h-screen bg-base-200">
 
   <div id="container" class="flex-1 min-h-screen text-base-content overflow-x-hidden">
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
 
       <!-- Header -->
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5">
         <div>
           <h1 class="text-xl sm:text-2xl font-bold tracking-tight">Products</h1>
-          <p class="text-sm opacity-50 mt-0.5">Manage snooze status for Snoonu products</p>
+          <p class="text-sm opacity-50 mt-0.5">Branch: <span id="branch-name" class="font-semibold"></span></p>
         </div>
         <div id="stats" class="flex gap-3 text-xs sm:text-sm hidden">
           <span class="badge badge-outline px-3 py-2">Total: <span id="stat-total" class="font-bold ml-1">0</span></span>
           <span class="badge badge-warning badge-outline px-3 py-2">Snoozed: <span id="stat-snoozed" class="font-bold ml-1">0</span></span>
         </div>
+      </div>
+
+      <!-- View toggle -->
+      <div role="tablist" class="tabs tabs-boxed w-fit mb-5">
+        <a role="tab" id="tab-products" class="tab tab-active" onclick="switchView('products')">Products</a>
+        <a role="tab" id="tab-addons" class="tab" onclick="switchView('addons')">Add-ons</a>
       </div>
 
       <!-- Search -->
@@ -100,42 +100,42 @@
       <!-- No results -->
       <div id="no-results" class="hidden text-center py-16 opacity-40">
         <div class="text-4xl mb-2">🔍</div>
-        <p class="text-sm">No products match your search.</p>
+        <p class="text-sm">Nothing matches your search.</p>
       </div>
 
-      <!-- Desktop Table -->
-        <div id="table-wrapper" class="overflow-x-auto rounded-xl border border-base-300 bg-base-100 shadow-sm">
-      <table class="table table-sm w-full">
+      <!-- Products view -->
+      <div id="products-cards" class="flex flex-col gap-3"></div>
+
+      <!-- Add-ons view -->
+      <div id="addons-wrapper" class="hidden overflow-x-auto rounded-xl border border-base-300 bg-base-100 shadow-sm">
+        <table class="table table-sm w-full">
           <thead>
             <tr class="text-xs uppercase tracking-wider opacity-50 border-b border-base-300">
               <th class="py-3 px-4 w-16">#ID</th>
               <th class="py-3 px-4">Name (EN)</th>
               <th class="py-3 px-4">Name (AR)</th>
-              <th class="py-3 px-4 w-28 text-right">Price (QAR)</th>
+              <th class="py-3 px-4">Attribute</th>
+              <th class="py-3 px-4 w-24 text-right">Price extra</th>
               <th class="py-3 px-4 w-24 text-center">Status</th>
-              <th class="py-3 px-4 w-24 text-center">Snooze</th>
+              <th class="py-3 px-4 w-20 text-center">Snooze</th>
             </tr>
           </thead>
-          <tbody id="products-tbody"></tbody>
+          <tbody id="addons-tbody"></tbody>
         </table>
       </div>
 
-      <!-- Mobile Cards -->
-        <div id="products-cards"></div>
-     <!-- Loading -->
+      <!-- Loading -->
       <div id="loading" class="flex flex-col gap-3 py-4">
-        <div class="skeleton h-12 w-full rounded-xl"></div>
-        <div class="skeleton h-12 w-full rounded-xl"></div>
-        <div class="skeleton h-12 w-full rounded-xl"></div>
-        <div class="skeleton h-12 w-full rounded-xl opacity-60"></div>
-        <div class="skeleton h-12 w-full rounded-xl opacity-30"></div>
+        <div class="skeleton h-16 w-full rounded-xl"></div>
+        <div class="skeleton h-16 w-full rounded-xl opacity-60"></div>
+        <div class="skeleton h-16 w-full rounded-xl opacity-30"></div>
       </div>
 
       <!-- Error -->
       <div id="error-state" class="hidden text-center py-16">
         <div class="text-4xl mb-3">⚠️</div>
-        <p class="text-sm opacity-60">Failed to load products.</p>
-        <button class="btn btn-sm btn-outline mt-4" onclick="loadProducts()">Retry</button>
+        <p class="text-sm opacity-60">Failed to load data.</p>
+        <button class="btn btn-sm btn-outline mt-4" onclick="loadCurrentView()">Retry</button>
       </div>
 
     </div>
@@ -143,35 +143,15 @@
 
   <script src="./js/cdn.js"></script>
   <script>
+    const branch = new URLSearchParams(location.search).get('branch') || 'The Pearl';
+    document.getElementById('branch-name').textContent = branch;
+
+    let view = 'products';
     let allProducts = [];
+    let allAddons = [];
 
-    async function loadProducts() {
-      const loading = document.getElementById('loading');
-      const errorState = document.getElementById('error-state');
-      const tableWrapper = document.getElementById('table-wrapper');
-      const cards = document.getElementById('products-cards');
-      const stats = document.getElementById('stats');
-
-      loading.classList.remove('hidden');
-      errorState.classList.add('hidden');
-        tableWrapper.classList.add('force-hidden');
-      cards.classList.add('force-hidden');
-    cards.innerHTML = '';
-      stats.classList.add('hidden');
-
-      try {
-          const res = await fetch('/snooze/products', { credentials: 'include' });
-      const data = await res.json();
-        allProducts = Array.isArray(data) ? data : [];
-        renderProducts(allProducts);
-        updateStats();
-        stats.classList.remove('hidden');
-      } catch (e) {
-        console.error(e);
-        errorState.classList.remove('hidden');
-      } finally {
-        loading.classList.add('hidden');
-      }
+    function escHtml(str) {
+      return String(str ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
 
     function getPrice(variants) {
@@ -180,143 +160,278 @@
       return (p != null && p !== '') ? Number(p).toFixed(2) : '—';
     }
 
-    function updateStats() {
+    function setLoading(isLoading) {
+      document.getElementById('loading').classList.toggle('hidden', !isLoading);
+      if (isLoading) {
+        document.getElementById('error-state').classList.add('hidden');
+        document.getElementById('no-results').classList.add('hidden');
+        document.getElementById('stats').classList.add('hidden');
+      }
+    }
+
+    function switchView(next) {
+      view = next;
+      document.getElementById('tab-products').classList.toggle('tab-active', next === 'products');
+      document.getElementById('tab-addons').classList.toggle('tab-active', next === 'addons');
+      document.getElementById('products-cards').classList.toggle('hidden', next !== 'products');
+      document.getElementById('addons-wrapper').classList.toggle('hidden', next !== 'addons');
+      document.getElementById('search-input').value = '';
+      document.getElementById('clear-search').style.opacity = '0';
+      document.getElementById('clear-search').style.pointerEvents = 'none';
+      loadCurrentView();
+    }
+
+    function loadCurrentView() {
+      if (view === 'products') loadProducts();
+      else loadAddons();
+    }
+
+    // ── Products ─────────────────────────────────────────────
+
+    async function loadProducts() {
+      setLoading(true);
+      try {
+        const res = await fetch(`/snooze/products?branch=${encodeURIComponent(branch)}`, { credentials: 'include' });
+        const data = await res.json();
+        allProducts = Array.isArray(data) ? data : [];
+        renderProducts(allProducts);
+        updateProductStats();
+      } catch (e) {
+        console.error(e);
+        document.getElementById('error-state').classList.remove('hidden');
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    function updateProductStats() {
       document.getElementById('stat-total').textContent = allProducts.length;
       document.getElementById('stat-snoozed').textContent = allProducts.filter(p => p.isSnoozed).length;
+      document.getElementById('stats').classList.remove('hidden');
     }
 
     function renderProducts(products) {
-      const tbody = document.getElementById('products-tbody');
       const cards = document.getElementById('products-cards');
-      const tableWrapper = document.getElementById('table-wrapper');
       const noResults = document.getElementById('no-results');
-
-      tbody.innerHTML = '';
       cards.innerHTML = '';
 
       if (!products.length) {
         noResults.classList.remove('hidden');
-          tableWrapper.classList.add('force-hidden');
-        cards.classList.add('force-hidden');
         return;
       }
-
       noResults.classList.add('hidden');
-      tableWrapper.classList.remove('force-hidden');
-      cards.classList.remove('force-hidden');
-     products.forEach((product, i) => {
+
+      products.forEach((product, i) => {
         const price = getPrice(product.variants);
         const snoozed = product.isSnoozed;
+        const attributeGroups = Array.isArray(product.attributes) ? product.attributes : [];
 
-        // Desktop row
-        const tr = document.createElement('tr');
-        tr.className = `product-row border-b border-base-200 fade-in${snoozed ? ' snoozed' : ''}`;
-        tr.style.animationDelay = `${Math.min(i * 30, 300)}ms`;
-        tr.dataset.id = product.productId;
-        tr.innerHTML = `
-          <td class="py-3 px-4 font-mono text-xs opacity-60">${product.productId}</td>
-          <td class="py-3 px-4 font-medium text-sm">${escHtml(product.productNameEn)}</td>
-          <td class="py-3 px-4 text-sm opacity-80 font-arabic" dir="rtl">${escHtml(product.productNameAr || '—')}</td>
-          <td class="py-3 px-4 text-right text-sm tabular-nums">${price}</td>
-          <td class="py-3 px-4 text-center">
-            <span class="badge text-xs px-2 py-1 rounded-full ${snoozed ? 'badge-snoozed' : 'badge-active'}" id="badge-${product.productId}">
-              ${snoozed ? 'Snoozed' : 'Active'}
-            </span>
-          </td>
-          <td class="py-3 px-4 text-center">
-            <label class="snooze-toggle" title="${snoozed ? 'Unsnoze' : 'Snooze'}">
-              <input type="checkbox" ${snoozed ? 'checked' : ''} onchange="toggleSnooze(${product.productId}, this)">
+        const card = document.createElement('div');
+        card.className = `product-card fade-in bg-base-100 rounded-xl border border-base-300 px-4 py-3${snoozed ? ' snoozed' : ''}`;
+        card.style.animationDelay = `${Math.min(i * 25, 250)}ms`;
+        card.dataset.id = product.productId;
+
+        card.innerHTML = `
+          <div class="flex items-center gap-3">
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="font-mono text-xs opacity-40">#${product.productId}</span>
+                <span class="font-semibold text-sm truncate">${escHtml(product.productNameEn)}</span>
+                <span class="badge text-xs px-2 rounded-full ${snoozed ? 'badge-snoozed' : 'badge-active'}" id="badge-${product.productId}">
+                  ${snoozed ? 'Snoozed' : 'Active'}
+                </span>
+              </div>
+              <div class="text-xs opacity-60 mt-0.5 truncate" dir="rtl">${escHtml(product.productNameAr || '')}</div>
+              <div class="text-xs font-medium mt-1">${price !== '—' ? price + ' QAR' : '—'}</div>
+            </div>
+            <label class="snooze-toggle" title="${snoozed ? 'Unsnooze product' : 'Snooze product'}">
+              <input type="checkbox" ${snoozed ? 'checked' : ''} onchange="toggleProductSnooze(${product.productId}, this)">
               <span class="snooze-slider"></span>
             </label>
-          </td>
-        `;
-        tbody.appendChild(tr);
-
-        // Mobile card
-        const card = document.createElement('div');
-        card.className = `card-product bg-base-100 rounded-xl border border-base-300 px-4 py-3 flex items-center gap-3 fade-in${snoozed ? ' opacity-60' : ''}`;
-        card.style.animationDelay = `${Math.min(i * 30, 300)}ms`;
-        card.dataset.id = product.productId;
-        card.innerHTML = `
-          <div class="flex-1 min-w-0">
-            <div class="flex items-center gap-2 flex-wrap">
-              <span class="font-mono text-xs opacity-40">#${product.productId}</span>
-              <span class="font-semibold text-sm truncate">${escHtml(product.productNameEn)}</span>
-            </div>
-            <div class="text-xs opacity-60 mt-0.5 truncate" dir="rtl">${escHtml(product.productNameAr || '')}</div>
-            <div class="flex items-center gap-2 mt-1.5">
-              <span class="text-xs font-medium">${price !== '—' ? price + ' QAR' : '—'}</span>
-              <span class="badge text-xs px-2 rounded-full ${snoozed ? 'badge-snoozed' : 'badge-active'}" id="badge-m-${product.productId}">
-                ${snoozed ? 'Snoozed' : 'Active'}
-              </span>
-            </div>
           </div>
-          <label class="snooze-toggle shrink-0">
-            <input type="checkbox" ${snoozed ? 'checked' : ''} onchange="toggleSnooze(${product.productId}, this)">
-            <span class="snooze-slider"></span>
-          </label>
+          ${attributeGroups.length ? `
+            <div class="mt-3 pt-3 border-t border-base-200 flex flex-col gap-2">
+              ${attributeGroups.map(group => renderAttributeGroup(group)).join('')}
+            </div>
+          ` : ''}
         `;
         cards.appendChild(card);
       });
     }
 
-    async function toggleSnooze(productId, checkbox) {
+    function renderAttributeGroup(group) {
+      const values = Array.isArray(group.values) ? group.values : [];
+      if (!values.length) return '';
+      return `
+        <div class="attr-group">
+          <div class="text-xs font-semibold uppercase tracking-wide opacity-50 mb-1">${escHtml(group.attribute_name?.en || '')}</div>
+          <div class="flex flex-col gap-1.5">
+            ${values.map(v => renderAddonChip(v)).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderAddonChip(value) {
+      const snoozed = value.isSnoozed;
+      return `
+        <div class="addon-row flex items-center justify-between gap-3 bg-base-200/50 rounded-lg px-3 py-1.5${snoozed ? ' snoozed' : ''}" data-addon-id="${value.id}">
+          <div class="min-w-0">
+            <span class="text-xs font-medium">${escHtml(value.name?.en || '')}</span>
+            <span class="text-xs opacity-50 ml-1" dir="rtl">${escHtml(value.name?.ar || '')}</span>
+            ${value.price_extra ? `<span class="text-xs opacity-60 ml-1">(+${Number(value.price_extra).toFixed(2)})</span>` : ''}
+          </div>
+          <label class="snooze-toggle" title="${snoozed ? 'Unsnooze add-on' : 'Snooze add-on'}">
+            <input type="checkbox" ${snoozed ? 'checked' : ''} onchange="toggleAddonSnooze(${value.id}, this)">
+            <span class="snooze-slider"></span>
+          </label>
+        </div>
+      `;
+    }
+
+    async function callSnoozeEndpoint(id, isAddon, snooze) {
+      const path = snooze ? '/snooze/product' : '/unsnooze/product';
+      const params = new URLSearchParams({ id, branch, isAddon: String(isAddon) });
+      const res = await fetch(`${path}?${params}`, { credentials: 'include' });
+      const data = await res.json();
+      if (!data.success) throw new Error(data.message || 'Request failed');
+      return data;
+    }
+
+    async function toggleProductSnooze(productId, checkbox) {
       checkbox.disabled = true;
+      const snooze = checkbox.checked;
       try {
-          const res = await fetch(`/snooze/products/${productId}/snooze`, {
-        method: 'PATCH',
-          credentials: 'include',
-        });
-        const data = await res.json();
+        await callSnoozeEndpoint(productId, false, snooze);
 
-        if (!data.success) throw new Error(data.message);
-
-        const isSnoozed = data.isSnoozed;
-
-        // Update in-memory state
         const product = allProducts.find(p => p.productId === productId);
-        if (product) product.isSnoozed = isSnoozed;
+        if (product) product.isSnoozed = snooze;
 
-        // Update desktop row
-        const row = document.querySelector(`tr[data-id="${productId}"]`);
-        if (row) {
-          row.classList.toggle('snoozed', isSnoozed);
+        const card = document.querySelector(`.product-card[data-id="${productId}"]`);
+        if (card) {
+          card.classList.toggle('snoozed', snooze);
           const badge = document.getElementById(`badge-${productId}`);
           if (badge) {
-            badge.textContent = isSnoozed ? 'Snoozed' : 'Active';
-            badge.className = `badge text-xs px-2 py-1 rounded-full ${isSnoozed ? 'badge-snoozed' : 'badge-active'}`;
+            badge.textContent = snooze ? 'Snoozed' : 'Active';
+            badge.className = `badge text-xs px-2 rounded-full ${snooze ? 'badge-snoozed' : 'badge-active'}`;
           }
         }
 
-        // Update mobile card
-        const mCard = document.querySelector(`.card-product[data-id="${productId}"]`);
-        if (mCard) {
-          mCard.classList.toggle('opacity-60', isSnoozed);
-          const mBadge = document.getElementById(`badge-m-${productId}`);
-          if (mBadge) {
-            mBadge.textContent = isSnoozed ? 'Snoozed' : 'Active';
-            mBadge.className = `badge text-xs px-2 rounded-full ${isSnoozed ? 'badge-snoozed' : 'badge-active'}`;
-          }
-        }
-
-        updateStats();
-        showToast(isSnoozed ? 'Product snoozed' : 'Product unsnoozed', isSnoozed ? 'warning' : 'success');
+        updateProductStats();
+        showToast(snooze ? 'Product snoozed' : 'Product unsnoozed', snooze ? 'warning' : 'success');
       } catch (e) {
         console.error(e);
-        checkbox.checked = !checkbox.checked;
-        showToast('Failed to update snooze status', 'error');
+        checkbox.checked = !snooze;
+        showToast('Failed to update product snooze status', 'error');
       } finally {
         checkbox.disabled = false;
       }
     }
 
-    function clearSearch() {
-      document.getElementById('search-input').value = '';
-      document.getElementById('search-input').dispatchEvent(new Event('input'));
+    async function toggleAddonSnooze(addonId, checkbox) {
+      checkbox.disabled = true;
+      const snooze = checkbox.checked;
+      try {
+        await callSnoozeEndpoint(addonId, true, snooze);
+
+        // Keep in-memory state consistent across every product/tab sharing this add-on.
+        allProducts.forEach(p => (p.attributes || []).forEach(g => (g.values || []).forEach(v => {
+          if (v.id === addonId) v.isSnoozed = snooze;
+        })));
+        const addon = allAddons.find(a => a.id === addonId);
+        if (addon) addon.isSnoozed = snooze;
+
+        document.querySelectorAll(`[data-addon-id="${addonId}"]`).forEach(row => {
+          row.classList.toggle('snoozed', snooze);
+          const input = row.querySelector('input[type="checkbox"]');
+          if (input) input.checked = snooze;
+        });
+
+        const addonBadge = document.getElementById(`addon-badge-${addonId}`);
+        if (addonBadge) {
+          addonBadge.textContent = snooze ? 'Snoozed' : 'Active';
+          addonBadge.className = `badge text-xs px-2 py-1 rounded-full ${snooze ? 'badge-snoozed' : 'badge-active'}`;
+        }
+
+        showToast(snooze ? 'Add-on snoozed' : 'Add-on unsnoozed', snooze ? 'warning' : 'success');
+      } catch (e) {
+        console.error(e);
+        checkbox.checked = !snooze;
+        showToast('Failed to update add-on snooze status', 'error');
+      } finally {
+        checkbox.disabled = false;
+      }
     }
 
-    function escHtml(str) {
-      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    // ── Add-ons ──────────────────────────────────────────────
+
+    async function loadAddons() {
+      setLoading(true);
+      try {
+        const res = await fetch(`/snooze/addons?branch=${encodeURIComponent(branch)}`, { credentials: 'include' });
+        const data = await res.json();
+        allAddons = Array.isArray(data) ? data : [];
+        renderAddons(allAddons);
+        updateAddonStats();
+      } catch (e) {
+        console.error(e);
+        document.getElementById('error-state').classList.remove('hidden');
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    function updateAddonStats() {
+      document.getElementById('stat-total').textContent = allAddons.length;
+      document.getElementById('stat-snoozed').textContent = allAddons.filter(a => a.isSnoozed).length;
+      document.getElementById('stats').classList.remove('hidden');
+    }
+
+    function renderAddons(addons) {
+      const tbody = document.getElementById('addons-tbody');
+      const noResults = document.getElementById('no-results');
+      tbody.innerHTML = '';
+
+      if (!addons.length) {
+        noResults.classList.remove('hidden');
+        return;
+      }
+      noResults.classList.add('hidden');
+
+      addons.forEach((addon, i) => {
+        const snoozed = addon.isSnoozed;
+        const tr = document.createElement('tr');
+        tr.className = `addon-row border-b border-base-200 fade-in${snoozed ? ' snoozed' : ''}`;
+        tr.style.animationDelay = `${Math.min(i * 20, 250)}ms`;
+        tr.dataset.addonId = addon.id;
+        tr.innerHTML = `
+          <td class="py-3 px-4 font-mono text-xs opacity-60">${addon.id}</td>
+          <td class="py-3 px-4 font-medium text-sm">${escHtml(addon.name?.en)}</td>
+          <td class="py-3 px-4 text-sm opacity-80" dir="rtl">${escHtml(addon.name?.ar || '—')}</td>
+          <td class="py-3 px-4 text-xs opacity-60">${escHtml(addon.attributeName?.en || '')}</td>
+          <td class="py-3 px-4 text-right text-sm tabular-nums">${Number(addon.priceExtra || 0).toFixed(2)}</td>
+          <td class="py-3 px-4 text-center">
+            <span class="badge text-xs px-2 py-1 rounded-full ${snoozed ? 'badge-snoozed' : 'badge-active'}" id="addon-badge-${addon.id}">
+              ${snoozed ? 'Snoozed' : 'Active'}
+            </span>
+          </td>
+          <td class="py-3 px-4 text-center">
+            <label class="snooze-toggle" title="${snoozed ? 'Unsnooze add-on' : 'Snooze add-on'}">
+              <input type="checkbox" ${snoozed ? 'checked' : ''} onchange="toggleAddonSnooze(${addon.id}, this)">
+              <span class="snooze-slider"></span>
+            </label>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // ── Search ───────────────────────────────────────────────
+
+    function clearSearch() {
+      const input = document.getElementById('search-input');
+      input.value = '';
+      input.dispatchEvent(new Event('input'));
     }
 
     document.getElementById('search-input').addEventListener('input', function () {
@@ -325,27 +440,32 @@
       clearBtn.style.opacity = q ? '1' : '0';
       clearBtn.style.pointerEvents = q ? 'auto' : 'none';
 
-      if (!q) {
-        renderProducts(allProducts);
-        return;
+      if (view === 'products') {
+        if (!q) { renderProducts(allProducts); return; }
+        const filtered = allProducts.filter(p => {
+          const price = getPrice(p.variants);
+          return (
+            String(p.productId).includes(q) ||
+            (p.productNameEn || '').toLowerCase().includes(q) ||
+            (p.productNameAr || '').toLowerCase().includes(q) ||
+            price.includes(q)
+          );
+        });
+        renderProducts(filtered);
+      } else {
+        if (!q) { renderAddons(allAddons); return; }
+        const filtered = allAddons.filter(a => (
+          String(a.id).includes(q) ||
+          (a.name?.en || '').toLowerCase().includes(q) ||
+          (a.name?.ar || '').toLowerCase().includes(q) ||
+          (a.attributeName?.en || '').toLowerCase().includes(q)
+        ));
+        renderAddons(filtered);
       }
-
-      const filtered = allProducts.filter(p => {
-        const price = getPrice(p.variants);
-        return (
-          String(p.productId).includes(q) ||
-          (p.productNameEn || '').toLowerCase().includes(q) ||
-          (p.productNameAr || '').toLowerCase().includes(q) ||
-          price.includes(q)
-        );
-      });
-
-      renderProducts(filtered);
     });
 
-    loadProducts();
+    if (new URLSearchParams(location.search).get('view') === 'addons') switchView('addons');
+    else loadCurrentView();
   </script>
 </body>
-</html>
-ody>
 </html>

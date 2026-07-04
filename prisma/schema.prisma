@@ -33,17 +33,19 @@ model Category {
 }
 
 model Product {
-  id            Int      @id @default(autoincrement())
-  productId     Int      @unique
-  imageUrl      String   @default("")
-  variants      Json     @default("[]")
-  attributes    Json     @default("[]")
-  isSynced      Boolean  @default(false)
-  isSnoozed     Boolean  @default(false)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  productNameAr String   @default("")
-  productNameEn String
+  id                 Int      @id @default(autoincrement())
+  productId          Int      @unique
+  imageUrl           String   @default("")
+  variants           Json     @default("[]")
+  attributes         Json     @default("[]")
+  isSynced           Boolean  @default(false)
+  isSnoozed          Boolean  @default(false)
+  isSnoozedPearl     Boolean  @default(false)
+  isSnoozedWestWalk  Boolean  @default(false)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  productNameAr      String   @default("")
+  productNameEn      String
 }
 
 model Order {
@@ -51,4 +53,11 @@ model Order {
   partnerId String  @unique
   odoo_id   String  @unique
   status    String?
+}
+
+model Branch {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  isSnoozed Boolean  @default(false)
+  updatedAt DateTime @updatedAt
 }
