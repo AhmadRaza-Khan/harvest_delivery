@@ -21,6 +21,7 @@ export class OrderService {
   delay (ms: number){ new Promise(resolve => setTimeout(resolve, ms)) };
 
   async placeOrderWebhook(payload: any): Promise<any> {
+    console.log("recied payload from order \n", payload);
     const channelId = payload.branch_id || payload.channelId;
     const channel = branchConfig.find(c => c.channelId === channelId);
 
