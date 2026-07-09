@@ -44,13 +44,13 @@ export class OrderService {
 
         case "Snoonu":
           switch (id) {
-            case "Delivery":
+            case 1:
               return 6;
 
-            case "Takeaway":
+            case 2:
               return 2;
 
-            case "DriveThru":
+            case 3:
               return 7;
 
             default:
@@ -422,16 +422,16 @@ export class OrderService {
     const BASE_URL = "https://baristrosnoonu.cyberboost.io";
     try {
       const payload = {
-        "id": this.posId,
-        "webhooks": {
-          "orderCreateWebhook": `${BASE_URL}/order/place`,
-          "orderCancelWebhook": `${BASE_URL}/order/cancel`,
-          "menuSyncStatusWebhook": `${BASE_URL}/menu/sync-status`,
-          "orderUpdateWebhook": `${BASE_URL}/order/update`,
-          "orderStatusUpdateWebhook": `${BASE_URL}/order/status`,
-          "loginWebhook": null
-        }
-      }
+            "id": "019dd371-0ab8-7b36-a768-c4fc7039737b",
+            "webhooks": {
+              "menuSyncStatusWebhook": "https://harvestdelivery.cyberboost.io/menu/sync-status",
+              "orderCreateWebhook": "https://harvestdelivery.cyberboost.io/order/place",
+              "orderCancelWebhook": "https://harvestdelivery.cyberboost.io/order/cancel",
+              "orderUpdateWebhook": "https://harvestdelivery.cyberboost.io/order/update",
+              "orderStatusUpdateWebhook": "https://harvestdelivery.cyberboost.io/order/status",
+              "loginWebhook": null
+            }
+}
       const response = await this.handler.apiHandler('/api/v1/pos/register-webhooks', 'POST', payload);
       console.log('Webhook registration response is :', response);
       return { success: true, message: response };

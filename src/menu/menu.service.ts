@@ -363,9 +363,9 @@ export class MenuService {
     async test(){
         const requestId1 = "019eac3d-29f0-7500-89d5-42ec5942d256";
         const requestId2 = "019f227f-b7b0-7796-9c9c-505030e239be";
-
+        const POS_ID = "019dd371-0ab8-7b36-a768-c4fc7039737b"
         const channelId = "019dd37a-3afb-7823-b033-8d542494ec1a";
-        const response =  await this.handler.apiHandler(`/api/v1/menu/${requestId2}/status`, "GET");
+        const response =  await this.handler.apiHandler(`/api/v1/pos/${POS_ID}`, "GET");
         console.log(response);
         return {response}
     }
