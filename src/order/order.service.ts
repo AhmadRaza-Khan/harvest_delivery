@@ -138,11 +138,11 @@ export class OrderService {
         };
       });
 
-      const name = payload.customer.name || "Snoonu Customer";
-      const phone = payload.customer.phoneNumber || null;
-      const email = payload.customer.email || null;
-      const street = payload.deliveryAddress.description || null;
-      const city = payload.deliveryAddress.state || null;
+      const name = payload?.customer?.name ? payload?.customer?.name : "Snoonu Customer";
+      const phone = payload?.customer?.phoneNumber ? payload?.customer?.phoneNumber : null;
+      const email = payload?.customer?.email ? payload?.customer?.email : null;
+      const street = payload?.deliveryAddress?.description ? payload?.deliveryAddress?.description : null;
+      const city = payload?.deliveryAddress?.state ? payload?.deliveryAddress?.state : null;
 
     const data =  {
       "partner_ref": "Snoonu-" + payload.orderId,
