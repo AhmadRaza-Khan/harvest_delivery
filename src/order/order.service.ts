@@ -169,8 +169,6 @@ export class OrderService {
 
     const response = await this.handler.odooApiHandler('/api/pos/create-order', 'POST', data);
     if (response && response.status == "success"){
-      await this.webhookHandler({order_id: response.order_id, order_name: response.order_name}, "validated", `/api/v1/orders/validate`, 1);
-      console.log('Order successfully created in Odoo with response:', response);
 
       await this.prisma.order.create({
         data: {
@@ -306,6 +304,17 @@ export class OrderService {
     }
   }
 
+  async deliveryOrderWebhook(payload: any): Promise<any> {
+    try {
+      const webhook = await this.webhookHandler(payload, "delivered", `/api/v1/orders/delivered`, 7);
+      console.log(`Order ${payload.order_name} with ID ${payload.order_id} has been delivered.`);
+      return { success: true, message: "Webhook received for order delivery" };
+    } catch (error: any) {
+      console.error("Error delivering order:", error.message);
+      return { success: false, message: "Failed to deliver order" };
+    }
+  }
+
   async rejectOrderWebhook(payload: any): Promise<any> {
     let partner = payload.order_name.split("-")[0];
     if(partner === "Avo"){
@@ -318,9 +327,9 @@ export class OrderService {
       }
     } else if(partner === "Snoonu"){
     try {
-      const webhook = await this.webhookHandler(payload, "rejected", `/api/v1/orders/reject`, 7);
-      console.log(`Order ${payload.order_name} with ID ${payload.order_id} has been rejected.`);
-      return { success: true, message: "Webhook received for order rejection" };
+      const webhook = await this.webhookHandler(payload, "cancelled", `/api/v1/orders/cancel`, 7);
+      console.log(`Order ${payload.order_name} with ID ${payload.order_id} has been cancelled.`);
+      return { success: true, message: "Webhook received for order cancellation" };
     } catch (error: any) {
       console.error("Error rejecting order:", error.message);
       return { success: false, message: "Failed to reject order" };
