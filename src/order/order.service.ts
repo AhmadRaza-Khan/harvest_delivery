@@ -130,8 +130,8 @@ export class OrderService {
         return {
           product_id: Number(product.productId),
           qty: product.quantity,
-          price_unit: price / 100,
-          discount: discount /100,
+          price_unit: price,
+          discount: discount,
           price_subtotal: price * product.quantity - discount,
           price_subtotal_incl: price * product.quantity - discount,
           attribute_value_ids: modifiers.map((modifier: any) => Number(modifier.id)),
@@ -379,8 +379,8 @@ export class OrderService {
       const { order_id, order_name } = payload;
       const partnerId = order_name.split('-')[1];
       const requestData = {
+        "integrationOrderId": "Snoonu-" + payload.order_id,
         "orderId": partnerId,
-        "status": status,
         "channelId": this.channelId,
       }
       await this.handler.apiHandler(endpoint, 'POST', requestData);
