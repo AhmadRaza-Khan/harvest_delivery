@@ -130,10 +130,10 @@ export class OrderService {
         return {
           product_id: Number(product.productId),
           qty: product.quantity,
-          price_unit: price,
-          discount: discount,
-          price_subtotal: price * product.quantity - discount,
-          price_subtotal_incl: price * product.quantity - discount,
+          price_unit: price / 100,
+          discount: discount /100,
+          price_subtotal: (price * product.quantity - discount) / 100,
+          price_subtotal_incl: (price * product.quantity - discount) / 100,
           attribute_value_ids: modifiers.map((modifier: any) => Number(modifier.id)),
         };
       });
@@ -147,11 +147,11 @@ export class OrderService {
       "email": payload.customer.email,
       "street": payload.deliveryAddress.description,
       "city": payload.deliveryAddress.state,
-      "delivery_fee": payload.deliveryFee,
+      "delivery_fee": payload.deliveryFee / 100,
 
       "amount_tax": 0,
-      "amount_total": payload.payment.amount,
-      "amount_paid": payload.payment.totalPaid,
+      "amount_total": payload.payment.amount / 100,
+      "amount_paid": payload.payment.totalPaid / 100,
       "amount_return": 0,
 
       "pos_reference": `SNOONU-${payload.orderId}`,
