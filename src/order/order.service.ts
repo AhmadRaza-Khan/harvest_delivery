@@ -125,15 +125,15 @@ export class OrderService {
     try {
       const products = payload.products.map((product: any) => {
         const modifiers = (product.modifierGroups ?? []).flatMap((group: any) => group.modifiers ?? []);
-        const price = product.price;
-        const discount = product.discountAmount;
+        const price = product.price / 100;
+        const discount = product.discountAmount / 100;
         return {
           product_id: Number(product.productId),
           qty: product.quantity,
           price_unit: price / 100,
           discount: discount /100,
-          price_subtotal: (price * product.quantity - discount) / 100,
-          price_subtotal_incl: (price * product.quantity - discount) / 100,
+          price_subtotal: price * product.quantity - discount,
+          price_subtotal_incl: price * product.quantity - discount,
           attribute_value_ids: modifiers.map((modifier: any) => Number(modifier.id)),
         };
       });
