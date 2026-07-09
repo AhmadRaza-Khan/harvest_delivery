@@ -138,15 +138,21 @@ export class OrderService {
         };
       });
 
+      const name = payload.customer.name || "Snoonu Customer";
+      const phone = payload.customer.phoneNumber || null;
+      const email = payload.customer.email || null;
+      const street = payload.deliveryAddress.description || null;
+      const city = payload.deliveryAddress.state || null;
+
     const data =  {
       "partner_ref": "Snoonu-" + payload.orderId,
       "order_type": mapOrderType("Snoonu", payload.orderType),
       "config_id": channel?.branchId,
-      "customer_name": payload.customer.name || "Snoonu Customer",
-      "phone": payload.customer.phoneNumber || null,
-      "email": payload.customer.email || null,
-      "street": payload.deliveryAddress.description || null,
-      "city": payload.deliveryAddress.state || null,
+      "customer_name": name,
+      "phone": phone,
+      "email": email,
+      "street": street,
+      "city": city,
       "delivery_fee": payload.deliveryFee / 100,
 
       "amount_tax": 0,
