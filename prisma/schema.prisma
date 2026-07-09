@@ -53,6 +53,7 @@ model Order {
   partnerId String  @unique
   odoo_id   String  @unique
   status    String?
+  channel   String?
 }
 
 model Branch {

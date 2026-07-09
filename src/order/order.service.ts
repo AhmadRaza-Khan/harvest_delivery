@@ -108,6 +108,7 @@ export class OrderService {
               partnerId: String(payload.order_id),
               odoo_id: String(response.order_id),
               status: "received",
+              channel: channelId
             },
           });
           console.log(`[Avo][PlaceOrder] Order ${payload.order_id} saved to database successfully with status "received".`);
@@ -175,7 +176,8 @@ export class OrderService {
         data: {
           partnerId: String(payload.orderId),
           odoo_id: String(response.order_id),
-          status: "validated"
+          status: "validated",
+          channel: channelId
         }
       });
       return { success: true, message: "Order validdated successfully!" };
@@ -377,11 +379,13 @@ export class OrderService {
   async webhookHandler(payload: any, webhookType: string, endpoint: string, status: number): Promise<any> {
     try {
       const { order_id, order_name } = payload;
+      const data = await this.prisma.order.findUnique({ where: { odoo_id: String(order_id) } });
+      const channelId = data?.channel;
       const partnerId = order_name.split('-')[1];
       const requestData = {
         "integrationOrderId": "Snoonu-" + payload.order_id,
         "orderId": partnerId,
-        "channelId": this.channelId,
+        "channelId": channelId,
       }
       await this.handler.apiHandler(endpoint, 'POST', requestData);
 
