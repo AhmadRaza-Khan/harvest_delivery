@@ -155,7 +155,7 @@ export class OrderService {
       "amount_return": 0,
 
       "pos_reference": `SNOONU-${payload.orderId}`,
-      "pickup_time": payload.pickupTime,
+      "pickup_time": payload.pickupTime || null,
 
       "lines": products
     }
