@@ -87,6 +87,7 @@
               <th class="py-3 px-4">Name (EN)</th>
               <th class="py-3 px-4">Name (AR)</th>
               <th class="py-3 px-4 w-28 text-right">Price (QAR)</th>
+              <th class="py-3 px-4 w-40 text-center">Attributes</th>
               <th class="py-3 px-4 w-24 text-center">Action</th>
             </tr>
           </thead>
@@ -152,6 +153,24 @@
     <form method="dialog" class="modal-backdrop"><button>close</button></form>
   </dialog>
 
+  <!-- Attributes Modal -->
+  <dialog id="attributes-modal" class="modal">
+    <div class="modal-box max-w-3xl">
+      <h3 class="font-bold text-base mb-1">Edit Attributes — <span id="attr-modal-product-name"></span></h3>
+      <p class="text-xs opacity-50 mb-4">Fill in or fix the Arabic translation for each attribute group and value. English fields are shown for reference and cannot be changed here.</p>
+
+      <div id="attr-modal-body" class="flex flex-col gap-5 max-h-[60vh] overflow-y-auto pr-1"></div>
+
+      <div id="attr-modal-empty" class="hidden text-sm opacity-50 text-center py-8">This product has no attributes.</div>
+
+      <div class="flex justify-end gap-2 mt-5">
+        <button class="btn btn-sm btn-ghost" onclick="document.getElementById('attributes-modal').close()">Cancel</button>
+        <button id="attr-save-btn" class="btn btn-sm btn-primary" onclick="saveAttributes()">Save</button>
+      </div>
+    </div>
+    <form method="dialog" class="modal-backdrop"><button>close</button></form>
+  </dialog>
+
   <script src="/js/cdn.js"></script>
   <script>
     function getPrice(variants) {
@@ -162,6 +181,22 @@
 
     function escHtml(str) {
       return String(str ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function isBilingual(en, ar) {
+      return !!en && !!ar && String(en).trim() !== String(ar).trim();
+    }
+
+    function countMissingTranslations(attributes) {
+      if (!Array.isArray(attributes)) return 0;
+      let missing = 0;
+      attributes.forEach(a => {
+        if (!isBilingual(a.attribute_name?.en, a.attribute_name?.ar)) missing++;
+        (a.values || []).forEach(v => {
+          if (!isBilingual(v.name?.en, v.name?.ar)) missing++;
+        });
+      });
+      return missing;
     }
 
     function confirm(text, onOk) {
@@ -248,6 +283,9 @@
 
     // ── Products ─────────────────────────────────────────────
 
+    const productsCache = {};
+    let currentEditingProductId = null;
+
     async function loadProducts() {
       const loading = document.getElementById('products-loading');
       const error   = document.getElementById('products-error');
@@ -275,6 +313,8 @@
         const tbody = document.getElementById('products-tbody');
         tbody.innerHTML = '';
         products.forEach((p, i) => {
+          productsCache[p.productId] = p;
+
           const tr = document.createElement('tr');
           tr.className = 'border-b border-base-200 fade-in';
           tr.style.animationDelay = `${Math.min(i * 25, 250)}ms`;
@@ -284,6 +324,7 @@
             <td class="py-3 px-4 font-medium text-sm">${escHtml(p.productNameEn)}</td>
             <td class="py-3 px-4 text-sm opacity-70" dir="rtl">${escHtml(p.productNameAr || '—')}</td>
             <td class="py-3 px-4 text-right text-sm tabular-nums">${getPrice(p.variants)}</td>
+            <td class="py-3 px-4 text-center" id="attr-cell-${p.productId}">${renderAttributesCell(p)}</td>
             <td class="py-3 px-4 text-center">
               <button class="del-btn btn btn-xs btn-error btn-outline" onclick="deleteProduct(${p.productId}, '${escHtml(p.productNameEn)}')">Delete</button>
             </td>
@@ -312,6 +353,124 @@
           showToast('Failed to delete product.', 'error');
         }
       });
+    }
+
+    function renderAttributesCell(p) {
+      const attrs = Array.isArray(p.attributes) ? p.attributes : [];
+      if (!attrs.length) return `<span class="text-xs opacity-40">—</span>`;
+      const missing = countMissingTranslations(attrs);
+      const btnClass = missing > 0 ? 'btn-warning btn-outline' : 'btn-outline';
+      return `
+        <button class="btn btn-xs ${btnClass}" onclick="openAttributesModal(${p.productId})">
+          Attributes${missing > 0 ? ` <span class="badge badge-xs badge-warning ml-1">${missing}</span>` : ' <span class="text-success">✓</span>'}
+        </button>
+      `;
+    }
+
+    function openAttributesModal(productId) {
+      const product = productsCache[productId];
+      if (!product) return;
+
+      currentEditingProductId = productId;
+      document.getElementById('attr-modal-product-name').textContent = `${product.productNameEn} (#${productId})`;
+
+      const body = document.getElementById('attr-modal-body');
+      const empty = document.getElementById('attr-modal-empty');
+      const attrs = Array.isArray(product.attributes) ? product.attributes : [];
+
+      if (!attrs.length) {
+        body.innerHTML = '';
+        body.classList.add('hidden');
+        empty.classList.remove('hidden');
+      } else {
+        empty.classList.add('hidden');
+        body.classList.remove('hidden');
+        body.innerHTML = attrs.map((group, gi) => `
+          <div class="border border-base-300 rounded-lg p-3">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="badge badge-ghost badge-sm">Group</span>
+              <span class="text-sm font-semibold">${escHtml(group.attribute_name?.en || '')}</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2 mb-3">
+              <div>
+                <label class="text-[10px] uppercase opacity-50">English</label>
+                <input type="text" class="input input-sm input-bordered w-full" value="${escHtml(group.attribute_name?.en || '')}" disabled>
+              </div>
+              <div>
+                <label class="text-[10px] uppercase opacity-50">Arabic</label>
+                <input type="text" class="input input-sm input-bordered w-full" dir="rtl" data-role="group-ar" data-gi="${gi}" value="${escHtml(group.attribute_name?.ar || group.attribute_name?.en || '')}">
+              </div>
+            </div>
+            <div class="flex flex-col gap-2 pl-3 border-l-2 border-base-200">
+              ${(group.values || []).map((v, vi) => `
+                <div class="grid grid-cols-2 gap-2">
+                  <div>
+                    <input type="text" class="input input-sm input-bordered w-full" value="${escHtml(v.name?.en || '')}" disabled>
+                  </div>
+                  <div>
+                    <input type="text" class="input input-sm input-bordered w-full" dir="rtl" data-role="value-ar" data-gi="${gi}" data-vi="${vi}" value="${escHtml(v.name?.ar || v.name?.en || '')}">
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      document.getElementById('attributes-modal').showModal();
+    }
+
+    async function saveAttributes() {
+      const productId = currentEditingProductId;
+      const product = productsCache[productId];
+      if (!product) return;
+
+      const attrs = JSON.parse(JSON.stringify(product.attributes || []));
+      const body = document.getElementById('attr-modal-body');
+
+      body.querySelectorAll('[data-role="group-ar"]').forEach(input => {
+        const gi = +input.dataset.gi;
+        if (attrs[gi]) attrs[gi].attribute_name.ar = input.value.trim();
+      });
+      body.querySelectorAll('[data-role="value-ar"]').forEach(input => {
+        const gi = +input.dataset.gi;
+        const vi = +input.dataset.vi;
+        if (attrs[gi]?.values?.[vi]) attrs[gi].values[vi].name.ar = input.value.trim();
+      });
+
+      const btn = document.getElementById('attr-save-btn');
+      btn.disabled = true;
+      btn.classList.add('loading');
+
+      try {
+        const res = await fetch(`/menu/products/${productId}/attributes`, {
+          method: 'PUT',
+          credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ attributes: attrs }),
+        });
+        const data = await res.json();
+        if (!data.success) throw new Error(data.message || 'Request failed');
+
+        document.getElementById('attributes-modal').close();
+
+        const propagatedTo = data.propagatedTo || 0;
+        showToast(
+          propagatedTo > 0
+            ? `Attributes updated — translations also applied to ${propagatedTo} other matching product${propagatedTo === 1 ? '' : 's'}.`
+            : 'Attributes updated.',
+          'success'
+        );
+
+        // Other products may have been updated too (shared attribute ids), so
+        // refresh the whole table rather than patching just this row.
+        await loadProducts();
+      } catch (e) {
+        showToast('Failed to update attributes.', 'error');
+      } finally {
+        btn.disabled = false;
+        btn.classList.remove('loading');
+      }
     }
 
     // ── Categories ───────────────────────────────────────────

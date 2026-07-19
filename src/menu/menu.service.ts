@@ -35,7 +35,8 @@ export class MenuService {
 
     async saveProductsToDB(): Promise<any> {
         try {
-            const response = await this.handler.odooApiHandler("/api/pos/products", "GET");
+            // const response = await this.handler.odooApiHandler("/api/pos/products", "GET");
+            const response = await this.prisma.product.findMany({ where: { isSynced: false } });
             return response;
 
             // await Promise.all((response?.products ?? []).map(async (product: any)=> {
@@ -55,14 +56,14 @@ export class MenuService {
 
             // return { success: true, saved: (response?.products ?? []).length };
 
-            await Promise.all((response?.products ?? []).map(async (product: any) => {
-                const attributes = product.attributes || [];
+            // await Promise.all((response?.products ?? []).map(async (product: any) => {
+            //     const attributes = product.attributes || [];
 
-                await this.prisma.product.updateMany({
-                    where: { productId: product.id },
-                    data: { attributes, productNameEn: product.name.en, productNameAr: product.name.ar, imageUrl: product.image_url, variants: product.variants},
-                });
-            }));
+            //     await this.prisma.product.updateMany({
+            //         where: { productId: product.id },
+            //         data: { attributes, productNameEn: product.name.en, productNameAr: product.name.ar, imageUrl: product.image_url, variants: product.variants},
+            //     });
+            // }));
 
             return { success: true };
         } catch (error: any) {
@@ -109,7 +110,7 @@ export class MenuService {
             });
 
             const [allProducts, categories] = await Promise.all([
-                this.prisma.product.findMany({ where: { isSynced: true } }),
+                this.prisma.product.findMany({ where: { isSynced: false } }),
                 this.prisma.category.findMany({}),
             ]);
 
@@ -337,6 +338,82 @@ export class MenuService {
         if (!existing) return { success: false, message: 'Product not found' };
         await this.prisma.product.delete({ where: { productId } });
         return { success: true };
+    }
+
+    async updateProductAttributes(productId: number, attributes: any[]): Promise<any> {
+        const existing = await this.prisma.product.findUnique({ where: { productId } });
+        if (!existing) return { success: false, message: 'Product not found' };
+        if (!Array.isArray(attributes)) return { success: false, message: 'attributes must be an array' };
+
+        // attribute_id (group) and value.id are stable Odoo master-data ids shared
+        // across products, so a translation saved here can be safely propagated to
+        // any other product's group/value carrying the same id.
+        const groupTranslations = new Map<number, string>();
+        const valueTranslations = new Map<number, string>();
+
+        for (const group of attributes) {
+            const groupAr = group?.attribute_name?.ar?.trim();
+            if (group?.attribute_id != null && groupAr) {
+                groupTranslations.set(group.attribute_id, groupAr);
+            }
+            for (const value of group?.values ?? []) {
+                const valueAr = value?.name?.ar?.trim();
+                if (value?.id != null && valueAr) {
+                    valueTranslations.set(value.id, valueAr);
+                }
+            }
+        }
+
+        await this.prisma.product.update({ where: { productId }, data: { attributes } });
+        const propagatedTo = await this.propagateAttributeTranslations(productId, groupTranslations, valueTranslations);
+
+        return { success: true, propagatedTo };
+    }
+
+    private async propagateAttributeTranslations(
+        excludeProductId: number,
+        groupTranslations: Map<number, string>,
+        valueTranslations: Map<number, string>,
+    ): Promise<number> {
+        if (!groupTranslations.size && !valueTranslations.size) return 0;
+
+        const others = await this.prisma.product.findMany({
+            where: { productId: { not: excludeProductId } },
+        });
+
+        let updatedCount = 0;
+
+        for (const product of others) {
+            const attrs = ((product.attributes as any[]) ?? []).map((group: any) => ({
+                ...group,
+                attribute_name: { ...group.attribute_name },
+                values: (group.values ?? []).map((v: any) => ({ ...v, name: { ...v.name } })),
+            }));
+            if (!attrs.length) continue;
+
+            let changed = false;
+            for (const group of attrs) {
+                const newGroupAr = group.attribute_id != null ? groupTranslations.get(group.attribute_id) : undefined;
+                if (newGroupAr && group.attribute_name?.ar !== newGroupAr) {
+                    group.attribute_name.ar = newGroupAr;
+                    changed = true;
+                }
+                for (const value of group.values ?? []) {
+                    const newValueAr = value.id != null ? valueTranslations.get(value.id) : undefined;
+                    if (newValueAr && value.name?.ar !== newValueAr) {
+                        value.name.ar = newValueAr;
+                        changed = true;
+                    }
+                }
+            }
+
+            if (changed) {
+                await this.prisma.product.update({ where: { productId: product.productId }, data: { attributes: attrs } });
+                updatedCount++;
+            }
+        }
+
+        return updatedCount;
     }
 
     async listCategories(): Promise<any> {

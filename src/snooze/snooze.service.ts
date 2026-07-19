@@ -25,13 +25,72 @@ export class SnoozeService {
         return field;
     }
 
+    async closingStore(): Promise<any> {
+            const requestPayload = {
+                "averagePreparationTime": 8271,
+                "takeawayPhoneNumber": "",
+                "weekdayAvailabilities": [
+                    {
+                    "closingTime": "22:30",
+                    "openingTime": "06:00",
+                    "day": 0,
+                    "isClosed": false
+                    },
+                    {
+                    "closingTime": "22:30",
+                    "openingTime": "06:00",
+                    "day": 1,
+                    "isClosed": false
+                    },
+                    {
+                    "closingTime": "22:30",
+                    "openingTime": "06:00",
+                    "day": 2,
+                    "isClosed": false
+                    },
+                    {
+                    "closingTime": "22:30",
+                    "openingTime": "06:00",
+                    "day": 3,
+                    "isClosed": false
+                    },
+                    {
+                    "closingTime": "22:30",
+                    "openingTime": "06:00",
+                    "day": 4,
+                    "isClosed": false
+                    },
+                    {
+                    "closingTime": "22:30",
+                    "openingTime": "06:00",
+                    "day": 5,
+                    "isClosed": false
+                    },
+                    {
+                    "closingTime": "22:30",
+                    "openingTime": "06:00",
+                    "day": 6,
+                    "isClosed": false
+                    },
+                ],
+                "channelId": "019dd37a-3afb-7823-b033-8d542494ec1a"
+            };
+
+            const response = await this.handler.apiHandler("/api/v1/stores", "PUT", requestPayload)
+            console.log(response);
+            return response;
+    }   
+
     async test(): Promise<any> {
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
+        const busyUntil = tomorrow.toISOString();
         const requestPayload = {
-        "id": "019dd37d-d762-7786-8e75-74812789c87c",
-        "isActive": true,
-        "posId": "019dd371-0ab8-7b36-a768-c4fc7039737b"
+            "channelId": "019dd37d-d762-7786-8e75-74812789c87c",
+            "busyUntil": busyUntil
         }
-        const response = await this.handler.apiHandler("/api/v1/channels/status", "PUT", requestPayload)
+        const response = await this.handler.apiHandler("/api/v1/stores/busy-status", "PATCH", requestPayload)
         console.log(response);
         return response;
     }
@@ -99,14 +158,15 @@ export class SnoozeService {
 
             const branchData2 = branchConfig.find(b => b.name === branch && b.partner === 'Snoonu');
 
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+
+            const busyUntil = tomorrow.toISOString();
             const requestPayload = {
-                "id": branchData2?.channelId,
-                "isActive": false,
-                "posId": "019dd371-0ab8-7b36-a768-c4fc7039737b"
+                "channelId": branchData2,
+                "busyUntil": busyUntil
             }
-
-            await this.handler.apiHandler("/api/v1/channels/status", "PUT", requestPayload)
-
+            const response = await this.handler.apiHandler("/api/v1/stores/busy-status", "PATCH", requestPayload)
             await this.prisma.branch.upsert({
                 where: { name: branch },
                 create: { name: branch, isSnoozed: true },
@@ -155,8 +215,19 @@ export class SnoozeService {
                 "itemPosId": productId,
                 "isAddon": isAddon
                 };
-                console.log("Request Payload for snoozing product: ", requestPayload);
-            const response = await this.handler.AvoApiHandler("/SnoozeItemFromOdoo", "POST", requestPayload)
+            await this.handler.AvoApiHandler("/SnoozeItemFromOdoo", "POST", requestPayload)
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            const branchData2 = branchConfig.find(b => b.name === branch && b.partner === 'Snoonu');
+            const snoozeUntil = tomorrow.toISOString();
+            const payload = {
+                "channelId": branchData2?.channelId,
+                "itemId": productId.toString(),
+                "operationType": 0,
+                "snoozeUntil": snoozeUntil
+            };
+            console.log(payload)
+            const response = await this.handler.apiHandler("/api/v1/menu/change-snooze-status", "PUT", payload)
             console.log(response);
             await this.setSnoozeState(productId, branch, isAddon, true);
             return { success: true, message: isAddon ? "Add-on Snoozed" : "Product Snoozed" }
@@ -175,10 +246,18 @@ export class SnoozeService {
                 "itemPosId": productId,
                 "isAddon": isAddon
                 };
-                console.log("Request Payload for unsnoozing product: ", requestPayload);
+            
             const response = await this.handler.AvoApiHandler("/UnsnoozeItemFromOdoo", "POST", requestPayload)
-            console.log(response);
-            await this.setSnoozeState(productId, branch, isAddon, false);
+            const branchData2 = branchConfig.find(b => b.name === branch && b.partner === 'Snoonu');
+            const payload = {
+                "channelId": branchData2?.channelId,
+                "itemId": productId.toString(),
+                "operationType": 1,
+                "snoozeUntil": null
+            };
+            console.log(payload)
+            const response2 = await this.handler.apiHandler("/api/v1/menu/change-snooze-status", "PUT", payload)
+            console.log(response2);
             return { success: true, message: isAddon ? "Add-on unsnoozed" : "Product unsnoozed" }
         } catch (error: any) {
             console.log("Unsnoozing Product in Avo failed dur to: ", error.message)

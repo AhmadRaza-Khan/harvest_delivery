@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Res } from '@nestjs/common';
 import { join } from 'path';
 import { MenuService } from './menu.service';
 
@@ -60,6 +60,11 @@ export class MenuController {
     @Delete("/products/:id")
     async deleteProduct(@Param('id') id: string) {
         return this.service.deleteProduct(+id);
+    }
+
+    @Put("/products/:id/attributes")
+    async updateProductAttributes(@Param('id') id: string, @Body() body: { attributes: any[] }) {
+        return this.service.updateProductAttributes(+id, body.attributes);
     }
 
     @Delete("/categories/:id")

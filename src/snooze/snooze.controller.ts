@@ -14,7 +14,7 @@ export class SnoozeController {
 
     @Get('/snooze/test')
     async test() {
-        return await this.service.test();
+        return await this.service.closingStore();
     }
 
     @Get('/snooze/branches')
